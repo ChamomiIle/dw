@@ -325,11 +325,134 @@
     .msg-container:not(.me-container) .msg-sender { color: var(--accent); text-align: right; }
     
     .ticket-action-bar { padding: 10px 16px; background: rgba(15, 23, 42, 0.8); border-top: 1px solid rgba(255,255,255,0.05); display: none; gap: 10px; flex-shrink: 0; }
-    .modal-input-area { padding: 12px 18px; background: #0f172a; border-top: 1px solid var(--card-border); display: flex; gap: 8px; flex-shrink: 0; }
-    .modal-input-area input { flex: 1; padding: 10px 14px; background: rgba(15, 23, 42, 0.8); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 8px; color: #fff; font-size: 0.88rem; outline: none; }
-    .modal-input-area input:focus { border-color: var(--accent); }
+    .modal-input-area { padding: 12px 18px; background: #0f172a; border-top: 1px solid var(--card-border); display: flex; gap: 8px; flex-shrink: 0; align-items: center; }
+    .modal-input-area input[type="text"] { flex: 1; padding: 10px 14px; background: rgba(15, 23, 42, 0.8); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 8px; color: #fff; font-size: 0.88rem; outline: none; }
+    .modal-input-area input[type="text"]:focus { border-color: var(--accent); }
     .modal-input-area button { padding: 10px 18px; background: var(--primary); border: none; color: #fff; font-weight: 800; border-radius: 8px; cursor: pointer; transition: 0.2s; }
     .modal-input-area button:hover { opacity: 0.9; }
+
+    /* 📸 إرسال الصور - أنماط جديدة */
+    .btn-image-picker {
+      padding: 10px 14px !important;
+      background: rgba(56, 189, 248, 0.15) !important;
+      border: 1px solid var(--card-border) !important;
+      color: var(--accent) !important;
+      font-size: 1.2rem !important;
+      cursor: pointer;
+      border-radius: 8px;
+      transition: all 0.2s;
+      flex-shrink: 0;
+    }
+
+    .btn-image-picker:hover {
+      background: rgba(56, 189, 248, 0.25) !important;
+      transform: scale(1.05);
+    }
+
+    /* معاينة الصورة قبل الإرسال */
+    #imagePreviewBox {
+      display: none;
+      padding: 10px 18px;
+      background: #0f172a;
+      border-top: 1px solid var(--card-border);
+      flex-shrink: 0;
+    }
+
+    #imagePreviewBox .preview-container {
+      position: relative;
+      display: inline-block;
+    }
+
+    #imagePreview {
+      max-height: 100px;
+      max-width: 180px;
+      border-radius: 10px;
+      border: 2px solid var(--accent);
+      display: block;
+    }
+
+    .cancel-image-btn {
+      position: absolute;
+      top: -8px;
+      right: -8px;
+      background: #ef4444;
+      color: #fff;
+      border: 2px solid #0f172a;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-weight: bold;
+      font-size: 0.75rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0;
+    }
+
+    .preview-label {
+      color: var(--text-sub);
+      font-size: 0.72rem;
+      margin-top: 6px;
+    }
+
+    /* صور في الشات */
+    .msg-bubble img {
+      max-width: 100%;
+      max-height: 300px;
+      border-radius: 10px;
+      margin-top: 6px;
+      cursor: pointer;
+      display: block;
+      transition: transform 0.2s;
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .msg-bubble img:hover {
+      transform: scale(1.02);
+    }
+
+    /* عارض الصور المكبّر */
+    .image-lightbox {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.95);
+      z-index: 99999;
+      display: none;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+      cursor: zoom-out;
+    }
+
+    .image-lightbox.active {
+      display: flex;
+    }
+
+    .image-lightbox img {
+      max-width: 100%;
+      max-height: 90vh;
+      border-radius: 12px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.8);
+    }
+
+    .image-lightbox .close-lightbox {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: rgba(255,255,255,0.1);
+      color: #fff;
+      border: 1px solid rgba(255,255,255,0.2);
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 1.4rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
 
     /* ============================================ */
     /* 📱 RESPONSIVE - تحسين الموقع للجوال           */
@@ -595,7 +718,7 @@
         gap: 6px;
       }
 
-      .modal-input-area input {
+      .modal-input-area input[type="text"] {
         padding: 10px 12px;
         font-size: 0.85rem;
       }
@@ -603,6 +726,11 @@
       .modal-input-area button {
         padding: 10px 14px;
         font-size: 0.85rem;
+      }
+
+      .btn-image-picker {
+        padding: 8px 12px !important;
+        font-size: 1.1rem !important;
       }
 
       .ticket-action-bar {
@@ -652,6 +780,15 @@
 
       #profileModal div[style*="grid-template-columns: repeat(3"] {
         gap: 6px !important;
+      }
+
+      .msg-bubble img {
+        max-height: 220px;
+      }
+
+      #imagePreview {
+        max-height: 70px !important;
+        max-width: 130px !important;
       }
     }
 
@@ -1136,7 +1273,19 @@
         <button onclick="updateTicketStatus('canceled')" style="flex: 1; background: #ef4444; color: #fff; border: none; padding: 8px; border-radius: 8px; font-weight: bold; cursor: pointer; font-size: 0.85rem;">❌ إلغاء التذكرة</button>
       </div>
 
+      <!-- 📸 معاينة الصورة قبل الإرسال -->
+      <div id="imagePreviewBox" data-html2canvas-ignore="true">
+        <div class="preview-container">
+          <img id="imagePreview" src="" alt="معاينة" />
+          <button type="button" class="cancel-image-btn" onclick="cancelImageSend()">✕</button>
+        </div>
+        <div class="preview-label">📷 جاهزة للإرسال</div>
+      </div>
+
+      <!-- 📸 إدخال الرسالة مع زر الصورة -->
       <form class="modal-input-area" onsubmit="sendModalMessage(event)" data-html2canvas-ignore="true">
+        <input type="file" id="imageInput" accept="image/*" style="display: none;" onchange="handleImageSelect(event)">
+        <button type="button" class="btn-image-picker" onclick="document.getElementById('imageInput').click()" title="إرسال صورة">📎</button>
         <input type="text" id="modalMessageInput" placeholder="اكتب رسالتك وسلّم بياناتك هنا..." autocomplete="off">
         <button type="submit">إرسال</button>
       </form>
@@ -1160,6 +1309,12 @@
     </div>
   </div>
 
+  <!-- 📸 عارض الصور المكبّر -->
+  <div class="image-lightbox" id="imageLightbox" onclick="closeLightbox()">
+    <button class="close-lightbox" onclick="closeLightbox()">✕</button>
+    <img id="lightboxImage" src="" alt="صورة" onclick="event.stopPropagation()" />
+  </div>
+
   <footer>
     جميع الحقوق محفوظة &copy; 2026 منصة ضماني للوساطة الرقمية المضمونة
   </footer>
@@ -1169,6 +1324,7 @@
     let socket = null;
     let currentTicketId = null;
     let socketReady = false;
+    let pendingImageData = null; // 📸
 
     if (typeof io === 'undefined') {
       console.error('❌ Socket.io client library NOT loaded! Check the script tag.');
@@ -1536,12 +1692,17 @@
         socket.once('connect', () => socket.emit('join_ticket', id));
       }
 
+      // 📸 تنظيف معاينة الصورة عند الفتح
+      cancelImageSend();
+
       document.getElementById('modalMessagesBox').innerHTML = '';
       loadModalHistory(id);
     }
 
     function closeTicketModal() {
       document.getElementById('ticketModal').classList.remove('active');
+      // 📸 تنظيف معاينة الصورة عند الإغلاق
+      cancelImageSend();
     }
 
     async function loadModalHistory(id) {
@@ -1568,15 +1729,17 @@
       }
     }
 
+    // 📸 عرض الرسالة (نص + صورة)
     function renderModalMessage(data) {
       const box = document.getElementById('modalMessagesBox');
       const myUser = localStorage.getItem('username') || 'أنت';
       const senderName = data.sender || 'مستخدم';
       const isMe = senderName === myUser || (socket && data.socketId === socket.id);
       const messageText = data.message || data.text || data.content || '';
+      const imageData = data.image || data.imageUrl || null;
 
       const lastMsg = box.lastElementChild;
-      const fingerprint = `${senderName}|${messageText}`;
+      const fingerprint = `${senderName}|${messageText}|${imageData ? imageData.substring(0, 50) : ''}`;
       if (lastMsg && lastMsg.dataset.fingerprint === fingerprint) return;
 
       const containerDiv = document.createElement('div');
@@ -1586,16 +1749,70 @@
       const trimmedName = senderName.trim();
       const firstChar = trimmedName ? trimmedName.charAt(0) : '؟';
 
+      let bubbleContent = `<div class="msg-sender">${isMe ? 'أنت' : senderName}</div>`;
+
+      if (messageText) {
+        bubbleContent += `<div>${messageText}</div>`;
+      }
+
+      if (imageData) {
+        bubbleContent += `<img src="${imageData}" alt="صورة" onclick="openLightbox(this.src)" onerror="this.style.display='none'" />`;
+      }
+
       containerDiv.innerHTML = `
         <div class="msg-avatar">${firstChar}</div>
-        <div class="msg-bubble">
-          <div class="msg-sender">${isMe ? 'أنت' : senderName}</div>
-          <div>${messageText}</div>
-        </div>
+        <div class="msg-bubble">${bubbleContent}</div>
       `;
 
       box.appendChild(containerDiv);
       box.scrollTop = box.scrollHeight;
+    }
+
+    // 📸 اختيار صورة
+    function handleImageSelect(event) {
+      const file = event.target.files[0];
+      if (!file) return;
+
+      if (file.size > 5 * 1024 * 1024) {
+        showAlert('حجم الصورة كبير جداً! الحد الأقصى 5 ميجابايت', 'warning');
+        event.target.value = '';
+        return;
+      }
+
+      if (!file.type.startsWith('image/')) {
+        showAlert('يرجى اختيار صورة صحيحة', 'warning');
+        event.target.value = '';
+        return;
+      }
+
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        pendingImageData = e.target.result;
+        document.getElementById('imagePreview').src = pendingImageData;
+        document.getElementById('imagePreviewBox').style.display = 'block';
+      };
+      reader.readAsDataURL(file);
+    }
+
+    // 📸 إلغاء إرسال الصورة
+    function cancelImageSend() {
+      pendingImageData = null;
+      const imgInput = document.getElementById('imageInput');
+      if (imgInput) imgInput.value = '';
+      const previewBox = document.getElementById('imagePreviewBox');
+      if (previewBox) previewBox.style.display = 'none';
+      const previewImg = document.getElementById('imagePreview');
+      if (previewImg) previewImg.src = '';
+    }
+
+    // 📸 عارض الصور
+    function openLightbox(src) {
+      document.getElementById('lightboxImage').src = src;
+      document.getElementById('imageLightbox').classList.add('active');
+    }
+
+    function closeLightbox() {
+      document.getElementById('imageLightbox').classList.remove('active');
     }
 
     function setModalTicketStatus(status) {
@@ -1636,27 +1853,41 @@
       }
     }
 
+    // 📸 إرسال الرسالة (نص + صورة)
     async function sendModalMessage(e) {
       e.preventDefault();
       const input = document.getElementById('modalMessageInput');
       const message = input.value.trim();
       const myUser = localStorage.getItem('username') || 'مستخدم';
 
-      if (!message) return;
       if (!currentTicketId) {
         showAlert('لا توجد تذكرة مفتوحة', 'error');
         return;
       }
 
+      if (!message && !pendingImageData) return;
+
       if (socket && socket.connected) {
-        socket.emit('send_message', {
+        const payload = {
           ticketId: currentTicketId,
           sender: myUser,
-          message
+          message: message || '',
+          image: pendingImageData || null,
+          hasImage: !!pendingImageData
+        };
+
+        socket.emit('send_message', payload);
+
+        renderModalMessage({
+          sender: myUser,
+          message: message || '',
+          image: pendingImageData,
+          socketId: socket.id
         });
-        renderModalMessage({ sender: myUser, message, socketId: socket.id });
+
         input.value = '';
-        console.log('📤 Message sent via socket');
+        cancelImageSend();
+        console.log('📤 Message sent via socket' + (pendingImageData ? ' with image' : ''));
         return;
       }
 
