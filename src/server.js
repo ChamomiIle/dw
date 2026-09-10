@@ -13,17 +13,17 @@ const ticketRoutes = require('./routes/ticketRoutes');
 const app = express();
 const server = http.createServer(app);
 
-// إعدادات الـ CORS والسيرفر الحقيقي
+// إعدادات الـ CORS والسيرفر الحقيقي (مضاف إليها PATCH)
 const io = new Server(server, {
   cors: {
     origin: "*",
-    methods: ["GET", "POST", "PUT", "DELETE"]
+    methods: ["GET", "POST", "PUT", "PATCH", "DELETE"]
   }
 });
 
 app.use(cors({
   origin: "*",
-  methods: ["GET", "POST", "PUT", "DELETE"],
+  methods: ["GET", "POST", "PUT", "PATCH", "DELETE"],
   credentials: true
 }));
 
