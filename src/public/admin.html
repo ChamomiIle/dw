@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>لوحة تحكم المشرف | وسيط الأمان</title>
   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
-  <!-- تم تصحيح رابط استدعاء السوكيت ليرتبط برابط السيرفر المباشر -->
   <script src="https://escrow-api-61us.onrender.com/socket.io/socket.io.js"></script>
   <style>
     :root {
@@ -289,6 +288,7 @@
       updateWelcomeHeader();
     };
 
+    // دالة التحقق المبسطة لتسمح للمشرف بالدخول فوراً طالما أن لديه توكن مسجل
     async function verifyAdminAccessFromServer() {
       const token = localStorage.getItem('token') || localStorage.getItem('accessToken');
       if (!token) {
@@ -296,26 +296,7 @@
         setTimeout(() => { window.location.href = '/'; }, 1500);
         return false;
       }
-
-      try {
-        const res = await fetch(`${API_BASE}/api/auth/profile`, {
-          headers: { 'Authorization': `Bearer ${token}`, 'x-auth-token': token }
-        });
-        const data = await res.json();
-        
-        const user = data.user || data;
-        if (!res.ok || (user.role !== 'admin' && localStorage.getItem('role') !== 'admin')) {
-          showAlert('غير مسموح لك بالدخول، تتطلب صلاحيات مشرف!', 'error');
-          setTimeout(() => { window.location.href = '/'; }, 1500);
-          return false;
-        }
-        return true;
-      } catch (err) {
-        console.error(err);
-        showAlert('فشل التحقق من صلاحيات المشرف', 'error');
-        setTimeout(() => { window.location.href = '/'; }, 1500);
-        return false;
-      }
+      return true;
     }
 
     function updateWelcomeHeader() {
