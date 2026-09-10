@@ -158,7 +158,6 @@
     .toast-container { position: fixed; top: 25px; right: 25px; z-index: 9999; display: flex; flex-direction: column; gap: 10px; pointer-events: none; }
     .custom-toast { pointer-events: auto; min-width: 280px; background: rgba(15, 23, 42, 0.95); border: 1px solid var(--card-border); padding: 12px 18px; border-radius: 14px; display: flex; align-items: center; gap: 12px; color: #fff; font-weight: 700; font-size: 0.88rem; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
     
-    /* فورم إعدادات الحساب */
     .settings-form { padding: 25px; display: flex; flex-direction: column; gap: 15px; }
     .settings-form label { font-size: 0.85rem; color: var(--text-sub); font-weight: 700; }
     .settings-form input { padding: 10px 14px; background: rgba(15, 23, 42, 0.8); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 8px; color: #fff; outline: none; }
@@ -223,7 +222,6 @@
     </div>
   </div>
 
-  <!-- نافذة شات المشرف المباشر -->
   <div class="modal-overlay" id="adminTicketModal">
     <div class="ticket-modal">
       <div class="modal-header">
@@ -250,7 +248,6 @@
     </div>
   </div>
 
-  <!-- نافذة تعديل بيانات الحساب (الملف الشخصي) -->
   <div class="modal-overlay" id="adminProfileModal">
     <div class="ticket-modal" style="height: auto; max-width: 450px;">
       <div class="modal-header">
@@ -272,12 +269,11 @@
   </div>
 
   <script>
-    const API_BASE = 'http://localhost:5001';
+    const API_BASE = 'https://escrow-api-61us.onrender.com';
     let socket = null;
     try { socket = io(API_BASE); } catch (e) { console.warn("Socket connection failed"); }
     let activeAdminTicketId = null;
 
-    // دوال جلب وحفظ بيانات المشرف الشخصية من الـ LocalStorage
     function getAdminProfile() {
       return {
         name: localStorage.getItem('admin_custom_name') || 'مشرف معتمد 🛡️',
@@ -285,11 +281,44 @@
       };
     }
 
-    window.onload = function() {
-      verifyAdminAccess();
+    window.onload = async function() {
+      // فحص حقيقي للصلاحيات عبر السيرفر لمنع الدخول العشوائي بالرابط
+      const authorized = await verifyAdminAccessFromServer();
+      if (!authorized) return;
+
       loadAllTickets();
       updateWelcomeHeader();
     };
+
+    async function verifyAdminAccessFromServer() {
+      const token = localStorage.getItem('token') || localStorage.getItem('accessToken');
+      if (!token) {
+        showAlert('غير مسموح لك بالدخول، يرجى تسجيل الدخول أولاً!', 'error');
+        setTimeout(() => { window.location.href = '/'; }, 1500);
+        return false;
+      }
+
+      try {
+        // نتحقق من السيرفر إذا كان اليوزر يمتلك صلاحية admin فعلاً
+        const res = await fetch(`${API_BASE}/api/auth/profile`, {
+          headers: { 'Authorization': `Bearer ${token}`, 'x-auth-token': token }
+        });
+        const data = await res.json();
+        
+        const user = data.user || data;
+        if (!res.ok || (user.role !== 'admin' && localStorage.getItem('role') !== 'admin')) {
+          showAlert('غير مسموح لك بالدخول، تتطلب صلاحيات مشرف!', 'error');
+          setTimeout(() => { window.location.href = '/'; }, 1500);
+          return false;
+        }
+        return true;
+      } catch (err) {
+        console.error(err);
+        showAlert('فشل التحقق من صلاحيات المشرف', 'error');
+        setTimeout(() => { window.location.href = '/'; }, 1500);
+        return false;
+      }
+    }
 
     function updateWelcomeHeader() {
       const profile = getAdminProfile();
@@ -331,15 +360,6 @@
       toast.innerHTML = `<span>${icons[type] || '⚠️'}</span><div>${message}</div>`;
       container.appendChild(toast);
       setTimeout(() => toast.remove(), 4000);
-    }
-
-    function verifyAdminAccess() {
-      const token = localStorage.getItem('token') || localStorage.getItem('accessToken');
-      const role = localStorage.getItem('role');
-      if (!token || role !== 'admin') {
-        showAlert('غير مسموح لك بالدخول، تتطلب صلاحيات مشرف!', 'error');
-        setTimeout(() => { window.location.href = '/'; }, 1500);
-      }
     }
 
     async function loadAllTickets() {
@@ -449,17 +469,14 @@
       const box = document.getElementById('adminModalMessagesBox');
       const profile = getAdminProfile();
       
-      // التحقق مما إذا كانت الرسالة مرسلة من المشرف الحالي بناءً على الاسم المخزن أو التصنيف القديم
-      const isMe = (data.sender === profile.name || data.sender === 'مشرف معتمد 🛡️');
+      const isMe = (data.sender === profile.name || data.sender === 'مشرف معتمد 🛡️' || data.sender === 'المشرف');
       
       const containerDiv = document.createElement('div');
       containerDiv.className = `msg-container ${isMe ? 'me-container' : ''}`;
       
       const senderName = isMe ? profile.name : (data.sender || 'مستخدم');
-      const initial = senderName.charAt(0);
+      let avatarContent = senderName.charAt(0);
       
-      // دعم عرض الصورة الرمزية إن وجدت، أو الحرف الأول
-      let avatarContent = initial;
       if (isMe && profile.avatar) {
         avatarContent = `<img src="${profile.avatar}" alt="Avatar">`;
       }
@@ -484,19 +501,45 @@
       });
     }
 
-    function sendAdminModalMessage(e) {
+    // تم تعديل دالة الإرسال لتدعم السوكيت مع الاحتفاظ بالطلب كـ API احتياطي لضمان عدم فشل الإرسال نهائياً
+    async function sendAdminModalMessage(e) {
       e.preventDefault();
       const input = document.getElementById('adminMessageInput');
       const message = input.value.trim();
       const profile = getAdminProfile();
 
-      if (message && activeAdminTicketId && socket) {
+      if (!message || !activeAdminTicketId) return;
+
+      // 1. الإرسال عبر السوكيت المباشر
+      if (socket && socket.connected) {
         socket.emit('send_message', { 
           ticketId: activeAdminTicketId, 
           sender: profile.name, 
           message 
         });
         input.value = '';
+      } else {
+        // 2. كاحتياطي: إرسال الرسالة عبر مسار الـ API المباشر للسيرفر إذا لم يتصل السوكيت
+        const token = localStorage.getItem('token') || localStorage.getItem('accessToken');
+        try {
+          const res = await fetch(`${API_BASE}/api/tickets/${activeAdminTicketId}/messages`, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${token}`,
+              'x-auth-token': token
+            },
+            body: JSON.stringify({ message, sender: profile.name })
+          });
+          if (res.ok) {
+            input.value = '';
+            loadAdminTicketMessages(activeAdminTicketId);
+          } else {
+            showAlert('فشل إرسال الرسالة', 'error');
+          }
+        } catch (err) {
+          showAlert('خطأ في الاتصال بالسيرفر', 'error');
+        }
       }
     }
 
