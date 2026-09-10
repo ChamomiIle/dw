@@ -19,7 +19,7 @@ const userSchema = new mongoose.Schema(
     password: {
       type: String,
       required: [true, 'يرجى إدخال كلمة المرور'],
-      minlength: 6,
+      minlength: [6, 'كلمة المرور يجب أن تكون 6 أحرف على الأقل'],
       select: false,
     },
     role: {
