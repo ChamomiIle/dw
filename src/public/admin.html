@@ -5,7 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>لوحة تحكم المشرف | وسيط الأمان</title>
   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
-  <script src="/socket.io/socket.io.js"></script>
+  <!-- تم تصحيح رابط استدعاء السوكيت ليرتبط برابط السيرفر المباشر -->
+  <script src="https://escrow-api-61us.onrender.com/socket.io/socket.io.js"></script>
   <style>
     :root {
       --bg-dark: #090d16;
@@ -104,7 +105,6 @@
     .action-btn { background: var(--primary); color: #fff; border: none; padding: 6px 12px; border-radius: 8px; font-weight: 700; font-size: 0.78rem; cursor: pointer; transition: 0.2s; }
     .action-btn:hover { opacity: 0.85; }
 
-    /* Modal للشات الخاص بالأدمن وتعديل الحساب */
     .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(5, 8, 15, 0.8); backdrop-filter: blur(8px); display: none; justify-content: center; align-items: center; z-index: 1000; padding: 15px; }
     .modal-overlay.active { display: flex; }
     .ticket-modal { background: #0f172a; border: 1px solid var(--card-border); width: 100%; max-width: 680px; height: 82vh; border-radius: 24px; display: flex; flex-direction: column; overflow: hidden; }
@@ -282,7 +282,6 @@
     }
 
     window.onload = async function() {
-      // فحص حقيقي للصلاحيات عبر السيرفر لمنع الدخول العشوائي بالرابط
       const authorized = await verifyAdminAccessFromServer();
       if (!authorized) return;
 
@@ -299,7 +298,6 @@
       }
 
       try {
-        // نتحقق من السيرفر إذا كان اليوزر يمتلك صلاحية admin فعلاً
         const res = await fetch(`${API_BASE}/api/auth/profile`, {
           headers: { 'Authorization': `Bearer ${token}`, 'x-auth-token': token }
         });
@@ -501,7 +499,6 @@
       });
     }
 
-    // تم تعديل دالة الإرسال لتدعم السوكيت مع الاحتفاظ بالطلب كـ API احتياطي لضمان عدم فشل الإرسال نهائياً
     async function sendAdminModalMessage(e) {
       e.preventDefault();
       const input = document.getElementById('adminMessageInput');
@@ -510,7 +507,6 @@
 
       if (!message || !activeAdminTicketId) return;
 
-      // 1. الإرسال عبر السوكيت المباشر
       if (socket && socket.connected) {
         socket.emit('send_message', { 
           ticketId: activeAdminTicketId, 
@@ -519,7 +515,6 @@
         });
         input.value = '';
       } else {
-        // 2. كاحتياطي: إرسال الرسالة عبر مسار الـ API المباشر للسيرفر إذا لم يتصل السوكيت
         const token = localStorage.getItem('token') || localStorage.getItem('accessToken');
         try {
           const res = await fetch(`${API_BASE}/api/tickets/${activeAdminTicketId}/messages`, {
