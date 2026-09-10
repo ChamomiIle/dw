@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ضماني | منصة الوساطة الرقمية المضمونة</title>
   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <!-- ✅ FIX: Socket.io من CDN بدل ما كان من نفس السيرفر (اللي كان يعطي 404) -->
   <script src="https://cdn.socket.io/4.7.5/socket.io.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
   <style>
@@ -130,8 +131,29 @@
     .user-profile-badge:hover { border-color: var(--accent); background: rgba(56, 189, 248, 0.08); }
     .btn-logout { background: rgba(239, 68, 68, 0.2); color: #f87171; border: 1px solid rgba(239, 68, 68, 0.3); padding: 4px 8px; border-radius: 6px; font-weight: 700; font-size: 0.78rem; cursor: pointer; }
 
+    /* ✅ محسّن: Toast أكبر وأوضح */
     .toast-container { position: fixed; top: 25px; right: 25px; z-index: 9999; display: flex; flex-direction: column; gap: 10px; pointer-events: none; }
-    .custom-toast { pointer-events: auto; min-width: 300px; background: rgba(15, 23, 42, 0.95); border: 1px solid var(--card-border); backdrop-filter: blur(12px); padding: 12px 18px; border-radius: 14px; display: flex; align-items: center; gap: 12px; color: #fff; font-weight: 700; font-size: 0.88rem; transform: translateX(120%); transition: all 0.35s ease; }
+    .custom-toast { 
+      pointer-events: auto; 
+      min-width: 340px; 
+      max-width: 440px; 
+      background: rgba(15, 23, 42, 0.98); 
+      border: 1px solid var(--card-border); 
+      backdrop-filter: blur(12px); 
+      padding: 14px 20px; 
+      border-radius: 14px; 
+      display: flex; 
+      align-items: center; 
+      gap: 12px; 
+      color: #fff; 
+      font-weight: 700; 
+      font-size: 0.9rem; 
+      line-height: 1.6;
+      transform: translateX(120%); 
+      transition: all 0.35s ease; 
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+      direction: rtl;
+    }
     .custom-toast.show { transform: translateX(0); }
     .toast-warning { border-color: rgba(245, 158, 11, 0.5); }
     .toast-error { border-color: rgba(239, 68, 68, 0.5); }
@@ -485,109 +507,62 @@
 
       <div class="reviews-grid">
         <div class="review-card">
-          <div class="review-header">
-            <span class="reviewer-name">عبدالعزيز</span>
-            <span class="review-stars">★★★★★</span>
-          </div>
+          <div class="review-header"><span class="reviewer-name">عبدالعزيز</span><span class="review-stars">★★★★★</span></div>
           <p class="review-text">"خدمة ضماني ممتازة وسريعة جداً. المشرف دخل التذكرة خلال دقيقة واحدة وتأكد من تغيير الإيميل بنفسه."</p>
           <span class="review-item-tag">شراء حساب Rust</span>
         </div>
-
         <div class="review-card">
-          <div class="review-header">
-            <span class="reviewer-name">فهد</span>
-            <span class="review-stars">★★★★★</span>
-          </div>
+          <div class="review-header"><span class="reviewer-name">فهد</span><span class="review-stars">★★★★★</span></div>
           <p class="review-text">"أفضل منصة وساطة تعاملت معها، الأمان عندهم عالي جداً وأخذت حقي بالكامل بدون أي قلق."</p>
           <span class="review-item-tag">وساطة بقيمة 300$</span>
         </div>
-
         <div class="review-card">
-          <div class="review-header">
-            <span class="reviewer-name">سعود</span>
-            <span class="review-stars">★★★★★</span>
-          </div>
+          <div class="review-header"><span class="reviewer-name">سعود</span><span class="review-stars">★★★★★</span></div>
           <p class="review-text">"سرعة التحويل للبائع بعد الفحص رهيبة، والعقد الـ PDF يضمن الحقوق 100%. موفقين!"</p>
           <span class="review-item-tag">بيع قناتين يوتيوب</span>
         </div>
-
         <div class="review-card">
-          <div class="review-header">
-            <span class="reviewer-name">Sn1per</span>
-            <span class="review-stars">★★★★★</span>
-          </div>
+          <div class="review-header"><span class="reviewer-name">Sn1per</span><span class="review-stars">★★★★★</span></div>
           <p class="review-text">"كنت خايف أشتري حساب فورتنايت بمبلغ كبير، بس الوسيط طمني وخلاني أغير كل بيانات الأمان قبل ما يطلع."</p>
           <span class="review-item-tag">شراء حساب Fortnite</span>
         </div>
-
         <div class="review-card">
-          <div class="review-header">
-            <span class="reviewer-name">عبدالله</span>
-            <span class="review-stars">★★★★☆</span>
-          </div>
+          <div class="review-header"><span class="reviewer-name">عبدالله</span><span class="review-stars">★★★★☆</span></div>
           <p class="review-text">"الخدمة ممتازة بس تأخر المشرف 5 دقايق بسبب الزحمة. عموماً تمت الصفقة بأمان وأنصح فيهم."</p>
           <span class="review-item-tag">شحن رصيد 200$</span>
         </div>
-
         <div class="review-card">
-          <div class="review-header">
-            <span class="reviewer-name">DarkWolf</span>
-            <span class="review-stars">★★★★★</span>
-          </div>
+          <div class="review-header"><span class="reviewer-name">DarkWolf</span><span class="review-stars">★★★★★</span></div>
           <p class="review-text">"تعاملت معهم 3 مرات وما صار أي مشكلة. المستحقات توصل للبائع بسرعة والعمولة معقولة جداً."</p>
           <span class="review-item-tag">بيع حساب Steam</span>
         </div>
-
         <div class="review-card">
-          <div class="review-header">
-            <span class="reviewer-name">أبو ريان</span>
-            <span class="review-stars">★★★★★</span>
-          </div>
+          <div class="review-header"><span class="reviewer-name">أبو ريان</span><span class="review-stars">★★★★★</span></div>
           <p class="review-text">"صراحة أول مرة أتعامل بوساطة إلكترونية وكنت متردد، لكن طلعوا ناس محترمين ومحايدين في القرار."</p>
           <span class="review-item-tag">وساطة 120$</span>
         </div>
-
         <div class="review-card">
-          <div class="review-header">
-            <span class="reviewer-name">Rakan_99</span>
-            <span class="review-stars">★★★★★</span>
-          </div>
+          <div class="review-header"><span class="reviewer-name">Rakan_99</span><span class="review-stars">★★★★★</span></div>
           <p class="review-text">"أسرع وساطة جربتها بحياتي. دخلت التذكرة الساعة 2 بالليل والمشرف كان متواجد ورد علي فوراً."</p>
           <span class="review-item-tag">شراء حساب Valorant</span>
         </div>
-
         <div class="review-card">
-          <div class="review-header">
-            <span class="reviewer-name">خالد</span>
-            <span class="review-stars">★★★★★</span>
-          </div>
+          <div class="review-header"><span class="reviewer-name">خالد</span><span class="review-stars">★★★★★</span></div>
           <p class="review-text">"اللي عجبني إنهم يحفظون المحادثات كاملة، فأي خلاف يرجعون للمحادثة ويحلون الموضوع بعدل."</p>
           <span class="review-item-tag">وساطة 500$</span>
         </div>
-
         <div class="review-card">
-          <div class="review-header">
-            <span class="reviewer-name">Ghost</span>
-            <span class="review-stars">★★★★★</span>
-          </div>
+          <div class="review-header"><span class="reviewer-name">Ghost</span><span class="review-stars">★★★★★</span></div>
           <p class="review-text">"نقلت قناتي من بائع مجهول وأنا مرتاح، لأن المبلغ ما انحول له إلا بعد ما تأكدت من كل شي."</p>
           <span class="review-item-tag">بيع قناة تيليجرام</span>
         </div>
-
         <div class="review-card">
-          <div class="review-header">
-            <span class="reviewer-name">تركي</span>
-            <span class="review-stars">★★★★★</span>
-          </div>
+          <div class="review-header"><span class="reviewer-name">تركي</span><span class="review-stars">★★★★★</span></div>
           <p class="review-text">"خدمة العملاء عندهم راقية، يشرحون لك كل خطوة بالتفصيل ولا يتركونك إلا وأنت فاهم كل شي."</p>
           <span class="review-item-tag">شراء حساب انستقرام</span>
         </div>
-
         <div class="review-card">
-          <div class="review-header">
-            <span class="reviewer-name">Nasser.K</span>
-            <span class="review-stars">★★★★★</span>
-          </div>
+          <div class="review-header"><span class="reviewer-name">Nasser.K</span><span class="review-stars">★★★★★</span></div>
           <p class="review-text">"جربت منصات وساطة كثيرة، بس ضماني هو الوحيد اللي حسيت فيه بالأمان الحقيقي. شكراً لكم."</p>
           <span class="review-item-tag">وساطة 80$</span>
         </div>
@@ -602,34 +577,19 @@
 
       <div class="faq-list">
         <div class="faq-item">
-          <div class="faq-question" onclick="toggleFaq(this)">
-            <span>كم يستغرق وقت إتمام صفقة الوساطة؟</span>
-            <span>➕</span>
-          </div>
+          <div class="faq-question" onclick="toggleFaq(this)"><span>كم يستغرق وقت إتمام صفقة الوساطة؟</span><span>➕</span></div>
           <div class="faq-answer">غالباً ما تستغرق العملية بين 5 إلى 15 دقيقة فقط، يعتمد ذلك على سرعة استجابة البائع والمشتري وفحص البيانات داخل الغرفة.</div>
         </div>
-
         <div class="faq-item">
-          <div class="faq-question" onclick="toggleFaq(this)">
-            <span>كيف أضمن عدم استرجاع الحساب بعد الشراء؟</span>
-            <span>➕</span>
-          </div>
+          <div class="faq-question" onclick="toggleFaq(this)"><span>كيف أضمن عدم استرجاع الحساب بعد الشراء؟</span><span>➕</span></div>
           <div class="faq-answer">يشترط مشرف الوساطة نقل الحساب مع الإيميل الأساسي الأول (OG Email), وإزالة جميع وسائل التحقق القديمة ورقم الهاتف وتفعيل التحقق الثنائي الخاص بك.</div>
         </div>
-
         <div class="faq-item">
-          <div class="faq-question" onclick="toggleFaq(this)">
-            <span>ماذا يحدث إذا تراجع البائع أو المشتري عن الصفقة؟</span>
-            <span>➕</span>
-          </div>
+          <div class="faq-question" onclick="toggleFaq(this)"><span>ماذا يحدث إذا تراجع البائع أو المشتري عن الصفقة؟</span><span>➕</span></div>
           <div class="faq-answer">إذا تراجع المشتري قبل استلام البيانات يُرجع له المبلغ كاملاً. وإذا تراجع البائع يتم إلغاء التذكرة وإعادة المبلغ للمشتري دون خصم.</div>
         </div>
-
         <div class="faq-item">
-          <div class="faq-question" onclick="toggleFaq(this)">
-            <span>ما هي عمولة المنصة ومن يتحملها؟</span>
-            <span>➕</span>
-          </div>
+          <div class="faq-question" onclick="toggleFaq(this)"><span>ما هي عمولة المنصة ومن يتحملها؟</span><span>➕</span></div>
           <div class="faq-answer">العمولة هي 5% فقط من إجمالي قيمة الصفقة، وتُخصم تلقائياً عند تحويل مستحقات البائع النهائية أو حسب الاتفاق بين الطرفين.</div>
         </div>
       </div>
@@ -693,7 +653,7 @@
       <form id="registerForm" style="display: none;" onsubmit="handleRegisterSubmit(event)">
         <div class="form-group">
           <label>اسم المستخدم</label>
-          <input type="text" id="regUsername" required placeholder="مثال: name">
+          <input type="text" id="regUsername" required placeholder="مثال: faisal1337">
         </div>
         <div class="form-group">
           <label>البريد الإلكتروني</label>
@@ -759,12 +719,8 @@
       <div class="modal-messages" id="modalMessagesBox"></div>
 
       <div class="ticket-action-bar" id="ticketActionButtons" data-html2canvas-ignore="true">
-        <button onclick="updateTicketStatus('completed')" style="flex: 1; background: #10b981; color: #fff; border: none; padding: 8px; border-radius: 8px; font-weight: bold; cursor: pointer; font-size: 0.85rem;">
-          ✅ تأكيد الاستلام وإبراء الذمة
-        </button>
-        <button onclick="updateTicketStatus('canceled')" style="flex: 1; background: #ef4444; color: #fff; border: none; padding: 8px; border-radius: 8px; font-weight: bold; cursor: pointer; font-size: 0.85rem;">
-          ❌ إلغاء التذكرة
-        </button>
+        <button onclick="updateTicketStatus('completed')" style="flex: 1; background: #10b981; color: #fff; border: none; padding: 8px; border-radius: 8px; font-weight: bold; cursor: pointer; font-size: 0.85rem;">✅ تأكيد الاستلام وإبراء الذمة</button>
+        <button onclick="updateTicketStatus('canceled')" style="flex: 1; background: #ef4444; color: #fff; border: none; padding: 8px; border-radius: 8px; font-weight: bold; cursor: pointer; font-size: 0.85rem;">❌ إلغاء التذكرة</button>
       </div>
 
       <form class="modal-input-area" onsubmit="sendModalMessage(event)" data-html2canvas-ignore="true">
@@ -801,67 +757,69 @@
     let currentTicketId = null;
     let socketReady = false;
 
-    // ✅ إنشاء الاتصال مع خيارات صحيحة + Fallback
-    try {
-      socket = io(API_BASE, {
-        transports: ['websocket', 'polling'],
-        reconnection: true,
-        reconnectionAttempts: 15,
-        reconnectionDelay: 1000,
-        reconnectionDelayMax: 5000,
-        timeout: 20000,
-        autoConnect: true
-      });
+    // ✅ التحقق من تحميل مكتبة Socket.io
+    if (typeof io === 'undefined') {
+      console.error('❌ Socket.io client library NOT loaded! Check the script tag.');
+    } else {
+      try {
+        socket = io(API_BASE, {
+          transports: ['websocket', 'polling'],
+          reconnection: true,
+          reconnectionAttempts: 15,
+          reconnectionDelay: 1000,
+          reconnectionDelayMax: 5000,
+          timeout: 20000,
+          autoConnect: true
+        });
 
-      socket.on('connect', () => {
-        console.log('✅ Socket connected:', socket.id);
-        socketReady = true;
-        // إعادة الانضمام للغرفة الحالية لو في واحدة مفتوحة
-        if (currentTicketId) {
-          socket.emit('join_ticket', currentTicketId);
-        }
-      });
+        socket.on('connect', () => {
+          console.log('✅ Socket connected:', socket.id);
+          socketReady = true;
+          if (currentTicketId) {
+            socket.emit('join_ticket', currentTicketId);
+          }
+        });
 
-      socket.on('disconnect', (reason) => {
-        console.warn('⚠️ Socket disconnected:', reason);
-        socketReady = false;
-      });
+        socket.on('disconnect', (reason) => {
+          console.warn('⚠️ Socket disconnected:', reason);
+          socketReady = false;
+        });
 
-      socket.on('connect_error', (err) => {
-        console.error('❌ Socket connect_error:', err.message);
-        socketReady = false;
-      });
+        socket.on('connect_error', (err) => {
+          console.error('❌ Socket connect_error:', err.message);
+          socketReady = false;
+        });
 
-      socket.on('receive_message', (data) => {
-        console.log('📥 receive_message:', data);
-        if (document.getElementById('ticketModal').classList.contains('active')) {
-          renderModalMessage(data);
-        }
-      });
+        socket.on('receive_message', (data) => {
+          console.log('📥 receive_message:', data);
+          if (document.getElementById('ticketModal').classList.contains('active')) {
+            renderModalMessage(data);
+          }
+        });
 
-      // بعض السيرفرات تستخدم اسم مختلف
-      socket.on('new_message', (data) => {
-        console.log('📥 new_message:', data);
-        if (document.getElementById('ticketModal').classList.contains('active')) {
-          renderModalMessage(data);
-        }
-      });
+        socket.on('new_message', (data) => {
+          console.log('📥 new_message:', data);
+          if (document.getElementById('ticketModal').classList.contains('active')) {
+            renderModalMessage(data);
+          }
+        });
 
-      socket.on('message', (data) => {
-        console.log('📥 message:', data);
-        if (document.getElementById('ticketModal').classList.contains('active')) {
-          renderModalMessage(data);
-        }
-      });
+        socket.on('message', (data) => {
+          console.log('📥 message:', data);
+          if (document.getElementById('ticketModal').classList.contains('active')) {
+            renderModalMessage(data);
+          }
+        });
 
-      socket.on('status_updated', (data) => {
-        if (data.ticketId === currentTicketId) {
-          setModalTicketStatus(data.status);
-        }
-      });
+        socket.on('status_updated', (data) => {
+          if (data.ticketId === currentTicketId) {
+            setModalTicketStatus(data.status);
+          }
+        });
 
-    } catch (e) {
-      console.warn("Socket.io init failed:", e);
+      } catch (e) {
+        console.warn("Socket.io init failed:", e);
+      }
     }
 
     window.onload = function() {
@@ -888,6 +846,24 @@
         toast.classList.remove('show');
         setTimeout(() => toast.remove(), 350);
       }, 4000);
+    }
+
+    // ✅ دالة تنظيف رسائل Mongoose من البادئات الإنجليزية
+    function cleanMongooseError(msg) {
+      if (!msg) return 'حدث خطأ غير متوقع';
+      return msg
+        .replace(/User validation failed:\s*/gi, '')
+        .replace(/Validation failed:\s*/gi, '')
+        .replace(/password:\s*/gi, 'كلمة المرور: ')
+        .replace(/username:\s*/gi, 'اسم المستخدم: ')
+        .replace(/email:\s*/gi, 'البريد: ')
+        .replace(/Path\s*`[^`]+`\s*/gi, '')
+        .replace(/\(`[^`]+`\)\s*/gi, '')
+        .replace(/is shorter than the minimum allowed length/gi, 'يجب أن يكون طوله على الأقل')
+        .replace(/is longer than the maximum allowed length/gi, 'يجب أن لا يتجاوز طوله')
+        .replace(/is required/gi, 'مطلوب')
+        .replace(/\s+/g, ' ')
+        .trim();
     }
 
     function checkAuthState() {
@@ -982,6 +958,12 @@
       e.preventDefault();
       const inputVal = document.getElementById('loginUsername').value.trim();
       const password = document.getElementById('loginPassword').value.trim();
+
+      if (password.length < 6) {
+        showAlert('كلمة المرور يجب أن تكون 6 أحرف على الأقل', 'warning');
+        return;
+      }
+
       const isEmail = inputVal.includes('@');
       const payload = {
         password: password,
@@ -1007,7 +989,7 @@
           checkFloatingTicketsCount();
           showAlert('تم تسجيل الدخول بنجاح!', 'success');
         } else {
-          showAlert(data.message || 'بيانات الدخول غير صحيحة', 'error');
+          showAlert(cleanMongooseError(data.message) || 'بيانات الدخول غير صحيحة', 'error');
         }
       } catch (err) {
         showAlert('تعذر الاتصال بالسيرفر!', 'error');
@@ -1019,6 +1001,24 @@
       const username = document.getElementById('regUsername').value.trim();
       const email = document.getElementById('regEmail').value.trim();
       const password = document.getElementById('regPassword').value.trim();
+
+      // ✅ تحقق محلي قبل الإرسال - يمنع ظهور رسائل Mongoose الإنجليزية
+      if (username.length < 3) {
+        showAlert('اسم المستخدم يجب أن يكون 3 أحرف على الأقل', 'warning');
+        return;
+      }
+      if (username.length > 20) {
+        showAlert('اسم المستخدم يجب أن لا يتجاوز 20 حرفاً', 'warning');
+        return;
+      }
+      if (!/^\S+@\S+\.\S+$/.test(email)) {
+        showAlert('الرجاء إدخال بريد إلكتروني صحيح', 'warning');
+        return;
+      }
+      if (password.length < 6) {
+        showAlert('كلمة المرور يجب أن تكون 6 أحرف على الأقل', 'warning');
+        return;
+      }
 
       try {
         const res = await fetch(`${API_BASE}/api/auth/register`, {
@@ -1032,7 +1032,18 @@
           showAlert('تم إنشاء الحساب بنجاح! يمكنك الآن تسجيل الدخول', 'success');
           switchAuthTab('login');
         } else {
-          showAlert(data.message || 'تعذر إنشاء الحساب', 'error');
+          let errorMsg = cleanMongooseError(data.message || data.error);
+
+          // ترجمة إضافية للأخطاء الشائعة
+          if (errorMsg.includes('duplicate key') && errorMsg.includes('email')) {
+            errorMsg = 'هذا البريد الإلكتروني مسجل مسبقاً';
+          } else if (errorMsg.includes('duplicate key') && errorMsg.includes('username')) {
+            errorMsg = 'اسم المستخدم مسجل مسبقاً، اختر اسماً آخر';
+          } else if (errorMsg.includes('E11000')) {
+            errorMsg = 'البيانات مسجلة مسبقاً، جرب قيماً مختلفة';
+          }
+
+          showAlert(errorMsg || 'تعذر إنشاء الحساب', 'error');
         }
       } catch (err) {
         showAlert('تعذر الاتصال بالسيرفر!', 'error');
@@ -1093,7 +1104,7 @@
           checkFloatingTicketsCount();
           showAlert('تم فتح غرفة الوساطة بنجاح 🚀', 'success');
         } else {
-          showAlert(data.message || data.error || 'حدث خطأ أثناء فتح التذكرة', 'error');
+          showAlert(cleanMongooseError(data.message || data.error) || 'حدث خطأ أثناء فتح التذكرة', 'error');
         }
       } catch (err) {
         showAlert('تعذر الاتصال بالسيرفر!', 'error');
@@ -1110,14 +1121,12 @@
       const actionButtonsBar = document.getElementById('ticketActionButtons');
       actionButtonsBar.style.display = (userRole === 'admin') ? 'flex' : 'none';
 
-      // ✅ الانضمام للغرفة
       if (socket && socket.connected) {
         socket.emit('join_ticket', id);
       } else if (socket) {
         socket.once('connect', () => socket.emit('join_ticket', id));
       }
 
-      // تفريغ صندوق الرسائل قبل التحميل
       document.getElementById('modalMessagesBox').innerHTML = '';
       loadModalHistory(id);
     }
@@ -1212,20 +1221,19 @@
           }
           checkFloatingTicketsCount();
         } else {
-          showAlert(data.message || 'فشل تحديث الحالة', 'error');
+          showAlert(cleanMongooseError(data.message) || 'فشل تحديث الحالة', 'error');
         }
       } catch (err) {
         showAlert('حدث خطأ في الاتصال بالسيرفر', 'error');
       }
     }
 
-    // ✅✅✅ الدالة الأهم - إرسال الرسالة مع Fallback
+    // ✅✅✅ إرسال الرسائل عبر Socket.io فقط
     async function sendModalMessage(e) {
       e.preventDefault();
       const input = document.getElementById('modalMessageInput');
       const message = input.value.trim();
       const myUser = localStorage.getItem('username') || 'مستخدم';
-      const token = localStorage.getItem('token') || localStorage.getItem('accessToken');
 
       if (!message) return;
       if (!currentTicketId) {
@@ -1233,45 +1241,22 @@
         return;
       }
 
-      // ✅ محاولة الإرسال عبر Socket أولاً
+      // ✅ الحالة 1: السوكت متصل
       if (socket && socket.connected) {
         socket.emit('send_message', {
           ticketId: currentTicketId,
           sender: myUser,
-          message,
-          token
+          message
         });
-
         renderModalMessage({ sender: myUser, message, socketId: socket.id });
         input.value = '';
         console.log('📤 Message sent via socket');
         return;
       }
 
-      // 🔁 Fallback: REST API
-      console.warn('⚠️ Socket not connected, using REST fallback');
-      try {
-        const res = await fetch(`${API_BASE}/api/tickets/${currentTicketId}/messages`, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${token}`,
-            'x-auth-token': token
-          },
-          body: JSON.stringify({ message, sender: myUser })
-        });
-
-        if (res.ok) {
-          renderModalMessage({ sender: myUser, message });
-          input.value = '';
-          showAlert('تم إرسال الرسالة (وضع احتياطي)', 'success');
-        } else {
-          showAlert('فشل إرسال الرسالة، تأكد من اتصالك', 'error');
-        }
-      } catch (err) {
-        console.error(err);
-        showAlert('تعذر إرسال الرسالة، السيرفر غير متاح', 'error');
-      }
+      // ❌ السوكت غير متصل
+      console.error('❌ Cannot send: Socket is not connected');
+      showAlert('فشل إرسال الرسالة: الاتصال بالسيرفر غير متاح. تأكد من اتصالك بالإنترنت.', 'error');
     }
 
     function exportToPDF() {
