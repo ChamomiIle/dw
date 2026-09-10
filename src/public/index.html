@@ -36,7 +36,6 @@
       overflow-x: hidden;
     }
 
-    /* Header */
     header {
       background: rgba(9, 13, 22, 0.85);
       backdrop-filter: blur(16px);
@@ -86,7 +85,6 @@
       transform: translateY(-1px);
     }
 
-    /* Auth Buttons */
     .auth-buttons { display: flex; align-items: center; gap: 8px; }
     .btn-auth-outline {
       border: 1px solid var(--card-border);
@@ -132,7 +130,6 @@
     .user-profile-badge:hover { border-color: var(--accent); background: rgba(56, 189, 248, 0.08); }
     .btn-logout { background: rgba(239, 68, 68, 0.2); color: #f87171; border: 1px solid rgba(239, 68, 68, 0.3); padding: 4px 8px; border-radius: 6px; font-weight: 700; font-size: 0.78rem; cursor: pointer; }
 
-    /* Toast Notifications */
     .toast-container { position: fixed; top: 25px; right: 25px; z-index: 9999; display: flex; flex-direction: column; gap: 10px; pointer-events: none; }
     .custom-toast { pointer-events: auto; min-width: 300px; background: rgba(15, 23, 42, 0.95); border: 1px solid var(--card-border); backdrop-filter: blur(12px); padding: 12px 18px; border-radius: 14px; display: flex; align-items: center; gap: 12px; color: #fff; font-weight: 700; font-size: 0.88rem; transform: translateX(120%); transition: all 0.35s ease; }
     .custom-toast.show { transform: translateX(0); }
@@ -140,7 +137,6 @@
     .toast-error { border-color: rgba(239, 68, 68, 0.5); }
     .toast-success { border-color: rgba(16, 185, 129, 0.5); }
 
-    /* Live Ticker Bar */
     .live-ticker {
       background: rgba(2, 132, 199, 0.1);
       border-bottom: 1px solid var(--card-border);
@@ -154,7 +150,6 @@
     .ticker-content { display: inline-block; animation: marquee 25s linear infinite; }
     @keyframes marquee { 0% { transform: translateX(100%); } 100% { transform: translateX(-100%); } }
 
-    /* Hero Section */
     .hero { text-align: center; padding: 60px 20px 30px; max-width: 900px; margin: 0 auto; }
     .hero-badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(56, 189, 248, 0.1); border: 1px solid rgba(56, 189, 248, 0.3); color: var(--accent); padding: 6px 16px; border-radius: 20px; font-size: 0.85rem; font-weight: 800; margin-bottom: 20px; }
     .pulse-dot { width: 8px; height: 8px; background: var(--success); border-radius: 50%; box-shadow: 0 0 8px var(--success); }
@@ -162,7 +157,6 @@
     .hero h1 span { background: linear-gradient(135deg, #38bdf8, #818cf8); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
     .hero p { font-size: 1.1rem; color: var(--text-sub); font-weight: 600; max-width: 700px; margin: 0 auto; }
 
-    /* Hero Action Button */
     .hero-action-btn {
       margin-top: 25px;
       display: inline-flex;
@@ -181,22 +175,18 @@
     }
     .hero-action-btn:hover { transform: translateY(-3px); box-shadow: 0 8px 25px rgba(37, 99, 235, 0.6); }
 
-    /* Section Global Styles */
     .section-container { max-width: 1150px; margin: 0 auto 50px; padding: 0 20px; }
     .card { background: var(--card-bg); border: 1px solid var(--card-border); backdrop-filter: blur(12px); border-radius: 24px; padding: 32px; box-shadow: 0 20px 40px rgba(0,0,0,0.4); }
     .section-title { font-size: 1.4rem; font-weight: 900; color: #fff; text-align: center; margin-bottom: 10px; display: flex; align-items: center; justify-content: center; gap: 10px; }
     .section-subtitle { text-align: center; color: var(--text-sub); font-weight: 600; font-size: 0.9rem; margin-bottom: 30px; }
 
-    /* Stats Grid */
     .stats-container { display: flex; justify-content: center; gap: 20px; margin: 20px auto 40px; max-width: 950px; flex-wrap: wrap; padding: 0 20px; }
     .stat-card { background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 16px; padding: 18px 25px; flex: 1; min-width: 180px; text-align: center; }
     .stat-card .value { font-size: 1.8rem; font-weight: 900; color: #ffffff; }
     .stat-card .label { font-size: 0.82rem; color: var(--text-sub); font-weight: 700; }
 
-    /* Main Grid */
     .main-grid { max-width: 900px; margin: 0 auto 50px; padding: 0 20px; }
 
-    /* Guarantee Section Grid */
     .guarantee-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
     .guarantee-card { background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 18px; padding: 22px; text-align: center; transition: 0.3s; }
     .guarantee-card:hover { border-color: var(--accent); transform: translateY(-3px); }
@@ -204,7 +194,6 @@
     .guarantee-card h4 { color: #fff; font-size: 1.05rem; font-weight: 800; margin-bottom: 8px; }
     .guarantee-card p { font-size: 0.85rem; color: var(--text-sub); line-height: 1.6; }
 
-    /* Reviews Section Grid */
     .reviews-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
     .review-card { background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 18px; padding: 20px; }
     .review-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
@@ -213,7 +202,6 @@
     .review-text { font-size: 0.88rem; color: var(--text-sub); line-height: 1.5; font-weight: 600; }
     .review-item-tag { display: inline-block; font-size: 0.75rem; background: rgba(56, 189, 248, 0.1); color: var(--accent); padding: 3px 10px; border-radius: 8px; margin-top: 10px; font-weight: 700; }
 
-    /* FAQ Accordion */
     .faq-list { display: flex; flex-direction: column; gap: 14px; max-width: 850px; margin: 0 auto; }
     .faq-item { background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 14px; overflow: hidden; transition: 0.3s; }
     .faq-question { padding: 16px 20px; font-weight: 800; font-size: 0.98rem; cursor: pointer; display: flex; justify-content: space-between; align-items: center; color: #fff; }
@@ -221,7 +209,6 @@
     .faq-answer { padding: 0 20px 16px; font-size: 0.88rem; color: var(--text-sub); line-height: 1.6; display: none; border-top: 1px solid rgba(255,255,255,0.05); padding-top: 12px; }
     .faq-item.active .faq-answer { display: block; }
 
-    /* Rules Grid */
     .rules-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
     .rule-card { background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 16px; padding: 20px; }
     .rule-card h4 { color: var(--accent); font-weight: 800; font-size: 1rem; margin-bottom: 10px; display: flex; align-items: center; gap: 8px; }
@@ -229,7 +216,6 @@
     .rule-card ul li { font-size: 0.85rem; color: var(--text-sub); margin-bottom: 8px; position: relative; padding-right: 16px; line-height: 1.5; font-weight: 600; }
     .rule-card ul li::before { content: "•"; position: absolute; right: 0; color: var(--accent); }
 
-    /* Forms */
     .form-group { margin-bottom: 18px; }
     .form-group label { display: block; font-size: 0.85rem; font-weight: 700; color: var(--text-sub); margin-bottom: 6px; }
     .form-group input, .form-group textarea {
@@ -239,7 +225,6 @@
     .btn-submit { width: 100%; background: linear-gradient(135deg, #0284c7, #2563eb); color: #fff; border: none; padding: 14px; border-radius: 12px; font-weight: 800; font-size: 1rem; cursor: pointer; box-shadow: 0 6px 20px var(--primary-glow); transition: 0.2s; }
     .btn-submit:hover { transform: translateY(-2px); }
 
-    /* Steps Items */
     .steps-list { display: flex; flex-direction: column; gap: 20px; }
     .step-item { display: flex; gap: 16px; align-items: flex-start; }
     .step-num { background: rgba(56, 189, 248, 0.15); border: 1px solid rgba(56, 189, 248, 0.4); color: var(--accent); width: 38px; height: 38px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-weight: 900; font-size: 1rem; flex-shrink: 0; }
@@ -248,7 +233,6 @@
 
     footer { background: rgba(9, 13, 22, 0.95); border-top: 1px solid var(--card-border); text-align: center; padding: 20px; margin-top: auto; font-size: 0.85rem; color: var(--text-sub); font-weight: 600; }
 
-    /* Modals */
     .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(5, 8, 15, 0.8); backdrop-filter: blur(8px); display: none; justify-content: center; align-items: center; z-index: 1000; padding: 15px; }
     .modal-overlay.active { display: flex; }
     .custom-modal { background: #0f172a; border: 1px solid var(--card-border); width: 100%; max-width: 420px; border-radius: 20px; padding: 28px; position: relative; }
@@ -257,7 +241,6 @@
     .auth-tab { flex: 1; text-align: center; padding: 10px; font-weight: 800; cursor: pointer; color: var(--text-sub); border-bottom: 2px solid transparent; }
     .auth-tab.active { color: var(--accent); border-color: var(--accent); }
 
-    /* Ticket Chat Popup Modal */
     .ticket-modal { background: #0f172a; border: 1px solid var(--card-border); width: 100%; max-width: 680px; height: 82vh; border-radius: 24px; display: flex; flex-direction: column; overflow: hidden; }
     .modal-header { padding: 16px 20px; border-bottom: 1px solid var(--card-border); display: flex; justify-content: space-between; align-items: center; background: rgba(15, 23, 42, 0.9); flex-shrink: 0; }
     .modal-status-bar { padding: 8px 16px; background: rgba(255,255,255,0.02); border-bottom: 1px solid var(--card-border); display: flex; gap: 10px; align-items: center; font-size: 0.82rem; flex-shrink: 0; }
@@ -267,7 +250,6 @@
     .status-completed { background: rgba(16, 185, 129, 0.2); color: #10b981; border: 1px solid rgba(16, 185, 129, 0.4); }
     .status-canceled { background: rgba(239, 68, 68, 0.2); color: #ef4444; border: 1px solid rgba(239, 68, 68, 0.4); }
     
-    /* صندوق الرسائل المحسّن */
     .modal-messages { flex: 1; padding: 18px; overflow-y: auto; background: #0b1120; display: flex; flex-direction: column; gap: 14px; min-height: 0; }
     
     .msg-container { display: flex; align-items: flex-end; gap: 10px; width: 100%; }
@@ -322,7 +304,6 @@
     .msg-container.me-container .msg-sender { color: #bae6fd; text-align: left; }
     .msg-container:not(.me-container) .msg-sender { color: var(--accent); text-align: right; }
     
-    /* جعل أزرار التحكم مخفية افتراضياً من الـ CSS أو الـ JS */
     .ticket-action-bar { padding: 10px 16px; background: rgba(15, 23, 42, 0.8); border-top: 1px solid rgba(255,255,255,0.05); display: none; gap: 10px; flex-shrink: 0; }
     .modal-input-area { padding: 12px 18px; background: #0f172a; border-top: 1px solid var(--card-border); display: flex; gap: 8px; flex-shrink: 0; }
     .modal-input-area input { flex: 1; padding: 10px 14px; background: rgba(15, 23, 42, 0.8); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 8px; color: #fff; font-size: 0.88rem; outline: none; }
@@ -347,7 +328,7 @@
       <a href="#faq" class="nav-btn"><span class="icon">❓</span> الأسئلة الشائعة</a>
       <a class="nav-btn" onclick="openCreateTicketModal()"><span class="icon">➕</span> فتح تذكرة</a>
       <a href="#calc" class="nav-btn"><span class="icon">🧮</span> الحاسبة</a>
-      <a href="/admin/dashboard" class="nav-btn" id="adminDashboardBtn" style="display: none; border-color: rgba(245, 158, 11, 0.4); color: #f59e0b;">
+      <a href="/admin.html" class="nav-btn" id="adminDashboardBtn" style="display: none; border-color: rgba(245, 158, 11, 0.4); color: #f59e0b;">
         <span class="icon">👑</span> لوحة التحكم
       </a>
     </nav>
@@ -497,13 +478,12 @@
     </div>
   </section>
 
-    <section class="section-container" id="reviews">
+  <section class="section-container" id="reviews">
     <div class="card">
       <div class="section-title">⭐ آراء وانطباعات العملاء</div>
       <div class="section-subtitle">شاهد تجارب المتعاملين السابقين ودرجة رضاهم عن خدمات الوساطة</div>
 
       <div class="reviews-grid">
-        <!-- تقييم 1 -->
         <div class="review-card">
           <div class="review-header">
             <span class="reviewer-name">عبدالعزيز</span>
@@ -513,7 +493,6 @@
           <span class="review-item-tag">شراء حساب Rust</span>
         </div>
 
-        <!-- تقييم 2 -->
         <div class="review-card">
           <div class="review-header">
             <span class="reviewer-name">فهد</span>
@@ -523,7 +502,6 @@
           <span class="review-item-tag">وساطة بقيمة 300$</span>
         </div>
 
-        <!-- تقييم 3 -->
         <div class="review-card">
           <div class="review-header">
             <span class="reviewer-name">سعود</span>
@@ -533,7 +511,6 @@
           <span class="review-item-tag">بيع قناتين يوتيوب</span>
         </div>
 
-        <!-- تقييم 4 -->
         <div class="review-card">
           <div class="review-header">
             <span class="reviewer-name">Sn1per</span>
@@ -543,7 +520,6 @@
           <span class="review-item-tag">شراء حساب Fortnite</span>
         </div>
 
-        <!-- تقييم 5 -->
         <div class="review-card">
           <div class="review-header">
             <span class="reviewer-name">عبدالله</span>
@@ -553,7 +529,6 @@
           <span class="review-item-tag">شحن رصيد 200$</span>
         </div>
 
-        <!-- تقييم 6 -->
         <div class="review-card">
           <div class="review-header">
             <span class="reviewer-name">DarkWolf</span>
@@ -563,7 +538,6 @@
           <span class="review-item-tag">بيع حساب Steam</span>
         </div>
 
-        <!-- تقييم 7 -->
         <div class="review-card">
           <div class="review-header">
             <span class="reviewer-name">أبو ريان</span>
@@ -573,7 +547,6 @@
           <span class="review-item-tag">وساطة 120$</span>
         </div>
 
-        <!-- تقييم 8 -->
         <div class="review-card">
           <div class="review-header">
             <span class="reviewer-name">Rakan_99</span>
@@ -583,7 +556,6 @@
           <span class="review-item-tag">شراء حساب Valorant</span>
         </div>
 
-        <!-- تقييم 9 -->
         <div class="review-card">
           <div class="review-header">
             <span class="reviewer-name">خالد</span>
@@ -593,7 +565,6 @@
           <span class="review-item-tag">وساطة 500$</span>
         </div>
 
-        <!-- تقييم 10 -->
         <div class="review-card">
           <div class="review-header">
             <span class="reviewer-name">Ghost</span>
@@ -603,7 +574,6 @@
           <span class="review-item-tag">بيع قناة تيليجرام</span>
         </div>
 
-        <!-- تقييم 11 -->
         <div class="review-card">
           <div class="review-header">
             <span class="reviewer-name">تركي</span>
@@ -613,7 +583,6 @@
           <span class="review-item-tag">شراء حساب انستقرام</span>
         </div>
 
-        <!-- تقييم 12 -->
         <div class="review-card">
           <div class="review-header">
             <span class="reviewer-name">Nasser.K</span>
@@ -678,7 +647,6 @@
     </div>
   </section>
 
-  <!-- نافذة فتح تذكرة جديدة (Modal) -->
   <div class="modal-overlay" id="createTicketModal">
     <div class="custom-modal" style="max-width: 480px;">
       <button class="modal-close-icon" onclick="closeCreateTicketModal()">✕</button>
@@ -701,7 +669,6 @@
     </div>
   </div>
 
-  <!-- نافذة تسجيل الدخول وحساب جديد -->
   <div class="modal-overlay" id="authModal">
     <div class="custom-modal">
       <button class="modal-close-icon" onclick="closeAuthModal()">✕</button>
@@ -741,7 +708,6 @@
     </div>
   </div>
 
-  <!-- نافذة بروفايل المستخدم ولوحة تحكمه -->
   <div class="modal-overlay" id="profileModal">
     <div class="custom-modal" style="max-width: 480px;">
       <button class="modal-close-icon" onclick="closeProfileModal()">✕</button>
@@ -767,14 +733,13 @@
         </div>
       </div>
 
-      <h4 style="font-size: 0.95rem; color: #fff; margin-bottom: 10px;">سجل تذاورك الأخيرة:</h4>
+      <h4 style="font-size: 0.95rem; color: #fff; margin-bottom: 10px;">سجل تذاكرك الأخيرة:</h4>
       <div id="profileTicketsList" style="max-height: 180px; overflow-y: auto; display: flex; flex-direction: column; gap: 8px;">
         <div style="text-align: center; color: var(--text-sub); font-size: 0.82rem; padding: 15px;">جاري التحميل...</div>
       </div>
     </div>
   </div>
 
-  <!-- نافذة شات التذكرة -->
   <div class="modal-overlay" id="ticketModal">
     <div class="ticket-modal" id="pdfArea">
       <div class="modal-header">
@@ -791,10 +756,8 @@
         <button style="background: rgba(255,255,255,0.08); color: #fff; border: 1px solid var(--card-border); padding: 4px 10px; border-radius: 8px; font-size: 0.75rem; font-weight: bold; cursor: pointer; margin-right: auto;" onclick="exportToPDF()">📄 تصدير عقد PDF</button>
       </div>
 
-      <!-- صندوق الرسائل -->
       <div class="modal-messages" id="modalMessagesBox"></div>
 
-      <!-- أزرار التحكم بالتذكرة (تظهر للأدمن فقط وتختفي عن العميل العادي) -->
       <div class="ticket-action-bar" id="ticketActionButtons" data-html2canvas-ignore="true">
         <button onclick="updateTicketStatus('completed')" style="flex: 1; background: #10b981; color: #fff; border: none; padding: 8px; border-radius: 8px; font-weight: bold; cursor: pointer; font-size: 0.85rem;">
           ✅ تأكيد الاستلام وإبراء الذمة
@@ -804,7 +767,6 @@
         </button>
       </div>
 
-      <!-- خانة الكتابة والإرسال -->
       <form class="modal-input-area" onsubmit="sendModalMessage(event)" data-html2canvas-ignore="true">
         <input type="text" id="modalMessageInput" placeholder="اكتب رسالتك وسلّم بياناتك هنا..." autocomplete="off">
         <button type="submit">إرسال</button>
@@ -834,15 +796,73 @@
   </footer>
 
   <script>
-    const API_BASE = 'http://localhost:5001';
+    const API_BASE = 'https://escrow-api-61us.onrender.com';
     let socket = null;
-    try {
-      socket = io(API_BASE);
-    } catch (e) {
-      console.warn("Socket.io لم يتصل بعد");
-    }
-    
     let currentTicketId = null;
+    let socketReady = false;
+
+    // ✅ إنشاء الاتصال مع خيارات صحيحة + Fallback
+    try {
+      socket = io(API_BASE, {
+        transports: ['websocket', 'polling'],
+        reconnection: true,
+        reconnectionAttempts: 15,
+        reconnectionDelay: 1000,
+        reconnectionDelayMax: 5000,
+        timeout: 20000,
+        autoConnect: true
+      });
+
+      socket.on('connect', () => {
+        console.log('✅ Socket connected:', socket.id);
+        socketReady = true;
+        // إعادة الانضمام للغرفة الحالية لو في واحدة مفتوحة
+        if (currentTicketId) {
+          socket.emit('join_ticket', currentTicketId);
+        }
+      });
+
+      socket.on('disconnect', (reason) => {
+        console.warn('⚠️ Socket disconnected:', reason);
+        socketReady = false;
+      });
+
+      socket.on('connect_error', (err) => {
+        console.error('❌ Socket connect_error:', err.message);
+        socketReady = false;
+      });
+
+      socket.on('receive_message', (data) => {
+        console.log('📥 receive_message:', data);
+        if (document.getElementById('ticketModal').classList.contains('active')) {
+          renderModalMessage(data);
+        }
+      });
+
+      // بعض السيرفرات تستخدم اسم مختلف
+      socket.on('new_message', (data) => {
+        console.log('📥 new_message:', data);
+        if (document.getElementById('ticketModal').classList.contains('active')) {
+          renderModalMessage(data);
+        }
+      });
+
+      socket.on('message', (data) => {
+        console.log('📥 message:', data);
+        if (document.getElementById('ticketModal').classList.contains('active')) {
+          renderModalMessage(data);
+        }
+      });
+
+      socket.on('status_updated', (data) => {
+        if (data.ticketId === currentTicketId) {
+          setModalTicketStatus(data.status);
+        }
+      });
+
+    } catch (e) {
+      console.warn("Socket.io init failed:", e);
+    }
 
     window.onload = function() {
       checkAuthState();
@@ -879,12 +899,7 @@
         document.getElementById('loggedOutView').style.display = 'none';
         document.getElementById('loggedInView').style.display = 'flex';
         document.getElementById('navUsername').innerText = `👤 ${username}`;
-
-        if (role === 'admin') {
-          document.getElementById('adminDashboardBtn').style.display = 'flex';
-        } else {
-          document.getElementById('adminDashboardBtn').style.display = 'none';
-        }
+        document.getElementById('adminDashboardBtn').style.display = (role === 'admin') ? 'flex' : 'none';
       } else {
         document.getElementById('loggedOutView').style.display = 'flex';
         document.getElementById('loggedInView').style.display = 'none';
@@ -896,15 +911,12 @@
       document.getElementById('authModal').classList.add('active');
       switchAuthTab(mode);
     }
-
     function closeAuthModal() {
       document.getElementById('authModal').classList.remove('active');
     }
-
     function openCreateTicketModal() {
       document.getElementById('createTicketModal').classList.add('active');
     }
-
     function closeCreateTicketModal() {
       document.getElementById('createTicketModal').classList.remove('active');
     }
@@ -912,7 +924,6 @@
     async function openProfileModal() {
       const modal = document.getElementById('profileModal');
       modal.classList.add('active');
-      
       const token = localStorage.getItem('token') || localStorage.getItem('accessToken');
       if (!token) return;
 
@@ -946,9 +957,7 @@
             list.innerHTML = '<div style="text-align: center; color: var(--text-sub); font-size: 0.82rem; padding: 15px;">ليس لديك معاملات مسجلة بعد.</div>';
           }
         }
-      } catch (err) {
-        console.error(err);
-      }
+      } catch (err) { console.error(err); }
     }
 
     function closeProfileModal() {
@@ -1097,16 +1106,19 @@
       document.getElementById('modalTicketTitle').innerText = title ? `${title} ($${amount})` : 'غرفة الوساطة المباشرة';
       document.getElementById('ticketModal').classList.add('active');
 
-      // التحكم بإظهار أو إخفاء أزرار الإدارة حسب الـ role
       const userRole = localStorage.getItem('role');
       const actionButtonsBar = document.getElementById('ticketActionButtons');
-      if (userRole === 'admin') {
-        actionButtonsBar.style.display = 'flex';
-      } else {
-        actionButtonsBar.style.display = 'none';
+      actionButtonsBar.style.display = (userRole === 'admin') ? 'flex' : 'none';
+
+      // ✅ الانضمام للغرفة
+      if (socket && socket.connected) {
+        socket.emit('join_ticket', id);
+      } else if (socket) {
+        socket.once('connect', () => socket.emit('join_ticket', id));
       }
 
-      if(socket) socket.emit('join_ticket', id);
+      // تفريغ صندوق الرسائل قبل التحميل
+      document.getElementById('modalMessagesBox').innerHTML = '';
       loadModalHistory(id);
     }
 
@@ -1129,7 +1141,9 @@
           setModalTicketStatus(t.status);
           const box = document.getElementById('modalMessagesBox');
           box.innerHTML = '';
-          if (t.messages) t.messages.forEach(msg => renderModalMessage(msg));
+          if (t.messages && t.messages.length > 0) {
+            t.messages.forEach(msg => renderModalMessage(msg));
+          }
         }
       } catch (err) {
         console.error('Error loading history:', err);
@@ -1141,37 +1155,30 @@
       const myUser = localStorage.getItem('username') || 'أنت';
       const senderName = data.sender || 'مستخدم';
       const isMe = senderName === myUser || (socket && data.socketId === socket.id);
-      
+      const messageText = data.message || data.text || data.content || '';
+
+      // منع التكرار
+      const lastMsg = box.lastElementChild;
+      const fingerprint = `${senderName}|${messageText}`;
+      if (lastMsg && lastMsg.dataset.fingerprint === fingerprint) return;
+
       const containerDiv = document.createElement('div');
       containerDiv.className = `msg-container ${isMe ? 'me-container' : ''}`;
-      
+      containerDiv.dataset.fingerprint = fingerprint;
+
       const trimmedName = senderName.trim();
       const firstChar = trimmedName ? trimmedName.charAt(0) : '؟';
-      
+
       containerDiv.innerHTML = `
         <div class="msg-avatar">${firstChar}</div>
         <div class="msg-bubble">
           <div class="msg-sender">${isMe ? 'أنت' : senderName}</div>
-          <div>${data.message || ''}</div>
+          <div>${messageText}</div>
         </div>
       `;
-      
+
       box.appendChild(containerDiv);
       box.scrollTop = box.scrollHeight;
-    }
-
-    if(socket) {
-      socket.on('receive_message', (data) => {
-        if (document.getElementById('ticketModal').classList.contains('active')) {
-          renderModalMessage(data);
-        }
-      });
-
-      socket.on('status_updated', (data) => {
-        if (data.ticketId === currentTicketId) {
-          setModalTicketStatus(data.status);
-        }
-      });
     }
 
     function setModalTicketStatus(status) {
@@ -1200,7 +1207,9 @@
         if (res.ok) {
           showAlert('تم تحديث حالة التذكرة بنجاح!', 'success');
           setModalTicketStatus(newStatus);
-          if(socket) socket.emit('status_updated', { ticketId: currentTicketId, status: newStatus });
+          if (socket && socket.connected) {
+            socket.emit('status_updated', { ticketId: currentTicketId, status: newStatus });
+          }
           checkFloatingTicketsCount();
         } else {
           showAlert(data.message || 'فشل تحديث الحالة', 'error');
@@ -1210,15 +1219,58 @@
       }
     }
 
-    function sendModalMessage(e) {
+    // ✅✅✅ الدالة الأهم - إرسال الرسالة مع Fallback
+    async function sendModalMessage(e) {
       e.preventDefault();
       const input = document.getElementById('modalMessageInput');
       const message = input.value.trim();
       const myUser = localStorage.getItem('username') || 'مستخدم';
+      const token = localStorage.getItem('token') || localStorage.getItem('accessToken');
 
-      if (message && currentTicketId && socket) {
-        socket.emit('send_message', { ticketId: currentTicketId, sender: myUser, message });
+      if (!message) return;
+      if (!currentTicketId) {
+        showAlert('لا توجد تذكرة مفتوحة', 'error');
+        return;
+      }
+
+      // ✅ محاولة الإرسال عبر Socket أولاً
+      if (socket && socket.connected) {
+        socket.emit('send_message', {
+          ticketId: currentTicketId,
+          sender: myUser,
+          message,
+          token
+        });
+
+        renderModalMessage({ sender: myUser, message, socketId: socket.id });
         input.value = '';
+        console.log('📤 Message sent via socket');
+        return;
+      }
+
+      // 🔁 Fallback: REST API
+      console.warn('⚠️ Socket not connected, using REST fallback');
+      try {
+        const res = await fetch(`${API_BASE}/api/tickets/${currentTicketId}/messages`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`,
+            'x-auth-token': token
+          },
+          body: JSON.stringify({ message, sender: myUser })
+        });
+
+        if (res.ok) {
+          renderModalMessage({ sender: myUser, message });
+          input.value = '';
+          showAlert('تم إرسال الرسالة (وضع احتياطي)', 'success');
+        } else {
+          showAlert('فشل إرسال الرسالة، تأكد من اتصالك', 'error');
+        }
+      } catch (err) {
+        console.error(err);
+        showAlert('تعذر إرسال الرسالة، السيرفر غير متاح', 'error');
       }
     }
 
@@ -1228,7 +1280,7 @@
         margin: 10,
         filename: `ticket_${currentTicketId}.pdf`,
         image: { type: 'jpeg', quality: 0.98 },
-        html2canvas: { scale: 2 },
+        html2canvas: { scale: 2, useCORS: true },
         jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
       };
       html2pdf().set(opt).from(element).save();
@@ -1274,17 +1326,17 @@
         const result = await res.json();
         if (res.ok) {
           const tickets = result.data || result.tickets || [];
-          
+
           if (tickets.length > 0) {
             badge.innerText = tickets.length;
             badge.style.display = 'inline-block';
             listContainer.innerHTML = '';
-            
+
             tickets.forEach(ticket => {
               const ticketId = ticket._id || ticket.id;
               const statusColor = ticket.status === 'completed' ? '#22c55e' : (ticket.status === 'canceled' ? '#ef4444' : '#eab308');
               const statusText = ticket.status === 'completed' ? 'مكتملة' : (ticket.status === 'in_progress' ? 'قيد التنفيذ' : (ticket.status === 'canceled' ? 'ملغاة' : 'قيد الانتظار'));
-              
+
               listContainer.innerHTML += `
                 <div style="background: #090d16; padding: 10px; border-radius: 10px; margin-bottom: 10px; border: 1px solid #1e293b;">
                   <div style="font-weight: 700; font-size: 0.9rem; margin-bottom: 4px; color: #fff; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${ticket.title || 'تذكرة وساطة'}</div>
