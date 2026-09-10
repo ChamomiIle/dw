@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>غرفة الوساطة المباشرة</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <script src="/socket.io/socket.io.js"></script>
+  <!-- مكتبة تحويل HTML إلى PDF -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Cairo', sans-serif; }
+    body { background-color: #090d16; color: #f8fafc; min-height: 100vh; display: flex; justify-content: center; align-items: center; padding: 20px; }
+    
+    .chat-container { background: rgba(18, 24, 38, 0.85); border: 1px solid rgba(56, 189, 248, 0.15); border-radius: 20px; width: 100%; max-width: 850px; height: 88vh; display: flex; flex-direction: column; overflow: hidden; box-shadow: 0 20px 40px rgba(0,0,0,0.4); }
+    
+    .chat-header { background: rgba(15, 23, 42, 0.9); padding: 18px 24px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(56, 189, 248, 0.15); }
+    .chat-header h3 { color: #38bdf8; font-size: 1.2rem; font-weight: 800; }
+    
+    .status-badge { padding: 6px 14px; border-radius: 20px; font-size: 0.8rem; font-weight: 800; text-transform: uppercase; }
+    .status-pending { background: rgba(245, 158, 11, 0.15); color: #f59e0b; border: 1px solid rgba(245, 158, 11, 0.3); }
+    .status-in_progress { background: rgba(56, 189, 248, 0.15); color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.3); }
+    .status-completed { background: rgba(16, 185, 129, 0.15); color: #10b981; border: 1px solid rgba(16, 185, 129, 0.3); }
+    .status-canceled { background: rgba(239, 68, 68, 0.15); color: #ef4444; border: 1px solid rgba(239, 68, 68, 0.3); }
+
+    .admin-action-bar { background: rgba(15, 23, 42, 0.6); padding: 12px 24px; display: none; gap: 10px; border-bottom: 1px solid rgba(56, 189, 248, 0.15); align-items: center; flex-wrap: wrap; }
+
+    .btn-action { padding: 8px 16px; border: none; border-radius: 8px; color: #fff; font-size: 0.85rem; font-weight: 700; cursor: pointer; transition: 0.2s; }
+    .btn-accept { background: #0284c7; }
+    .btn-complete { background: #10b981; }
+    .btn-cancel { background: #ef4444; }
+    .btn-pdf { background: #475569; margin-right: auto; }
+    .btn-action:hover { opacity: 0.9; }
+
+    .messages-box { flex: 1; padding: 24px; overflow-y: auto; display: flex; flex-direction: column; gap: 14px; background: #0b1120; }
+    .msg { max-width: 75%; padding: 12px 16px; border-radius: 14px; font-size: 0.95rem; line-height: 1.5; word-break: break-word; }
+    .msg.me { background: linear-gradient(135deg, #0284c7, #075985); color: #ffffff; align-self: flex-start; border-bottom-right-radius: 2px; border: 1px solid #38bdf8; }
+    .msg.other { background: #1e293b; color: #f8fafc; border: 1px solid rgba(56, 189, 248, 0.15); align-self: flex-end; border-bottom-left-radius: 2px; }
+    .msg .sender { font-size: 0.75rem; opacity: 0.85; margin-bottom: 4px; font-weight: 800; color: #94a3b8; }
+    .msg.me .sender { color: #bae6fd; }
+    .msg img { max-width: 100%; border-radius: 8px; margin-top: 8px; display: block; border: 1px solid rgba(56, 189, 248, 0.3); }
+
+    .chat-input { padding: 16px; background: rgba(15, 23, 42, 0.9); display: flex; gap: 12px; border-top: 1px solid rgba(56, 189, 248, 0.15); align-items: center; }
+    .chat-input input[type="text"] { flex: 1; padding: 12px 16px; background: rgba(15, 23, 42, 0.8); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 10px; color: #fff; font-size: 0.95rem; outline: none; }
+    .chat-input input[type="text"]:focus { border-color: #38bdf8; }
+    .file-btn { background: #1e293b; padding: 10px 14px; border-radius: 10px; cursor: pointer; border: 1px solid rgba(56, 189, 248, 0.15); font-weight: bold; color: #f8fafc; }
+    .file-btn input { display: none; }
+    .send-btn { padding: 12px 24px; background: #0284c7; border: none; border-radius: 10px; color: #fff; font-weight: 800; cursor: pointer; }
+  </style>
+</head>
+<body>
+
+  <div class="chat-container" id="pdfArea">
+    <div class="chat-header">
+      <div>
+        <h3 id="ticketTitle">جاري تحميل التذكرة...</h3>
+        <span style="font-size: 0.8rem; color: #94a3b8;" id="ticketIdDisplay">ID: ---</span>
+      </div>
+      <span class="status-badge status-pending" id="ticketStatus">Pending</span>
+    </div>
+
+    <!-- شريط تحكم المشرف (يظهر للمشرف فقط) -->
+    <div class="admin-action-bar" id="adminActionBar" data-html2canvas-ignore="true">
+      <span style="font-size: 0.85rem; color: #94a3b8; font-weight: bold;">تحكم الوسيط:</span>
+      <button class="btn-action btn-accept" onclick="updateStatus('in_progress')">قبول التذكرة</button>
+      <button class="btn-action btn-complete" onclick="updateStatus('completed')">إتمام الصفقة</button>
+      <button class="btn-action btn-cancel" onclick="updateStatus('canceled')">إلغاء الصفقة</button>
+      <button class="btn-action btn-pdf" onclick="exportToPDF()">📄 تصدير الاتفاقية (PDF)</button>
+    </div>
+
+    <div class="messages-box" id="messagesBox"></div>
+
+    <form class="chat-input" onsubmit="sendMessage(event)" data-html2canvas-ignore="true">
+      <label class="file-btn" title="إرفاق صورة أو اثبات">
+        📷 مرفق
+        <input type="file" id="fileInput" onchange="uploadFile(this)">
+      </label>
+      <input type="text" id="messageInput" placeholder="اكتب رسالتك هنا..." autocomplete="off">
+      <button type="submit" class="send-btn">إرسال</button>
+    </form>
+  </div>
+
+  <script>
+    const socket = io();
+    const urlParams = new URLSearchParams(window.location.search);
+    const ticketId = urlParams.get('id');
+    let myUsername = 'مستخدم';
+
+    if ("Notification" in window && Notification.permission !== "granted") {
+      Notification.requestPermission();
+    }
+
+    function playNotificationSound() {
+      const ctx = new (window.AudioContext || window.webkitAudioContext)();
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(587.33, ctx.currentTime);
+      gain.gain.setValueAtTime(0.1, ctx.currentTime);
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+      osc.start();
+      osc.stop(ctx.currentTime + 0.15);
+    }
+
+    function showBrowserNotification(title, body) {
+      if ("Notification" in window && Notification.permission === "granted") {
+        new Notification(title, { body, icon: '/favicon.ico' });
+      }
+    }
+
+    if (!ticketId) {
+      alert('خطأ: رقم التذكرة مفقود!');
+    } else {
+      document.getElementById('ticketIdDisplay').innerText = `ID: ${ticketId}`;
+      socket.emit('join_ticket', ticketId);
+      loadTicketAndCheckRole();
+    }
+
+    async function loadTicketAndCheckRole() {
+      try {
+        const token = localStorage.getItem('token') || localStorage.getItem('accessToken');
+        const headers = token ? { 'Authorization': `Bearer ${token}` } : {};
+
+        const profileRes = await fetch('/api/auth/profile', { headers }).catch(() => null);
+        let isAdmin = false;
+
+        if (profileRes && profileRes.ok) {
+          const profileData = await profileRes.json();
+          if (profileData.user) {
+            myUsername = profileData.user.username || profileData.user.name || 'مستخدم';
+            if (profileData.user.role === 'admin') {
+              isAdmin = true;
+            }
+          }
+        }
+
+        if (!isAdmin && localStorage.getItem('role') === 'admin') {
+          isAdmin = true;
+        }
+
+        const res = await fetch(`/api/tickets/${ticketId}`, { headers });
+        const data = await res.json();
+        
+        if (data.success) {
+          document.getElementById('ticketTitle').innerText = `${data.ticket.title} ($${data.ticket.amount})`;
+          setTicketStatusUI(data.ticket.status);
+
+          const adminBar = document.getElementById('adminActionBar');
+
+          if (isAdmin) {
+            if (adminBar) adminBar.style.display = 'flex';
+            myUsername = 'مشرف معتمد';
+          } else {
+            if (adminBar) adminBar.style.display = 'none';
+          }
+
+          const box = document.getElementById('messagesBox');
+          box.innerHTML = '';
+          if (data.ticket.messages) {
+            data.ticket.messages.forEach(msg => renderMessage(msg));
+          }
+        }
+      } catch (err) {
+        console.error('Error loading ticket:', err);
+      }
+    }
+
+    function renderMessage(data, isNew = false) {
+      const box = document.getElementById('messagesBox');
+      const msgDiv = document.createElement('div');
+      const isMe = data.sender === myUsername || data.socketId === socket.id;
+      
+      msgDiv.className = `msg ${isMe ? 'me' : 'other'}`;
+      let content = `<div class="sender">${isMe ? 'أنت' : data.sender}</div>`;
+      
+      if (data.message) content += `<div>${data.message}</div>`;
+      if (data.fileUrl) {
+        if (data.fileType === 'image') {
+          content += `<a href="${data.fileUrl}" target="_blank"><img src="${data.fileUrl}" /></a>`;
+        } else {
+          content += `<div>📎 <a href="${data.fileUrl}" target="_blank" style="color:#38bdf8; font-weight:bold;">تحميل المرفق</a></div>`;
+        }
+      }
+      
+      msgDiv.innerHTML = content;
+      box.appendChild(msgDiv);
+      box.scrollTop = box.scrollHeight;
+
+      if (isNew && !isMe) {
+        playNotificationSound();
+        showBrowserNotification(`رسالة جديدة في التذكرة`, `${data.sender}: ${data.message || 'أرفق ملفاً'}`);
+      }
+    }
+
+    socket.on('receive_message', (data) => renderMessage(data, true));
+
+    socket.on('status_updated', (data) => {
+      setTicketStatusUI(data.status);
+      playNotificationSound();
+      showBrowserNotification('تحديث التذكرة', `تغيرت حالة الصفقة إلى: ${data.status}`);
+    });
+
+    function setTicketStatusUI(status) {
+      const badge = document.getElementById('ticketStatus');
+      badge.className = `status-badge status-${status}`;
+      const labels = { pending: 'قيد الانتظار', in_progress: 'قيد التنفيذ', completed: 'مكتملة', canceled: 'ملغاة' };
+      badge.innerText = labels[status] || status;
+    }
+
+    function sendMessage(e) {
+      e.preventDefault();
+      const input = document.getElementById('messageInput');
+      const message = input.value.trim();
+
+      if (message && ticketId) {
+        socket.emit('send_message', { ticketId, sender: myUsername, message });
+        input.value = '';
+      }
+    }
+
+    async function uploadFile(input) {
+      if (!input.files || !input.files[0]) return;
+      const formData = new FormData();
+      formData.append('file', input.files[0]);
+
+      try {
+        const res = await fetch('/api/upload', { method: 'POST', body: formData });
+        const data = await res.json();
+        if (data.success) {
+          socket.emit('send_message', {
+            ticketId,
+            sender: myUsername,
+            fileUrl: data.fileUrl,
+            fileType: data.fileType
+          });
+        }
+      } catch (err) {
+        alert('فشل رفع الملف');
+      }
+      input.value = '';
+    }
+
+    async function updateStatus(status) {
+      try {
+        const token = localStorage.getItem('token') || localStorage.getItem('accessToken');
+        const res = await fetch(`/api/tickets/${ticketId}/status`, {
+          method: 'PATCH',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+          },
+          body: JSON.stringify({ status })
+        });
+        const data = await res.json();
+        if (data.success) {
+          setTicketStatusUI(data.data.status);
+        } else {
+          alert(data.message || 'فشل تحديث الحالة');
+        }
+      } catch (err) {
+        console.error('Error updating status:', err);
+        alert('حدث خطأ أثناء تحديث الحالة');
+      }
+    }
+
+    function exportToPDF() {
+      const element = document.getElementById('pdfArea');
+      const opt = {
+        margin:       10,
+        filename:     `ticket_agreement_${ticketId}.pdf`,
+        image:        { type: 'jpeg', quality: 0.98 },
+        html2canvas:  { scale: 2, useCORS: true },
+        jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' }
+      };
+      html2pdf().set(opt).from(element).save();
+    }
+  </script>
+</body>
+</html>
