@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ضماني | منصة الوساطة الرقمية المضمونة</title>
   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
-  <!-- ✅ FIX: Socket.io من CDN بدل ما كان من نفس السيرفر (اللي كان يعطي 404) -->
   <script src="https://cdn.socket.io/4.7.5/socket.io.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
   <style>
@@ -131,7 +130,6 @@
     .user-profile-badge:hover { border-color: var(--accent); background: rgba(56, 189, 248, 0.08); }
     .btn-logout { background: rgba(239, 68, 68, 0.2); color: #f87171; border: 1px solid rgba(239, 68, 68, 0.3); padding: 4px 8px; border-radius: 6px; font-weight: 700; font-size: 0.78rem; cursor: pointer; }
 
-    /* ✅ محسّن: Toast أكبر وأوضح */
     .toast-container { position: fixed; top: 25px; right: 25px; z-index: 9999; display: flex; flex-direction: column; gap: 10px; pointer-events: none; }
     .custom-toast { 
       pointer-events: auto; 
@@ -332,6 +330,421 @@
     .modal-input-area input:focus { border-color: var(--accent); }
     .modal-input-area button { padding: 10px 18px; background: var(--primary); border: none; color: #fff; font-weight: 800; border-radius: 8px; cursor: pointer; transition: 0.2s; }
     .modal-input-area button:hover { opacity: 0.9; }
+
+    /* ============================================ */
+    /* 📱 RESPONSIVE - تحسين الموقع للجوال           */
+    /* ============================================ */
+
+    @media (max-width: 900px) {
+      header {
+        padding: 10px 3%;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+
+      .brand {
+        font-size: 1.15rem;
+        flex-shrink: 0;
+      }
+
+      .nav-links {
+        order: 3;
+        width: 100%;
+        justify-content: center;
+        gap: 6px;
+        padding-top: 8px;
+        border-top: 1px solid var(--card-border);
+        margin-top: 8px;
+      }
+
+      .nav-btn {
+        font-size: 0.72rem;
+        padding: 6px 10px;
+        gap: 4px;
+      }
+
+      .nav-btn .icon {
+        font-size: 0.85rem;
+      }
+
+      .auth-buttons {
+        margin-right: auto;
+      }
+
+      .btn-auth-outline,
+      .btn-auth-solid {
+        padding: 6px 12px;
+        font-size: 0.75rem;
+      }
+
+      .user-profile-badge {
+        font-size: 0.78rem;
+        padding: 5px 10px;
+      }
+
+      .hero {
+        padding: 40px 16px 20px;
+      }
+
+      .hero h1 {
+        font-size: 1.75rem;
+        line-height: 1.4;
+      }
+
+      .hero p {
+        font-size: 0.95rem;
+        padding: 0 8px;
+      }
+
+      .hero-badge {
+        font-size: 0.75rem;
+        padding: 5px 12px;
+      }
+
+      .hero-action-btn {
+        padding: 12px 22px;
+        font-size: 0.92rem;
+        width: 100%;
+        max-width: 320px;
+        justify-content: center;
+      }
+
+      .stats-container {
+        gap: 12px;
+        padding: 0 12px;
+        margin: 20px auto 30px;
+      }
+
+      .stat-card {
+        min-width: 140px;
+        padding: 14px 18px;
+        flex: 1 1 calc(50% - 12px);
+      }
+
+      .stat-card .value {
+        font-size: 1.4rem;
+      }
+
+      .stat-card .label {
+        font-size: 0.72rem;
+      }
+
+      .section-container {
+        padding: 0 12px;
+        margin-bottom: 30px;
+      }
+
+      .card {
+        padding: 20px 16px;
+        border-radius: 18px;
+      }
+
+      .section-title {
+        font-size: 1.1rem;
+        flex-wrap: wrap;
+        line-height: 1.5;
+      }
+
+      .section-subtitle {
+        font-size: 0.82rem;
+        margin-bottom: 20px;
+        padding: 0 8px;
+      }
+
+      .guarantee-grid,
+      .rules-grid {
+        grid-template-columns: 1fr;
+        gap: 14px;
+      }
+
+      .guarantee-card,
+      .rule-card {
+        padding: 16px;
+      }
+
+      .guarantee-icon {
+        font-size: 1.8rem;
+      }
+
+      .guarantee-card h4,
+      .rule-card h4 {
+        font-size: 0.95rem;
+      }
+
+      .guarantee-card p,
+      .rule-card ul li {
+        font-size: 0.82rem;
+      }
+
+      .reviews-grid {
+        grid-template-columns: 1fr;
+        gap: 12px;
+      }
+
+      .review-card {
+        padding: 16px;
+      }
+
+      .faq-question {
+        padding: 14px 16px;
+        font-size: 0.88rem;
+        gap: 10px;
+      }
+
+      .faq-answer {
+        padding: 0 16px 14px;
+        padding-top: 10px;
+        font-size: 0.82rem;
+      }
+
+      .step-item {
+        gap: 12px;
+      }
+
+      .step-num {
+        width: 34px;
+        height: 34px;
+        font-size: 0.9rem;
+      }
+
+      .step-content h4 {
+        font-size: 0.9rem;
+      }
+
+      .step-content p {
+        font-size: 0.8rem;
+      }
+
+      .modal-overlay {
+        padding: 8px;
+        align-items: flex-start;
+        padding-top: 20px;
+      }
+
+      .custom-modal {
+        padding: 22px 18px;
+        border-radius: 18px;
+        max-width: 100%;
+        max-height: 92vh;
+        overflow-y: auto;
+      }
+
+      .modal-close-icon {
+        top: 12px;
+        left: 12px;
+        width: 28px;
+        height: 28px;
+        font-size: 0.9rem;
+      }
+
+      .form-group input,
+      .form-group textarea {
+        padding: 11px 12px;
+        font-size: 0.88rem;
+      }
+
+      .btn-submit {
+        padding: 12px;
+        font-size: 0.92rem;
+      }
+
+      .ticket-modal {
+        max-width: 100%;
+        height: 95vh;
+        border-radius: 16px;
+      }
+
+      .modal-header {
+        padding: 12px 14px;
+      }
+
+      .modal-header h3 {
+        font-size: 0.95rem !important;
+      }
+
+      .modal-status-bar {
+        padding: 8px 12px;
+        font-size: 0.75rem;
+        flex-wrap: wrap;
+        gap: 6px;
+      }
+
+      .modal-messages {
+        padding: 12px;
+        gap: 10px;
+      }
+
+      .msg-bubble {
+        max-width: 82%;
+        padding: 10px 13px;
+        font-size: 0.85rem;
+      }
+
+      .msg-avatar {
+        width: 32px;
+        height: 32px;
+        font-size: 0.78rem;
+      }
+
+      .msg-sender {
+        font-size: 0.7rem;
+      }
+
+      .modal-input-area {
+        padding: 10px 12px;
+        gap: 6px;
+      }
+
+      .modal-input-area input {
+        padding: 10px 12px;
+        font-size: 0.85rem;
+      }
+
+      .modal-input-area button {
+        padding: 10px 14px;
+        font-size: 0.85rem;
+      }
+
+      .ticket-action-bar {
+        padding: 8px 12px;
+        flex-direction: column;
+        gap: 8px;
+      }
+
+      .toast-container {
+        top: 12px;
+        right: 12px;
+        left: 12px;
+      }
+
+      .custom-toast {
+        min-width: auto;
+        width: 100%;
+        max-width: 100%;
+        font-size: 0.82rem;
+        padding: 11px 14px;
+      }
+
+      .live-ticker {
+        font-size: 0.75rem;
+        padding: 6px 0;
+      }
+
+      #floating-tickets-widget {
+        bottom: 12px !important;
+        left: 12px !important;
+        right: 12px !important;
+      }
+
+      #widget-toggle-btn {
+        width: 100%;
+        justify-content: center;
+        padding: 10px 16px !important;
+        font-size: 0.85rem !important;
+      }
+
+      #floating-tickets-popup {
+        width: 100% !important;
+        left: 0 !important;
+        right: 0 !important;
+        max-height: 60vh !important;
+      }
+
+      #profileModal div[style*="grid-template-columns: repeat(3"] {
+        gap: 6px !important;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .brand {
+        font-size: 1rem;
+      }
+
+      .hero h1 {
+        font-size: 1.5rem;
+      }
+
+      .hero p {
+        font-size: 0.85rem;
+      }
+
+      .nav-btn {
+        font-size: 0.68rem;
+        padding: 5px 8px;
+      }
+
+      .btn-auth-outline,
+      .btn-auth-solid {
+        padding: 5px 10px;
+        font-size: 0.7rem;
+      }
+
+      .stat-card {
+        flex: 1 1 100%;
+      }
+
+      .stat-card .value {
+        font-size: 1.25rem;
+      }
+
+      .section-title {
+        font-size: 1rem;
+      }
+
+      .msg-bubble {
+        max-width: 88%;
+        font-size: 0.82rem;
+      }
+
+      .nav-btn .icon {
+        display: none;
+      }
+
+      #profileModal div[style*="grid-template-columns: repeat(3"] {
+        grid-template-columns: 1fr !important;
+      }
+    }
+
+    @media (min-width: 769px) and (max-width: 1024px) {
+      .guarantee-grid,
+      .rules-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .reviews-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (hover: none) and (pointer: coarse) {
+      .nav-btn,
+      .btn-auth-outline,
+      .btn-auth-solid,
+      .hero-action-btn,
+      .btn-submit,
+      .modal-input-area button {
+        min-height: 40px;
+        -webkit-tap-highlight-color: transparent;
+      }
+
+      .nav-btn:hover,
+      .guarantee-card:hover,
+      .btn-auth-outline:hover,
+      .btn-auth-solid:hover {
+        transform: none;
+      }
+    }
+
+    html, body {
+      overflow-x: hidden;
+      max-width: 100%;
+    }
+
+    @media (max-width: 900px) {
+      body {
+        font-size: 15px;
+      }
+    }
   </style>
 </head>
 <body>
@@ -678,7 +1091,7 @@
         <div style="color: var(--text-sub); font-size: 0.85rem;" id="profileEmail">--</div>
       </div>
 
-      <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 20px; text-align: center;">
+      <div id="profileStats" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 20px; text-align: center;">
         <div style="background: rgba(2, 132, 199, 0.1); border: 1px solid rgba(255,255,255,0.05); padding: 10px; border-radius: 10px;">
           <div style="font-weight: 900; color: var(--accent); font-size: 1.1rem;" id="statTotalTickets">0</div>
           <div style="font-size: 0.75rem; color: var(--text-sub);">إجمالي التذاكر</div>
@@ -757,7 +1170,6 @@
     let currentTicketId = null;
     let socketReady = false;
 
-    // ✅ التحقق من تحميل مكتبة Socket.io
     if (typeof io === 'undefined') {
       console.error('❌ Socket.io client library NOT loaded! Check the script tag.');
     } else {
@@ -848,7 +1260,6 @@
       }, 4000);
     }
 
-    // ✅ دالة تنظيف رسائل Mongoose من البادئات الإنجليزية
     function cleanMongooseError(msg) {
       if (!msg) return 'حدث خطأ غير متوقع';
       return msg
@@ -1002,7 +1413,6 @@
       const email = document.getElementById('regEmail').value.trim();
       const password = document.getElementById('regPassword').value.trim();
 
-      // ✅ تحقق محلي قبل الإرسال - يمنع ظهور رسائل Mongoose الإنجليزية
       if (username.length < 3) {
         showAlert('اسم المستخدم يجب أن يكون 3 أحرف على الأقل', 'warning');
         return;
@@ -1034,7 +1444,6 @@
         } else {
           let errorMsg = cleanMongooseError(data.message || data.error);
 
-          // ترجمة إضافية للأخطاء الشائعة
           if (errorMsg.includes('duplicate key') && errorMsg.includes('email')) {
             errorMsg = 'هذا البريد الإلكتروني مسجل مسبقاً';
           } else if (errorMsg.includes('duplicate key') && errorMsg.includes('username')) {
@@ -1166,7 +1575,6 @@
       const isMe = senderName === myUser || (socket && data.socketId === socket.id);
       const messageText = data.message || data.text || data.content || '';
 
-      // منع التكرار
       const lastMsg = box.lastElementChild;
       const fingerprint = `${senderName}|${messageText}`;
       if (lastMsg && lastMsg.dataset.fingerprint === fingerprint) return;
@@ -1228,7 +1636,6 @@
       }
     }
 
-    // ✅✅✅ إرسال الرسائل عبر Socket.io فقط
     async function sendModalMessage(e) {
       e.preventDefault();
       const input = document.getElementById('modalMessageInput');
@@ -1241,7 +1648,6 @@
         return;
       }
 
-      // ✅ الحالة 1: السوكت متصل
       if (socket && socket.connected) {
         socket.emit('send_message', {
           ticketId: currentTicketId,
@@ -1254,7 +1660,6 @@
         return;
       }
 
-      // ❌ السوكت غير متصل
       console.error('❌ Cannot send: Socket is not connected');
       showAlert('فشل إرسال الرسالة: الاتصال بالسيرفر غير متاح. تأكد من اتصالك بالإنترنت.', 'error');
     }
