@@ -104,6 +104,26 @@
     .action-btn { background: var(--primary); color: #fff; border: none; padding: 6px 12px; border-radius: 8px; font-weight: 700; font-size: 0.78rem; cursor: pointer; transition: 0.2s; }
     .action-btn:hover { opacity: 0.85; }
 
+    /* 🗑️ زر الحذف */
+    .btn-delete {
+      background: rgba(239, 68, 68, 0.15);
+      color: var(--danger);
+      border: 1px solid rgba(239, 68, 68, 0.4);
+      padding: 6px 12px;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 0.78rem;
+      cursor: pointer;
+      transition: 0.2s;
+      margin-right: 6px;
+      font-family: 'Cairo', sans-serif;
+    }
+    .btn-delete:hover {
+      background: rgba(239, 68, 68, 0.3);
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3);
+    }
+
     .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(5, 8, 15, 0.8); backdrop-filter: blur(8px); display: none; justify-content: center; align-items: center; z-index: 1000; padding: 15px; }
     .modal-overlay.active { display: flex; }
     .ticket-modal { background: #0f172a; border: 1px solid var(--card-border); width: 100%; max-width: 680px; height: 82vh; border-radius: 24px; display: flex; flex-direction: column; overflow: hidden; }
@@ -286,9 +306,26 @@
 
       loadAllTickets();
       updateWelcomeHeader();
+
+      // 🗑️ مراقبة حذف التذاكر من السيرفر
+      if (socket) {
+        socket.on('ticket_deleted', (data) => {
+          console.log('🗑️ تم حذف تذكرة:', data.ticketId);
+          // احذف الصف من الجدول مباشرة
+          const rows = document.querySelectorAll('#adminTicketsTableBody tr');
+          rows.forEach(row => {
+            const idCell = row.querySelector('td:first-child');
+            if (idCell && idCell.textContent.includes(data.ticketId.substring(0, 10))) {
+              row.style.transition = 'all 0.3s';
+              row.style.opacity = '0';
+              row.style.transform = 'translateX(-20px)';
+              setTimeout(() => row.remove(), 300);
+            }
+          });
+        });
+      }
     };
 
-    // دالة التحقق المبسطة لتسمح للمشرف بالدخول فوراً طالما أن لديه توكن مسجل
     async function verifyAdminAccessFromServer() {
       const token = localStorage.getItem('token') || localStorage.getItem('accessToken');
       if (!token) {
@@ -369,6 +406,9 @@
 
       if (tickets.length === 0) {
         tbody.innerHTML = `<tr><td colspan="5" style="text-align: center; color: var(--text-sub); padding: 30px;">لا توجد أي تذاكر مسجلة حالياً.</td></tr>`;
+        document.getElementById('statTotal').innerText = '0';
+        document.getElementById('statCompleted').innerText = '0';
+        document.getElementById('statAmount').innerText = '$0';
         return;
       }
 
@@ -393,13 +433,14 @@
         }[t.status] || t.status;
 
         tbody.innerHTML += `
-          <tr>
+          <tr data-ticket-id="${id}">
             <td style="font-family: monospace; font-size: 0.8rem; color: var(--accent);">${id.substring(0, 10)}...</td>
             <td style="font-weight: 700;">${t.title || 'تذكرة وساطة'}</td>
             <td style="color: var(--success); font-weight: 800;">$${amount}</td>
             <td><span class="badge ${badgeClass}">${statusLabels}</span></td>
-            <td>
-              <button class="action-btn" onclick="openAdminTicketModal('${id}', '${t.title || 'تذكرة'}', ${amount})">إدارة الشات 💬</button>
+            <td style="display: flex; gap: 6px; flex-wrap: wrap;">
+              <button class="action-btn" onclick="openAdminTicketModal('${id}', '${t.title || 'تذكرة'}', ${amount})">💬 إدارة الشات</button>
+              <button class="btn-delete" onclick="deleteTicket('${id}', '${(t.title || 'تذكرة').replace(/'/g, "\\'")}')">🗑️ حذف</button>
             </td>
           </tr>
         `;
@@ -408,6 +449,58 @@
       document.getElementById('statTotal').innerText = tickets.length;
       document.getElementById('statCompleted').innerText = completedCount;
       document.getElementById('statAmount').innerText = `$${totalAmount}`;
+    }
+
+    // 🗑️ دالة حذف التذكرة
+    async function deleteTicket(ticketId, ticketTitle) {
+      if (!confirm(`⚠️ هل أنت متأكد من حذف التذكرة:\n\n"${ticketTitle}"\n\nهذا الإجراء نهائي ولا يمكن التراجع عنه!`)) {
+        return;
+      }
+
+      const token = localStorage.getItem('token') || localStorage.getItem('accessToken');
+      if (!token) {
+        showAlert('يجب تسجيل الدخول كأدمن', 'error');
+        return;
+      }
+
+      try {
+        const res = await fetch(`${API_BASE}/api/tickets/${ticketId}`, {
+          method: 'DELETE',
+          headers: {
+            'Authorization': `Bearer ${token}`,
+            'x-auth-token': token,
+            'Content-Type': 'application/json'
+          }
+        });
+
+        const data = await res.json();
+
+        if (res.ok) {
+          showAlert('✅ تم حذف التذكرة نهائياً', 'success');
+
+          // احذف الصف من الجدول مباشرة
+          const row = document.querySelector(`tr[data-ticket-id="${ticketId}"]`);
+          if (row) {
+            row.style.transition = 'all 0.3s';
+            row.style.opacity = '0';
+            row.style.transform = 'translateX(-20px)';
+            setTimeout(() => {
+              row.remove();
+              // أعد حساب الإحصائيات
+              const remaining = document.querySelectorAll('#adminTicketsTableBody tr[data-ticket-id]').length;
+              document.getElementById('statTotal').innerText = remaining;
+            }, 300);
+          } else {
+            // أعد تحميل الجدول لو ما لقى الصف
+            loadAllTickets();
+          }
+        } else {
+          showAlert(data.message || 'فشل حذف التذكرة', 'error');
+        }
+      } catch (err) {
+        console.error(err);
+        showAlert('تعذر الاتصال بالسيرفر', 'error');
+      }
     }
 
     function openAdminTicketModal(id, title, amount) {
