@@ -130,6 +130,26 @@
     .user-profile-badge:hover { border-color: var(--accent); background: rgba(56, 189, 248, 0.08); }
     .btn-logout { background: rgba(239, 68, 68, 0.2); color: #f87171; border: 1px solid rgba(239, 68, 68, 0.3); padding: 4px 8px; border-radius: 6px; font-weight: 700; font-size: 0.78rem; cursor: pointer; }
 
+    /* 💰 شارة الرصيد في الهيدر */
+    #headerBalance {
+      display: none;
+      align-items: center;
+      gap: 6px;
+      background: rgba(16, 185, 129, 0.15);
+      border: 1px solid rgba(16, 185, 129, 0.35);
+      padding: 6px 12px;
+      border-radius: 10px;
+      font-weight: 800;
+      font-size: 0.85rem;
+      color: #10b981;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+    #headerBalance:hover {
+      background: rgba(16, 185, 129, 0.25);
+      transform: translateY(-1px);
+    }
+
     .toast-container { position: fixed; top: 25px; right: 25px; z-index: 9999; display: flex; flex-direction: column; gap: 10px; pointer-events: none; }
     .custom-toast { 
       pointer-events: auto; 
@@ -502,6 +522,11 @@
         padding: 5px 10px;
       }
 
+      #headerBalance {
+        font-size: 0.75rem;
+        padding: 5px 10px;
+      }
+
       .hero {
         padding: 40px 16px 20px;
       }
@@ -717,7 +742,7 @@
 
       .modal-input-area input[type="text"] {
         padding: 10px 12px;
-        font-size: 0.85rem;
+        font-size: 16px !important;
       }
 
       .modal-input-area button {
@@ -755,7 +780,6 @@
         padding: 6px 0;
       }
 
-      /* 📱 ويدجت التذاكر على الجوال */
       #floating-tickets-widget {
         bottom: 80px !important;
         left: 12px !important;
@@ -811,9 +835,29 @@
         max-height: 70px !important;
         max-width: 130px !important;
       }
+
+      /* 📱 إصلاح مشكلة الجوال - الشات */
+      .ticket-modal {
+        height: 100dvh;
+        max-height: 100dvh;
+        border-radius: 0;
+        max-width: 100%;
+      }
+      
+      .modal-overlay.active {
+        padding: 0;
+        align-items: stretch;
+        padding-top: 0;
+      }
+      
+      .modal-input-area {
+        position: sticky;
+        bottom: 0;
+        padding-bottom: max(10px, env(safe-area-inset-bottom));
+        z-index: 10;
+      }
     }
 
-    /* 📱 إخفاء الويدجت تماماً لما الشات مفتوح على الجوال */
     body.chat-open-mobile #floating-tickets-widget {
       display: none !important;
     }
@@ -936,9 +980,15 @@
         <button class="btn-auth-outline" onclick="openAuthModal('login')">تسجيل الدخول</button>
         <button class="btn-auth-solid" onclick="openAuthModal('register')">حساب جديد</button>
       </div>
-      <div id="loggedInView" class="user-profile-badge" onclick="openProfileModal()">
-        <span id="navUsername">مستخدم</span>
-        <button class="btn-logout" onclick="event.stopPropagation(); handleLogout()">خروج</button>
+      <div style="display: flex; align-items: center; gap: 8px;">
+        <!-- 💰 شارة الرصيد -->
+        <div id="headerBalance" onclick="openProfileModal()" title="رصيدي">
+          💰 <span id="headerBalanceValue">$0</span>
+        </div>
+        <div id="loggedInView" class="user-profile-badge" onclick="openProfileModal()">
+          <span id="navUsername">مستخدم</span>
+          <button class="btn-logout" onclick="event.stopPropagation(); handleLogout()">خروج</button>
+        </div>
       </div>
     </div>
   </header>
@@ -1254,6 +1304,18 @@
         <div style="color: var(--text-sub); font-size: 0.85rem;" id="profileEmail">--</div>
       </div>
 
+      <!-- 💰 الرصيد والنقاط -->
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 15px;">
+        <div style="background: linear-gradient(135deg, rgba(16, 185, 129, 0.15), rgba(15, 23, 42, 0.8)); border: 1px solid rgba(16, 185, 129, 0.3); padding: 15px; border-radius: 12px; text-align: center;">
+          <div style="font-size: 0.75rem; color: var(--text-sub); margin-bottom: 4px;">💰 الرصيد</div>
+          <div style="font-weight: 900; color: #10b981; font-size: 1.4rem;" id="userBalance">$0</div>
+        </div>
+        <div style="background: linear-gradient(135deg, rgba(56, 189, 248, 0.15), rgba(15, 23, 42, 0.8)); border: 1px solid rgba(56, 189, 248, 0.3); padding: 15px; border-radius: 12px; text-align: center;">
+          <div style="font-size: 0.75rem; color: var(--text-sub); margin-bottom: 4px;">🎯 النقاط</div>
+          <div style="font-weight: 900; color: #38bdf8; font-size: 1.4rem;" id="userPoints">0</div>
+        </div>
+      </div>
+
       <div id="profileStats" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 20px; text-align: center;">
         <div style="background: rgba(2, 132, 199, 0.1); border: 1px solid rgba(255,255,255,0.05); padding: 10px; border-radius: 10px;">
           <div style="font-weight: 900; color: var(--accent); font-size: 1.1rem;" id="statTotalTickets">0</div>
@@ -1367,6 +1429,13 @@
         socket.on('connect', () => {
           console.log('✅ Socket connected:', socket.id);
           socketReady = true;
+
+          // 💰 تسجيل المستخدم في غرفته الخاصة
+          const userId = localStorage.getItem('userId');
+          if (userId) {
+            socket.emit('register_user', userId);
+          }
+
           if (currentTicketId) {
             socket.emit('join_ticket', currentTicketId);
           }
@@ -1409,6 +1478,18 @@
           }
         });
 
+        // 💰 استقبال تحديث الرصيد
+        socket.on('balance_updated', (data) => {
+          console.log('💰 تحديث رصيد:', data);
+          const balanceEl = document.getElementById('headerBalanceValue');
+          if (balanceEl) balanceEl.innerText = `$${data.balance || 0}`;
+          const profileBal = document.getElementById('userBalance');
+          if (profileBal) profileBal.innerText = `$${data.balance || 0}`;
+          const profilePts = document.getElementById('userPoints');
+          if (profilePts) profilePts.innerText = data.points || 0;
+          if (data.message) showAlert(data.message, 'success');
+        });
+
       } catch (e) {
         console.warn("Socket.io init failed:", e);
       }
@@ -1417,10 +1498,10 @@
     window.onload = function() {
       checkAuthState();
       checkFloatingTicketsCount();
-      watchTicketModal(); // 📱
+      watchTicketModal();
+      loadBalance(); // 💰
     };
 
-    // 📱 مراقبة فتح/إغلاق الشات على الجوال
     function watchTicketModal() {
       const ticketModal = document.getElementById('ticketModal');
       if (!ticketModal) return;
@@ -1490,11 +1571,29 @@
         document.getElementById('loggedInView').style.display = 'flex';
         document.getElementById('navUsername').innerText = `👤 ${username}`;
         document.getElementById('adminDashboardBtn').style.display = (role === 'admin') ? 'flex' : 'none';
+        document.getElementById('headerBalance').style.display = 'flex'; // 💰
       } else {
         document.getElementById('loggedOutView').style.display = 'flex';
         document.getElementById('loggedInView').style.display = 'none';
         document.getElementById('adminDashboardBtn').style.display = 'none';
+        document.getElementById('headerBalance').style.display = 'none'; // 💰
       }
+    }
+
+    // 💰 جلب الرصيد
+    async function loadBalance() {
+      const token = localStorage.getItem('token') || localStorage.getItem('accessToken');
+      if (!token) return;
+      try {
+        const res = await fetch(`${API_BASE}/api/wallet/my-balance`, {
+          headers: { 'Authorization': `Bearer ${token}`, 'x-auth-token': token }
+        });
+        const data = await res.json();
+        if (res.ok) {
+          const headerEl = document.getElementById('headerBalanceValue');
+          if (headerEl) headerEl.innerText = `$${data.balance || 0}`;
+        }
+      } catch (e) { console.error('Balance load error:', e); }
     }
 
     function openAuthModal(mode) {
@@ -1516,6 +1615,18 @@
       modal.classList.add('active');
       const token = localStorage.getItem('token') || localStorage.getItem('accessToken');
       if (!token) return;
+
+      // 💰 جلب الرصيد أولاً
+      try {
+        const balRes = await fetch(`${API_BASE}/api/wallet/my-balance`, {
+          headers: { 'Authorization': `Bearer ${token}`, 'x-auth-token': token }
+        });
+        const balData = await balRes.json();
+        if (balRes.ok) {
+          document.getElementById('userBalance').innerText = `$${balData.balance || 0}`;
+          document.getElementById('userPoints').innerText = balData.points || 0;
+        }
+      } catch (e) { console.error(e); }
 
       try {
         const res = await fetch(`${API_BASE}/api/auth/profile`, {
@@ -1598,9 +1709,11 @@
           localStorage.setItem('token', token);
           localStorage.setItem('username', data.user?.username || inputVal);
           localStorage.setItem('role', data.user?.role || 'user');
+          localStorage.setItem('userId', data.user?.id || data.user?._id || ''); // 💰
           closeAuthModal();
           checkAuthState();
           checkFloatingTicketsCount();
+          loadBalance(); // 💰
           showAlert('تم تسجيل الدخول بنجاح!', 'success');
         } else {
           showAlert(cleanMongooseError(data.message) || 'بيانات الدخول غير صحيحة', 'error');
@@ -1668,6 +1781,7 @@
       localStorage.removeItem('jwt');
       localStorage.removeItem('username');
       localStorage.removeItem('role');
+      localStorage.removeItem('userId'); // 💰
       checkAuthState();
       checkFloatingTicketsCount();
       showAlert('تم تسجيل الخروج بنجاح', 'success');
