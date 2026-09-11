@@ -104,7 +104,6 @@
     .action-btn { background: var(--primary); color: #fff; border: none; padding: 6px 12px; border-radius: 8px; font-weight: 700; font-size: 0.78rem; cursor: pointer; transition: 0.2s; }
     .action-btn:hover { opacity: 0.85; }
 
-    /* 🗑️ زر الحذف */
     .btn-delete {
       background: rgba(239, 68, 68, 0.15);
       color: var(--danger);
@@ -180,6 +179,60 @@
     .settings-form { padding: 25px; display: flex; flex-direction: column; gap: 15px; }
     .settings-form label { font-size: 0.85rem; color: var(--text-sub); font-weight: 700; }
     .settings-form input { padding: 10px 14px; background: rgba(15, 23, 42, 0.8); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 8px; color: #fff; outline: none; }
+
+    /* 📸 صور في الشات */
+    .msg img {
+      max-width: 100%;
+      max-height: 250px;
+      border-radius: 10px;
+      margin-top: 6px;
+      cursor: pointer;
+      display: block;
+      border: 1px solid rgba(255,255,255,0.1);
+      transition: transform 0.2s;
+    }
+    .msg img:hover {
+      transform: scale(1.02);
+    }
+
+    /* 📸 عارض الصور المكبّر */
+    .image-lightbox {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.95);
+      z-index: 99999;
+      display: none;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+      cursor: zoom-out;
+    }
+    .image-lightbox.active {
+      display: flex;
+    }
+    .image-lightbox img {
+      max-width: 100%;
+      max-height: 90vh;
+      border-radius: 12px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.8);
+    }
+    .image-lightbox .close-lightbox {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: rgba(255,255,255,0.1);
+      color: #fff;
+      border: 1px solid rgba(255,255,255,0.2);
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 1.4rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
   </style>
 </head>
 <body>
@@ -287,6 +340,12 @@
     </div>
   </div>
 
+  <!-- 📸 عارض الصور المكبّر -->
+  <div class="image-lightbox" id="adminImageLightbox" onclick="closeAdminLightbox()">
+    <button class="close-lightbox" onclick="closeAdminLightbox()">✕</button>
+    <img id="adminLightboxImage" src="" alt="صورة" onclick="event.stopPropagation()" />
+  </div>
+
   <script>
     const API_BASE = 'https://escrow-api-61us.onrender.com';
     let socket = null;
@@ -307,11 +366,9 @@
       loadAllTickets();
       updateWelcomeHeader();
 
-      // 🗑️ مراقبة حذف التذاكر من السيرفر
       if (socket) {
         socket.on('ticket_deleted', (data) => {
           console.log('🗑️ تم حذف تذكرة:', data.ticketId);
-          // احذف الصف من الجدول مباشرة
           const rows = document.querySelectorAll('#adminTicketsTableBody tr');
           rows.forEach(row => {
             const idCell = row.querySelector('td:first-child');
@@ -451,7 +508,6 @@
       document.getElementById('statAmount').innerText = `$${totalAmount}`;
     }
 
-    // 🗑️ دالة حذف التذكرة
     async function deleteTicket(ticketId, ticketTitle) {
       if (!confirm(`⚠️ هل أنت متأكد من حذف التذكرة:\n\n"${ticketTitle}"\n\nهذا الإجراء نهائي ولا يمكن التراجع عنه!`)) {
         return;
@@ -478,7 +534,6 @@
         if (res.ok) {
           showAlert('✅ تم حذف التذكرة نهائياً', 'success');
 
-          // احذف الصف من الجدول مباشرة
           const row = document.querySelector(`tr[data-ticket-id="${ticketId}"]`);
           if (row) {
             row.style.transition = 'all 0.3s';
@@ -486,12 +541,10 @@
             row.style.transform = 'translateX(-20px)';
             setTimeout(() => {
               row.remove();
-              // أعد حساب الإحصائيات
               const remaining = document.querySelectorAll('#adminTicketsTableBody tr[data-ticket-id]').length;
               document.getElementById('statTotal').innerText = remaining;
             }, 300);
           } else {
-            // أعد تحميل الجدول لو ما لقى الصف
             loadAllTickets();
           }
         } else {
@@ -537,14 +590,25 @@
       }
     }
 
+    // 📸 عرض الرسالة (نص + صورة)
     function renderAdminMessage(data) {
       const box = document.getElementById('adminModalMessagesBox');
       const profile = getAdminProfile();
       
       const isMe = (data.sender === profile.name || data.sender === 'مشرف معتمد 🛡️' || data.sender === 'المشرف');
       
+      // 📸 استخراج النص والصورة
+      const messageText = data.message || data.text || data.content || '';
+      const imageData = data.image || data.imageUrl || null;
+
+      // ✅ منع التكرار
+      const lastMsg = box.lastElementChild;
+      const fingerprint = `${data.sender}|${messageText}|${imageData ? imageData.substring(0, 50) : ''}`;
+      if (lastMsg && lastMsg.dataset.fingerprint === fingerprint) return;
+      
       const containerDiv = document.createElement('div');
       containerDiv.className = `msg-container ${isMe ? 'me-container' : ''}`;
+      containerDiv.dataset.fingerprint = fingerprint;
       
       const senderName = isMe ? profile.name : (data.sender || 'مستخدم');
       let avatarContent = senderName.charAt(0);
@@ -553,16 +617,34 @@
         avatarContent = `<img src="${profile.avatar}" alt="Avatar">`;
       }
 
+      // 📸 بناء محتوى الرسالة
+      let bubbleContent = `<div class="sender">${senderName}</div>`;
+      
+      if (messageText) {
+        bubbleContent += `<div>${messageText}</div>`;
+      }
+      
+      if (imageData) {
+        bubbleContent += `<img src="${imageData}" alt="صورة" onclick="openAdminLightbox(this.src)" onerror="this.style.display='none'" />`;
+      }
+
       containerDiv.innerHTML = `
         <div class="msg-avatar">${avatarContent}</div>
-        <div class="msg ${isMe ? 'me' : 'other'}">
-          <div class="sender">${senderName}</div>
-          <div>${data.message || ''}</div>
-        </div>
+        <div class="msg ${isMe ? 'me' : 'other'}">${bubbleContent}</div>
       `;
       
       box.appendChild(containerDiv);
       box.scrollTop = box.scrollHeight;
+    }
+
+    // 📸 فتح الصورة مكبّرة
+    function openAdminLightbox(src) {
+      document.getElementById('adminLightboxImage').src = src;
+      document.getElementById('adminImageLightbox').classList.add('active');
+    }
+
+    function closeAdminLightbox() {
+      document.getElementById('adminImageLightbox').classList.remove('active');
     }
 
     if (socket) {
