@@ -470,390 +470,77 @@
     }
 
     @media (max-width: 900px) {
-      header {
-        padding: 10px 3%;
-        flex-wrap: wrap;
-        gap: 10px;
-      }
-
-      .brand {
-        font-size: 1.15rem;
-        flex-shrink: 0;
-      }
-
-      .nav-links {
-        order: 3;
-        width: 100%;
-        justify-content: center;
-        gap: 6px;
-        padding-top: 8px;
-        border-top: 1px solid var(--card-border);
-        margin-top: 8px;
-      }
-
-      .nav-btn {
-        font-size: 0.72rem;
-        padding: 6px 10px;
-        gap: 4px;
-      }
-
-      .nav-btn .icon {
-        font-size: 0.85rem;
-      }
-
-      .auth-buttons {
-        margin-right: auto;
-      }
-
-      .btn-auth-outline,
-      .btn-auth-solid {
-        padding: 6px 12px;
-        font-size: 0.75rem;
-      }
-
-      .user-profile-badge {
-        font-size: 0.78rem;
-        padding: 5px 10px;
-      }
-
-      #headerBalance {
-        font-size: 0.75rem;
-        padding: 5px 10px;
-      }
-
-      .hero {
-        padding: 40px 16px 20px;
-      }
-
-      .hero h1 {
-        font-size: 1.75rem;
-        line-height: 1.4;
-      }
-
-      .hero p {
-        font-size: 0.95rem;
-        padding: 0 8px;
-      }
-
-      .hero-badge {
-        font-size: 0.75rem;
-        padding: 5px 12px;
-      }
-
-      .hero-action-btn {
-        padding: 12px 22px;
-        font-size: 0.92rem;
-        width: 100%;
-        max-width: 320px;
-        justify-content: center;
-      }
-
-      .stats-container {
-        gap: 12px;
-        padding: 0 12px;
-        margin: 20px auto 30px;
-      }
-
-      .stat-card {
-        min-width: 140px;
-        padding: 14px 18px;
-        flex: 1 1 calc(50% - 12px);
-      }
-
-      .stat-card .value {
-        font-size: 1.4rem;
-      }
-
-      .stat-card .label {
-        font-size: 0.72rem;
-      }
-
-      .section-container {
-        padding: 0 12px;
-        margin-bottom: 30px;
-      }
-
-      .card {
-        padding: 20px 16px;
-        border-radius: 18px;
-      }
-
-      .section-title {
-        font-size: 1.1rem;
-        flex-wrap: wrap;
-        line-height: 1.5;
-      }
-
-      .section-subtitle {
-        font-size: 0.82rem;
-        margin-bottom: 20px;
-        padding: 0 8px;
-      }
-
-      .guarantee-grid,
-      .rules-grid {
-        grid-template-columns: 1fr;
-        gap: 14px;
-      }
-
-      .guarantee-card,
-      .rule-card {
-        padding: 16px;
-      }
-
-      .guarantee-icon {
-        font-size: 1.8rem;
-      }
-
-      .guarantee-card h4,
-      .rule-card h4 {
-        font-size: 0.95rem;
-      }
-
-      .guarantee-card p,
-      .rule-card ul li {
-        font-size: 0.82rem;
-      }
-
-      .reviews-grid {
-        grid-template-columns: 1fr;
-        gap: 12px;
-      }
-
-      .review-card {
-        padding: 16px;
-      }
-
-      .faq-question {
-        padding: 14px 16px;
-        font-size: 0.88rem;
-        gap: 10px;
-      }
-
-      .faq-answer {
-        padding: 0 16px 14px;
-        padding-top: 10px;
-        font-size: 0.82rem;
-      }
-
-      .step-item {
-        gap: 12px;
-      }
-
-      .step-num {
-        width: 34px;
-        height: 34px;
-        font-size: 0.9rem;
-      }
-
-      .step-content h4 {
-        font-size: 0.9rem;
-      }
-
-      .step-content p {
-        font-size: 0.8rem;
-      }
-
-      .modal-overlay {
-        padding: 8px;
-        align-items: flex-start;
-        padding-top: 20px;
-      }
-
-      .custom-modal {
-        padding: 22px 18px;
-        border-radius: 18px;
-        max-width: 100%;
-        max-height: 92vh;
-        overflow-y: auto;
-      }
-
-      .modal-close-icon {
-        top: 12px;
-        left: 12px;
-        width: 28px;
-        height: 28px;
-        font-size: 0.9rem;
-      }
-
-      .form-group input,
-      .form-group textarea {
-        padding: 11px 12px;
-        font-size: 0.88rem;
-      }
-
-      .btn-submit {
-        padding: 12px;
-        font-size: 0.92rem;
-      }
-
-      .ticket-modal {
-        max-width: 100%;
-        height: 95vh;
-        border-radius: 16px;
-      }
-
-      .modal-header {
-        padding: 12px 14px;
-      }
-
-      .modal-header h3 {
-        font-size: 0.95rem !important;
-      }
-
-      .modal-status-bar {
-        padding: 8px 12px;
-        font-size: 0.75rem;
-        flex-wrap: wrap;
-        gap: 6px;
-      }
-
-      .modal-messages {
-        padding: 12px;
-        gap: 10px;
-      }
-
-      .msg-bubble {
-        max-width: 82%;
-        padding: 10px 13px;
-        font-size: 0.85rem;
-      }
-
-      .msg-avatar {
-        width: 32px;
-        height: 32px;
-        font-size: 0.78rem;
-      }
-
-      .msg-sender {
-        font-size: 0.7rem;
-      }
-
-      .modal-input-area {
-        padding: 10px 12px;
-        gap: 6px;
-      }
-
-      .modal-input-area input[type="text"] {
-        padding: 10px 12px;
-        font-size: 16px !important;
-      }
-
-      .modal-input-area button {
-        padding: 10px 14px;
-        font-size: 0.85rem;
-      }
-
-      .btn-image-picker {
-        padding: 8px 12px !important;
-        font-size: 1.1rem !important;
-      }
-
-      .ticket-action-bar {
-        padding: 8px 12px;
-        flex-direction: column;
-        gap: 8px;
-      }
-
-      .toast-container {
-        top: 12px;
-        right: 12px;
-        left: 12px;
-      }
-
-      .custom-toast {
-        min-width: auto;
-        width: 100%;
-        max-width: 100%;
-        font-size: 0.82rem;
-        padding: 11px 14px;
-      }
-
-      .live-ticker {
-        font-size: 0.75rem;
-        padding: 6px 0;
-      }
-
-      #floating-tickets-widget {
-        bottom: 80px !important;
-        left: 12px !important;
-        right: auto !important;
-        transition: opacity 0.2s;
-      }
-      
-      #widget-toggle-btn {
-        width: 50px !important;
-        height: 50px !important;
-        padding: 0 !important;
-        border-radius: 50% !important;
-        justify-content: center !important;
-        font-size: 1.4rem !important;
-        min-width: 50px !important;
-      }
-      
-      .widget-text {
-        display: none !important;
-      }
-      
-      .widget-emoji {
-        display: inline !important;
-      }
-      
-      #floating-tickets-badge {
-        position: absolute !important;
-        top: -5px !important;
-        right: -5px !important;
-        font-size: 0.7rem !important;
-        padding: 1px 5px !important;
-        background: #ef4444 !important;
-        color: #fff !important;
-        min-width: 18px !important;
-        text-align: center !important;
-      }
-      
-      #floating-tickets-popup {
-        width: calc(100vw - 24px) !important;
-        max-height: 50vh !important;
-        bottom: 70px !important;
-      }
-
-      #profileModal div[style*="grid-template-columns: repeat(3"] {
-        gap: 6px !important;
-      }
-
-      .msg-bubble img {
-        max-height: 220px;
-      }
-
-      #imagePreview {
-        max-height: 70px !important;
-        max-width: 130px !important;
-      }
-
-      .ticket-modal {
-        height: 100dvh;
-        max-height: 100dvh;
-        border-radius: 0;
-        max-width: 100%;
-      }
-      
-      .modal-overlay.active {
-        padding: 0;
-        align-items: stretch;
-        padding-top: 0;
-      }
-      
-      .modal-input-area {
-        position: sticky;
-        bottom: 0;
-        padding-bottom: max(10px, env(safe-area-inset-bottom));
-        z-index: 10;
-      }
+      header { padding: 10px 3%; flex-wrap: wrap; gap: 10px; }
+      .brand { font-size: 1.15rem; flex-shrink: 0; }
+      .nav-links { order: 3; width: 100%; justify-content: center; gap: 6px; padding-top: 8px; border-top: 1px solid var(--card-border); margin-top: 8px; }
+      .nav-btn { font-size: 0.72rem; padding: 6px 10px; gap: 4px; }
+      .nav-btn .icon { font-size: 0.85rem; }
+      .auth-buttons { margin-right: auto; }
+      .btn-auth-outline, .btn-auth-solid { padding: 6px 12px; font-size: 0.75rem; }
+      .user-profile-badge { font-size: 0.78rem; padding: 5px 10px; }
+      #headerBalance { font-size: 0.75rem; padding: 5px 10px; }
+      .hero { padding: 40px 16px 20px; }
+      .hero h1 { font-size: 1.75rem; line-height: 1.4; }
+      .hero p { font-size: 0.95rem; padding: 0 8px; }
+      .hero-badge { font-size: 0.75rem; padding: 5px 12px; }
+      .hero-action-btn { padding: 12px 22px; font-size: 0.92rem; width: 100%; max-width: 320px; justify-content: center; }
+      .stats-container { gap: 12px; padding: 0 12px; margin: 20px auto 30px; }
+      .stat-card { min-width: 140px; padding: 14px 18px; flex: 1 1 calc(50% - 12px); }
+      .stat-card .value { font-size: 1.4rem; }
+      .stat-card .label { font-size: 0.72rem; }
+      .section-container { padding: 0 12px; margin-bottom: 30px; }
+      .card { padding: 20px 16px; border-radius: 18px; }
+      .section-title { font-size: 1.1rem; flex-wrap: wrap; line-height: 1.5; }
+      .section-subtitle { font-size: 0.82rem; margin-bottom: 20px; padding: 0 8px; }
+      .guarantee-grid, .rules-grid { grid-template-columns: 1fr; gap: 14px; }
+      .guarantee-card, .rule-card { padding: 16px; }
+      .guarantee-icon { font-size: 1.8rem; }
+      .guarantee-card h4, .rule-card h4 { font-size: 0.95rem; }
+      .guarantee-card p, .rule-card ul li { font-size: 0.82rem; }
+      .reviews-grid { grid-template-columns: 1fr; gap: 12px; }
+      .review-card { padding: 16px; }
+      .faq-question { padding: 14px 16px; font-size: 0.88rem; gap: 10px; }
+      .faq-answer { padding: 0 16px 14px; padding-top: 10px; font-size: 0.82rem; }
+      .step-item { gap: 12px; }
+      .step-num { width: 34px; height: 34px; font-size: 0.9rem; }
+      .step-content h4 { font-size: 0.9rem; }
+      .step-content p { font-size: 0.8rem; }
+      .modal-overlay { padding: 8px; align-items: flex-start; padding-top: 20px; }
+      .custom-modal { padding: 22px 18px; border-radius: 18px; max-width: 100%; max-height: 92vh; overflow-y: auto; }
+      .modal-close-icon { top: 12px; left: 12px; width: 28px; height: 28px; font-size: 0.9rem; }
+      .form-group input, .form-group textarea { padding: 11px 12px; font-size: 0.88rem; }
+      .btn-submit { padding: 12px; font-size: 0.92rem; }
+      .ticket-modal { max-width: 100%; height: 95vh; border-radius: 16px; }
+      .modal-header { padding: 12px 14px; }
+      .modal-header h3 { font-size: 0.95rem !important; }
+      .modal-status-bar { padding: 8px 12px; font-size: 0.75rem; flex-wrap: wrap; gap: 6px; }
+      .modal-messages { padding: 12px; gap: 10px; }
+      .msg-bubble { max-width: 82%; padding: 10px 13px; font-size: 0.85rem; }
+      .msg-avatar { width: 32px; height: 32px; font-size: 0.78rem; }
+      .msg-sender { font-size: 0.7rem; }
+      .modal-input-area { padding: 10px 12px; gap: 6px; }
+      .modal-input-area input[type="text"] { padding: 10px 12px; font-size: 16px !important; }
+      .modal-input-area button { padding: 10px 14px; font-size: 0.85rem; }
+      .btn-image-picker { padding: 8px 12px !important; font-size: 1.1rem !important; }
+      .ticket-action-bar { padding: 8px 12px; flex-direction: column; gap: 8px; }
+      .toast-container { top: 12px; right: 12px; left: 12px; }
+      .custom-toast { min-width: auto; width: 100%; max-width: 100%; font-size: 0.82rem; padding: 11px 14px; }
+      .live-ticker { font-size: 0.75rem; padding: 6px 0; }
+      #floating-tickets-widget { bottom: 80px !important; left: 12px !important; right: auto !important; transition: opacity 0.2s; }
+      #widget-toggle-btn { width: 50px !important; height: 50px !important; padding: 0 !important; border-radius: 50% !important; justify-content: center !important; font-size: 1.4rem !important; min-width: 50px !important; }
+      .widget-text { display: none !important; }
+      .widget-emoji { display: inline !important; }
+      #floating-tickets-badge { position: absolute !important; top: -5px !important; right: -5px !important; font-size: 0.7rem !important; padding: 1px 5px !important; background: #ef4444 !important; color: #fff !important; min-width: 18px !important; text-align: center !important; }
+      #floating-tickets-popup { width: calc(100vw - 24px) !important; max-height: 50vh !important; bottom: 70px !important; }
+      #profileModal div[style*="grid-template-columns: repeat(3"] { gap: 6px !important; }
+      .msg-bubble img { max-height: 220px; }
+      #imagePreview { max-height: 70px !important; max-width: 130px !important; }
+      .ticket-modal { height: 100dvh; max-height: 100dvh; border-radius: 0; max-width: 100%; }
+      .modal-overlay.active { padding: 0; align-items: stretch; padding-top: 0; }
+      .modal-input-area { position: sticky; bottom: 0; padding-bottom: max(10px, env(safe-area-inset-bottom)); z-index: 10; }
     }
 
-    body.chat-open-mobile #floating-tickets-widget {
-      display: none !important;
-    }
+    body.chat-open-mobile #floating-tickets-widget { display: none !important; }
 
     @media (max-width: 480px) {
       .brand { font-size: 1rem; }
@@ -866,9 +553,7 @@
       .section-title { font-size: 1rem; }
       .msg-bubble { max-width: 88%; font-size: 0.82rem; }
       .nav-btn .icon { display: none; }
-      #profileModal div[style*="grid-template-columns: repeat(3"] {
-        grid-template-columns: 1fr !important;
-      }
+      #profileModal div[style*="grid-template-columns: repeat(3"] { grid-template-columns: 1fr !important; }
     }
 
     @media (min-width: 769px) and (max-width: 1024px) {
@@ -877,13 +562,8 @@
     }
 
     @media (hover: none) and (pointer: coarse) {
-      .nav-btn, .btn-auth-outline, .btn-auth-solid, .hero-action-btn, .btn-submit, .modal-input-area button {
-        min-height: 40px;
-        -webkit-tap-highlight-color: transparent;
-      }
-      .nav-btn:hover, .guarantee-card:hover, .btn-auth-outline:hover, .btn-auth-solid:hover {
-        transform: none;
-      }
+      .nav-btn, .btn-auth-outline, .btn-auth-solid, .hero-action-btn, .btn-submit, .modal-input-area button { min-height: 40px; -webkit-tap-highlight-color: transparent; }
+      .nav-btn:hover, .guarantee-card:hover, .btn-auth-outline:hover, .btn-auth-solid:hover { transform: none; }
     }
 
     html, body { overflow-x: hidden; max-width: 100%; }
@@ -896,7 +576,6 @@
 
   <header>
     <a href="/" class="brand"><span>ضماني</span> 🛡️</a>
-
     <nav class="nav-links">
       <a href="#guarantee" class="nav-btn"><span class="icon">🛡️</span> الضمان والحماية</a>
       <a href="#rules" class="nav-btn"><span class="icon">📜</span> القوانين</a>
@@ -908,7 +587,6 @@
         <span class="icon">👑</span> لوحة التحكم
       </a>
     </nav>
-
     <div class="auth-buttons">
       <div id="loggedOutView" style="display: flex; gap: 8px;">
         <button class="btn-auth-outline" onclick="openAuthModal('login')">تسجيل الدخول</button>
@@ -933,56 +611,25 @@
   </div>
 
   <section class="hero">
-    <div class="hero-badge">
-      <span class="pulse-dot"></span> السيرفر المباشر شغال ومحمي 100%
-    </div>
+    <div class="hero-badge"><span class="pulse-dot"></span> السيرفر المباشر شغال ومحمي 100%</div>
     <h1>منصة ضماني للوساطة الرقمية <span>المضمونة 100%</span></h1>
     <p>نضمن حق البائع والمشتري في شراء الحسابات، الخدمات، والمنتجات الرقمية بعقود ومشرفين معتمدين.</p>
-    <button class="hero-action-btn" onclick="openCreateTicketModal()">
-      <span>🚀 ابدأ غرفة وساطة جديدة الآن</span>
-    </button>
+    <button class="hero-action-btn" onclick="openCreateTicketModal()"><span>🚀 ابدأ غرفة وساطة جديدة الآن</span></button>
   </section>
 
   <div class="stats-container">
-    <div class="stat-card">
-      <div class="value">+1,500$</div>
-      <div class="label">إجمالي المبالغ المحمية</div>
-    </div>
-    <div class="stat-card">
-      <div class="value">100%</div>
-      <div class="label">نسبة أمان الطرفين</div>
-    </div>
-    <div class="stat-card">
-      <div class="value">&lt; 3 دقائق</div>
-      <div class="label">متوسط سرعة استجابة الوسيط</div>
-    </div>
+    <div class="stat-card"><div class="value">+1,500$</div><div class="label">إجمالي المبالغ المحمية</div></div>
+    <div class="stat-card"><div class="value">100%</div><div class="label">نسبة أمان الطرفين</div></div>
+    <div class="stat-card"><div class="value">&lt; 3 دقائق</div><div class="label">متوسط سرعة استجابة الوسيط</div></div>
   </div>
 
   <main class="main-grid">
     <div class="card">
       <div class="section-title" style="justify-content: flex-start; font-size: 1.15rem;">🔒 كيف نضمن حقك بالكامل؟</div>
       <div class="steps-list" style="margin-top: 20px;">
-        <div class="step-item">
-          <div class="step-num">1</div>
-          <div class="step-content">
-            <h4>إنشاء التذكرة وإيداع المبلغ</h4>
-            <p>يقوم المشتري بحجز المبلغ بأمان داخل حساب المنصة قبل تسليم أي بيانات.</p>
-          </div>
-        </div>
-        <div class="step-item">
-          <div class="step-num">2</div>
-          <div class="step-content">
-            <h4>تسليم البيانات والتحقق المباشر</h4>
-            <p>يسلم البائع الحساب/الخدمة داخل غرفة الوساطة تحت إشراف الوسيط المتواجد.</p>
-          </div>
-        </div>
-        <div class="step-item">
-          <div class="step-num">3</div>
-          <div class="step-content">
-            <h4>تحويل المستحقات وإغلاق الصفقة</h4>
-            <p>بعد فحص المشتري وتأكيده للاستلام، يُحول المبلغ فوراً إلى البائع.</p>
-          </div>
-        </div>
+        <div class="step-item"><div class="step-num">1</div><div class="step-content"><h4>إنشاء التذكرة وإيداع المبلغ</h4><p>يقوم المشتري بحجز المبلغ بأمان داخل حساب المنصة قبل تسليم أي بيانات.</p></div></div>
+        <div class="step-item"><div class="step-num">2</div><div class="step-content"><h4>تسليم البيانات والتحقق المباشر</h4><p>يسلم البائع الحساب/الخدمة داخل غرفة الوساطة تحت إشراف الوسيط المتواجد.</p></div></div>
+        <div class="step-item"><div class="step-num">3</div><div class="step-content"><h4>تحويل المستحقات وإغلاق الصفقة</h4><p>بعد فحص المشتري وتأكيده للاستلام، يُحول المبلغ فوراً إلى البائع.</p></div></div>
       </div>
     </div>
   </main>
@@ -992,26 +639,10 @@
       <div class="section-title">🛡️ لماذا تختار منصة ضماني؟</div>
       <div class="section-subtitle">نوفر لك بيئة تداول رقمية خالية تماماً من المخاطر والنصب</div>
       <div class="guarantee-grid">
-        <div class="guarantee-card">
-          <span class="guarantee-icon">💰</span>
-          <h4>حماية الأموال 100%</h4>
-          <p>المبلغ يبقى معزولاً ومحفوظاً بأمان لدى المنصة ولا يستلمه البائع حتى يفحص المشتري المنتج بالكامل.</p>
-        </div>
-        <div class="guarantee-card">
-          <span class="guarantee-icon">🔑</span>
-          <h4>فحص ملكية الإيميل الأساسي</h4>
-          <p>يتأكد المشرف من تغيير وتثبيت معلومات الأمان والإيميل الأساسي لضمان عدم سحب الحساب مستقبلاً.</p>
-        </div>
-        <div class="guarantee-card">
-          <span class="guarantee-icon">📄</span>
-          <h4>توثيق وتصدير عقد PDF</h4>
-          <p>توليد عقد رسمي إلكتروني ببيانات وشروط الصفقة يمكن تصديره كـ PDF للحفاظ على حقوق الطرفين.</p>
-        </div>
-        <div class="guarantee-card">
-          <span class="guarantee-icon">👨‍⚖️</span>
-          <h4>مشرف متواجد لحل النزاعات</h4>
-          <p>فريق إشراف محايد يتواجد بالصفقة للتدخل واتخاذ القرارات العادلة في حال وجود أي خلاف.</p>
-        </div>
+        <div class="guarantee-card"><span class="guarantee-icon">💰</span><h4>حماية الأموال 100%</h4><p>المبلغ يبقى معزولاً ومحفوظاً بأمان لدى المنصة ولا يستلمه البائع حتى يفحص المشتري المنتج بالكامل.</p></div>
+        <div class="guarantee-card"><span class="guarantee-icon">🔑</span><h4>فحص ملكية الإيميل الأساسي</h4><p>يتأكد المشرف من تغيير وتثبيت معلومات الأمان والإيميل الأساسي لضمان عدم سحب الحساب مستقبلاً.</p></div>
+        <div class="guarantee-card"><span class="guarantee-icon">📄</span><h4>توثيق وتصدير عقد PDF</h4><p>توليد عقد رسمي إلكتروني ببيانات وشروط الصفقة يمكن تصديره كـ PDF للحفاظ على حقوق الطرفين.</p></div>
+        <div class="guarantee-card"><span class="guarantee-icon">👨‍⚖️</span><h4>مشرف متواجد لحل النزاعات</h4><p>فريق إشراف محايد يتواجد بالصفقة للتدخل واتخاذ القرارات العادلة في حال وجود أي خلاف.</p></div>
       </div>
     </div>
   </section>
@@ -1021,38 +652,10 @@
       <div class="section-title">📜 قوانين وأساسيات منصة ضماني</div>
       <div class="section-subtitle">التزامك بهذه القوانين يضمن سلامة عملياتك المالية وحماية حسابك من الإلغاء</div>
       <div class="rules-grid">
-        <div class="rule-card">
-          <h4>⚖️ الأساسيات والالتزام</h4>
-          <ul>
-            <li>يُمنع منعاً باتاً التعامل خارج شات التذكرة المباشر.</li>
-            <li>المنصة غير مسؤولة عن أي اتفاق يتم خارج نطاق التذكرة.</li>
-            <li>جميع المحادثات والبيانات المتبادلة داخل التذكرة مسجلة وموثقة.</li>
-          </ul>
-        </div>
-        <div class="rule-card">
-          <h4>💳 إيداع وصرف المبالغ</h4>
-          <ul>
-            <li>لا يتم تسليم البيانات إلا بعد تأكيد وصول المبلغ لحساب الوساطة.</li>
-            <li>تحويل المبالغ للبائع يكون بعد تأكيد المشتري وفحصه الكامل.</li>
-            <li>عمولة المنصة ثابته (5%) وتخصم تلقائياً عند إتمام الصفقة.</li>
-          </ul>
-        </div>
-        <div class="rule-card">
-          <h4>📦 مسؤولية البائع والمشتري</h4>
-          <ul>
-            <li>يلتزم البائع بتسليم كافة البيانات الأساسية مع الإيميل الأساسي.</li>
-            <li>يحق للمشتري مهلة فحص كافية يُحددها الوسيط قبل تأكيد الاستلام.</li>
-            <li>أي محاولة سحب للحساب بعد الصفقة تُعرض صاحبها للحظر والمساءلة.</li>
-          </ul>
-        </div>
-        <div class="rule-card">
-          <h4>🛡️ الخلافات والنزاعات</h4>
-          <ul>
-            <li>في حال نشوب خلاف، تكون قرارات مشرف الوساطة نهائية وملزمة.</li>
-            <li>تقديم إثباتات مزيفة أو تضليل المشرف تؤدي للحظر الفوري.</li>
-            <li>تُسترد المبالغ للمشتري كاملاً في حال إخلال البائع بالشروط.</li>
-          </ul>
-        </div>
+        <div class="rule-card"><h4>⚖️ الأساسيات والالتزام</h4><ul><li>يُمنع منعاً باتاً التعامل خارج شات التذكرة المباشر.</li><li>المنصة غير مسؤولة عن أي اتفاق يتم خارج نطاق التذكرة.</li><li>جميع المحادثات والبيانات المتبادلة داخل التذكرة مسجلة وموثقة.</li></ul></div>
+        <div class="rule-card"><h4>💳 إيداع وصرف المبالغ</h4><ul><li>لا يتم تسليم البيانات إلا بعد تأكيد وصول المبلغ لحساب الوساطة.</li><li>تحويل المبالغ للبائع يكون بعد تأكيد المشتري وفحصه الكامل.</li><li>عمولة المنصة ثابته (5%) وتخصم تلقائياً عند إتمام الصفقة.</li></ul></div>
+        <div class="rule-card"><h4>📦 مسؤولية البائع والمشتري</h4><ul><li>يلتزم البائع بتسليم كافة البيانات الأساسية مع الإيميل الأساسي.</li><li>يحق للمشتري مهلة فحص كافية يُحددها الوسيط قبل تأكيد الاستلام.</li><li>أي محاولة سحب للحساب بعد الصفقة تُعرض صاحبها للحظر والمساءلة.</li></ul></div>
+        <div class="rule-card"><h4>🛡️ الخلافات والنزاعات</h4><ul><li>في حال نشوب خلاف، تكون قرارات مشرف الوساطة نهائية وملزمة.</li><li>تقديم إثباتات مزيفة أو تضليل المشرف تؤدي للحظر الفوري.</li><li>تُسترد المبالغ للمشتري كاملاً في حال إخلال البائع بالشروط.</li></ul></div>
       </div>
     </div>
   </section>
@@ -1062,66 +665,18 @@
       <div class="section-title">⭐ آراء وانطباعات العملاء</div>
       <div class="section-subtitle">شاهد تجارب المتعاملين السابقين ودرجة رضاهم عن خدمات الوساطة</div>
       <div class="reviews-grid">
-        <div class="review-card">
-          <div class="review-header"><span class="reviewer-name">عبدالعزيز</span><span class="review-stars">★★★★★</span></div>
-          <p class="review-text">"خدمة ضماني ممتازة وسريعة جداً. المشرف دخل التذكرة خلال دقيقة واحدة وتأكد من تغيير الإيميل بنفسه."</p>
-          <span class="review-item-tag">شراء حساب Rust</span>
-        </div>
-        <div class="review-card">
-          <div class="review-header"><span class="reviewer-name">فهد</span><span class="review-stars">★★★★★</span></div>
-          <p class="review-text">"أفضل منصة وساطة تعاملت معها، الأمان عندهم عالي جداً وأخذت حقي بالكامل بدون أي قلق."</p>
-          <span class="review-item-tag">وساطة بقيمة 300$</span>
-        </div>
-        <div class="review-card">
-          <div class="review-header"><span class="reviewer-name">سعود</span><span class="review-stars">★★★★★</span></div>
-          <p class="review-text">"سرعة التحويل للبائع بعد الفحص رهيبة، والعقد الـ PDF يضمن الحقوق 100%. موفقين!"</p>
-          <span class="review-item-tag">بيع قناتين يوتيوب</span>
-        </div>
-        <div class="review-card">
-          <div class="review-header"><span class="reviewer-name">Sn1per</span><span class="review-stars">★★★★★</span></div>
-          <p class="review-text">"كنت خايف أشتري حساب فورتنايت بمبلغ كبير، بس الوسيط طمني وخلاني أغير كل بيانات الأمان قبل ما يطلع."</p>
-          <span class="review-item-tag">شراء حساب Fortnite</span>
-        </div>
-        <div class="review-card">
-          <div class="review-header"><span class="reviewer-name">عبدالله</span><span class="review-stars">★★★★☆</span></div>
-          <p class="review-text">"الخدمة ممتازة بس تأخر المشرف 5 دقايق بسبب الزحمة. عموماً تمت الصفقة بأمان وأنصح فيهم."</p>
-          <span class="review-item-tag">شحن رصيد 200$</span>
-        </div>
-        <div class="review-card">
-          <div class="review-header"><span class="reviewer-name">DarkWolf</span><span class="review-stars">★★★★★</span></div>
-          <p class="review-text">"تعاملت معهم 3 مرات وما صار أي مشكلة. المستحقات توصل للبائع بسرعة والعمولة معقولة جداً."</p>
-          <span class="review-item-tag">بيع حساب Steam</span>
-        </div>
-        <div class="review-card">
-          <div class="review-header"><span class="reviewer-name">أبو ريان</span><span class="review-stars">★★★★★</span></div>
-          <p class="review-text">"صراحة أول مرة أتعامل بوساطة إلكترونية وكنت متردد، لكن طلعوا ناس محترمين ومحايدين في القرار."</p>
-          <span class="review-item-tag">وساطة 120$</span>
-        </div>
-        <div class="review-card">
-          <div class="review-header"><span class="reviewer-name">Rakan_99</span><span class="review-stars">★★★★★</span></div>
-          <p class="review-text">"أسرع وساطة جربتها بحياتي. دخلت التذكرة الساعة 2 بالليل والمشرف كان متواجد ورد علي فوراً."</p>
-          <span class="review-item-tag">شراء حساب Valorant</span>
-        </div>
-        <div class="review-card">
-          <div class="review-header"><span class="reviewer-name">خالد</span><span class="review-stars">★★★★★</span></div>
-          <p class="review-text">"اللي عجبني إنهم يحفظون المحادثات كاملة، فأي خلاف يرجعون للمحادثة ويحلون الموضوع بعدل."</p>
-          <span class="review-item-tag">وساطة 500$</span>
-        </div>
-        <div class="review-card">
-          <div class="review-header"><span class="reviewer-name">Ghost</span><span class="review-stars">★★★★★</span></div>
-          <p class="review-text">"نقلت قناتي من بائع مجهول وأنا مرتاح، لأن المبلغ ما انحول له إلا بعد ما تأكدت من كل شي."</p>
-          <span class="review-item-tag">بيع قناة تيليجرام</span>
-        </div>
-        <div class="review-card">
-          <div class="review-header"><span class="reviewer-name">تركي</span><span class="review-stars">★★★★★</span></div>
-          <p class="review-text">"خدمة العملاء عندهم راقية، يشرحون لك كل خطوة بالتفصيل ولا يتركونك إلا وأنت فاهم كل شي."</p>
-          <span class="review-item-tag">شراء حساب انستقرام</span>
-        </div>
-        <div class="review-card">
-          <div class="review-header"><span class="reviewer-name">Nasser.K</span><span class="review-stars">★★★★★</span></div>
-          <p class="review-text">"جربت منصات وساطة كثيرة، بس ضماني هو الوحيد اللي حسيت فيه بالأمان الحقيقي. شكراً لكم."</p>
-          <span class="review-item-tag">وساطة 80$</span>
-        </div>
+        <div class="review-card"><div class="review-header"><span class="reviewer-name">عبدالعزيز</span><span class="review-stars">★★★★★</span></div><p class="review-text">"خدمة ضماني ممتازة وسريعة جداً. المشرف دخل التذكرة خلال دقيقة واحدة وتأكد من تغيير الإيميل بنفسه."</p><span class="review-item-tag">شراء حساب Rust</span></div>
+        <div class="review-card"><div class="review-header"><span class="reviewer-name">فهد</span><span class="review-stars">★★★★★</span></div><p class="review-text">"أفضل منصة وساطة تعاملت معها، الأمان عندهم عالي جداً وأخذت حقي بالكامل بدون أي قلق."</p><span class="review-item-tag">وساطة بقيمة 300$</span></div>
+        <div class="review-card"><div class="review-header"><span class="reviewer-name">سعود</span><span class="review-stars">★★★★★</span></div><p class="review-text">"سرعة التحويل للبائع بعد الفحص رهيبة، والعقد الـ PDF يضمن الحقوق 100%. موفقين!"</p><span class="review-item-tag">بيع قناتين يوتيوب</span></div>
+        <div class="review-card"><div class="review-header"><span class="reviewer-name">Sn1per</span><span class="review-stars">★★★★★</span></div><p class="review-text">"كنت خايف أشتري حساب فورتنايت بمبلغ كبير، بس الوسيط طمني وخلاني أغير كل بيانات الأمان قبل ما يطلع."</p><span class="review-item-tag">شراء حساب Fortnite</span></div>
+        <div class="review-card"><div class="review-header"><span class="reviewer-name">عبدالله</span><span class="review-stars">★★★★☆</span></div><p class="review-text">"الخدمة ممتازة بس تأخر المشرف 5 دقايق بسبب الزحمة. عموماً تمت الصفقة بأمان وأنصح فيهم."</p><span class="review-item-tag">شحن رصيد 200$</span></div>
+        <div class="review-card"><div class="review-header"><span class="reviewer-name">DarkWolf</span><span class="review-stars">★★★★★</span></div><p class="review-text">"تعاملت معهم 3 مرات وما صار أي مشكلة. المستحقات توصل للبائع بسرعة والعمولة معقولة جداً."</p><span class="review-item-tag">بيع حساب Steam</span></div>
+        <div class="review-card"><div class="review-header"><span class="reviewer-name">أبو ريان</span><span class="review-stars">★★★★★</span></div><p class="review-text">"صراحة أول مرة أتعامل بوساطة إلكترونية وكنت متردد، لكن طلعوا ناس محترمين ومحايدين في القرار."</p><span class="review-item-tag">وساطة 120$</span></div>
+        <div class="review-card"><div class="review-header"><span class="reviewer-name">Rakan_99</span><span class="review-stars">★★★★★</span></div><p class="review-text">"أسرع وساطة جربتها بحياتي. دخلت التذكرة الساعة 2 بالليل والمشرف كان متواجد ورد علي فوراً."</p><span class="review-item-tag">شراء حساب Valorant</span></div>
+        <div class="review-card"><div class="review-header"><span class="reviewer-name">خالد</span><span class="review-stars">★★★★★</span></div><p class="review-text">"اللي عجبني إنهم يحفظون المحادثات كاملة، فأي خلاف يرجعون للمحادثة ويحلون الموضوع بعدل."</p><span class="review-item-tag">وساطة 500$</span></div>
+        <div class="review-card"><div class="review-header"><span class="reviewer-name">Ghost</span><span class="review-stars">★★★★★</span></div><p class="review-text">"نقلت قناتي من بائع مجهول وأنا مرتاح، لأن المبلغ ما انحول له إلا بعد ما تأكدت من كل شي."</p><span class="review-item-tag">بيع قناة تيليجرام</span></div>
+        <div class="review-card"><div class="review-header"><span class="reviewer-name">تركي</span><span class="review-stars">★★★★★</span></div><p class="review-text">"خدمة العملاء عندهم راقية، يشرحون لك كل خطوة بالتفصيل ولا يتركونك إلا وأنت فاهم كل شي."</p><span class="review-item-tag">شراء حساب انستقرام</span></div>
+        <div class="review-card"><div class="review-header"><span class="reviewer-name">Nasser.K</span><span class="review-stars">★★★★★</span></div><p class="review-text">"جربت منصات وساطة كثيرة، بس ضماني هو الوحيد اللي حسيت فيه بالأمان الحقيقي. شكراً لكم."</p><span class="review-item-tag">وساطة 80$</span></div>
       </div>
     </div>
   </section>
@@ -1131,22 +686,10 @@
       <div class="section-title">❓ الأسئلة الشائعة والمعلومات</div>
       <div class="section-subtitle">إجابات مباشرة لأكثر الاستفسارات تداولاً بين المشترين والبائعين</div>
       <div class="faq-list">
-        <div class="faq-item">
-          <div class="faq-question" onclick="toggleFaq(this)"><span>كم يستغرق وقت إتمام صفقة الوساطة؟</span><span>➕</span></div>
-          <div class="faq-answer">غالباً ما تستغرق العملية بين 5 إلى 15 دقيقة فقط، يعتمد ذلك على سرعة استجابة البائع والمشتري وفحص البيانات داخل الغرفة.</div>
-        </div>
-        <div class="faq-item">
-          <div class="faq-question" onclick="toggleFaq(this)"><span>كيف أضمن عدم استرجاع الحساب بعد الشراء؟</span><span>➕</span></div>
-          <div class="faq-answer">يشترط مشرف الوساطة نقل الحساب مع الإيميل الأساسي الأول (OG Email), وإزالة جميع وسائل التحقق القديمة ورقم الهاتف وتفعيل التحقق الثنائي الخاص بك.</div>
-        </div>
-        <div class="faq-item">
-          <div class="faq-question" onclick="toggleFaq(this)"><span>ماذا يحدث إذا تراجع البائع أو المشتري عن الصفقة؟</span><span>➕</span></div>
-          <div class="faq-answer">إذا تراجع المشتري قبل استلام البيانات يُرجع له المبلغ كاملاً. وإذا تراجع البائع يتم إلغاء التذكرة وإعادة المبلغ للمشتري دون خصم.</div>
-        </div>
-        <div class="faq-item">
-          <div class="faq-question" onclick="toggleFaq(this)"><span>ما هي عمولة المنصة ومن يتحملها؟</span><span>➕</span></div>
-          <div class="faq-answer">العمولة هي 5% فقط من إجمالي قيمة الصفقة، وتُخصم تلقائياً عند تحويل مستحقات البائع النهائية أو حسب الاتفاق بين الطرفين.</div>
-        </div>
+        <div class="faq-item"><div class="faq-question" onclick="toggleFaq(this)"><span>كم يستغرق وقت إتمام صفقة الوساطة؟</span><span>➕</span></div><div class="faq-answer">غالباً ما تستغرق العملية بين 5 إلى 15 دقيقة فقط، يعتمد ذلك على سرعة استجابة البائع والمشتري وفحص البيانات داخل الغرفة.</div></div>
+        <div class="faq-item"><div class="faq-question" onclick="toggleFaq(this)"><span>كيف أضمن عدم استرجاع الحساب بعد الشراء؟</span><span>➕</span></div><div class="faq-answer">يشترط مشرف الوساطة نقل الحساب مع الإيميل الأساسي الأول (OG Email), وإزالة جميع وسائل التحقق القديمة ورقم الهاتف وتفعيل التحقق الثنائي الخاص بك.</div></div>
+        <div class="faq-item"><div class="faq-question" onclick="toggleFaq(this)"><span>ماذا يحدث إذا تراجع البائع أو المشتري عن الصفقة؟</span><span>➕</span></div><div class="faq-answer">إذا تراجع المشتري قبل استلام البيانات يُرجع له المبلغ كاملاً. وإذا تراجع البائع يتم إلغاء التذكرة وإعادة المبلغ للمشتري دون خصم.</div></div>
+        <div class="faq-item"><div class="faq-question" onclick="toggleFaq(this)"><span>ما هي عمولة المنصة ومن يتحملها؟</span><span>➕</span></div><div class="faq-answer">العمولة هي 5% فقط من إجمالي قيمة الصفقة، وتُخصم تلقائياً عند تحويل مستحقات البائع النهائية أو حسب الاتفاق بين الطرفين.</div></div>
       </div>
     </div>
   </section>
@@ -1167,26 +710,14 @@
       <button class="modal-close-icon" onclick="closeCreateTicketModal()">✕</button>
       <div class="section-title" style="justify-content: flex-start; font-size: 1.15rem; margin-bottom: 20px;">📝 فتح غرفة وساطة جديدة</div>
       <form onsubmit="handleCreateTicket(event)">
-        <div class="form-group">
-          <label>عنوان الصفقة / المنتج</label>
-          <input type="text" id="titleInput" placeholder="مثال: شراء حساب يوتيوب 50k مشترك" required>
-        </div>
-        <div class="form-group">
-          <label>المبلغ المتفق عليه ($)</label>
-          <input type="number" id="amountInput" placeholder="مثال: 150" min="1" required>
-        </div>
-        <div class="form-group">
-          <label>تفاصيل وشروط الاتفاق</label>
-          <textarea id="detailsInput" placeholder="اكتب الشروط والتفاصيل المتفق عليها بين الطرفين..."></textarea>
-        </div>
+        <div class="form-group"><label>عنوان الصفقة / المنتج</label><input type="text" id="titleInput" placeholder="مثال: شراء حساب يوتيوب 50k مشترك" required></div>
+        <div class="form-group"><label>المبلغ المتفق عليه ($)</label><input type="number" id="amountInput" placeholder="مثال: 150" min="1" required></div>
+        <div class="form-group"><label>تفاصيل وشروط الاتفاق</label><textarea id="detailsInput" placeholder="اكتب الشروط والتفاصيل المتفق عليها بين الطرفين..."></textarea></div>
         <button type="submit" class="btn-submit">بدء غرفة الوساطة المباشرة 🚀</button>
       </form>
     </div>
   </div>
 
-  <!-- ============================================ -->
-  <!-- 📧 Auth Modal (مع شاشات 2FA) -->
-  <!-- ============================================ -->
   <div class="modal-overlay" id="authModal">
     <div class="custom-modal">
       <button class="modal-close-icon" onclick="closeAuthModal()">✕</button>
@@ -1196,86 +727,45 @@
         <div class="auth-tab" id="tabRegister" onclick="switchAuthTab('register')">حساب جديد</div>
       </div>
 
-      <!-- 📝 تسجيل الدخول -->
       <form id="loginForm" onsubmit="handleLoginSubmit(event)">
-        <div class="form-group">
-          <label>اسم المستخدم / البريد</label>
-          <input type="text" id="loginUsername" required placeholder="أدخل اسم الحساب أو البريد">
-        </div>
-        <div class="form-group">
-          <label>كلمة المرور</label>
-          <input type="password" id="loginPassword" required placeholder="••••••••">
-        </div>
+        <div class="form-group"><label>اسم المستخدم / البريد</label><input type="text" id="loginUsername" required placeholder="أدخل اسم الحساب أو البريد"></div>
+        <div class="form-group"><label>كلمة المرور</label><input type="password" id="loginPassword" required placeholder="••••••••"></div>
         <button type="submit" class="btn-submit">دخول الحساب 🔓</button>
       </form>
 
-      <!-- 📝 تسجيل حساب جديد -->
       <form id="registerForm" style="display: none;" onsubmit="handleRegisterSubmit(event)">
-        <div class="form-group">
-          <label>اسم المستخدم</label>
-          <input type="text" id="regUsername" required placeholder="مثال: name">
-        </div>
-        <div class="form-group">
-          <label>البريد الإلكتروني</label>
-          <input type="email" id="regEmail" required placeholder="name@example.com">
-        </div>
-        <div class="form-group">
-          <label>كلمة المرور</label>
-          <input type="password" id="regPassword" required placeholder="••••••••">
-        </div>
+        <div class="form-group"><label>اسم المستخدم</label><input type="text" id="regUsername" required placeholder="مثال: name"></div>
+        <div class="form-group"><label>البريد الإلكتروني</label><input type="email" id="regEmail" required placeholder="name@example.com"></div>
+        <div class="form-group"><label>كلمة المرور</label><input type="password" id="regPassword" required placeholder="••••••••"></div>
         <button type="submit" class="btn-submit">إنشاء الحساب 🚀</button>
       </form>
 
-      <!-- 📧 شاشة إدخال كود التسجيل -->
       <form id="verifyForm" style="display: none;" onsubmit="handleVerifySubmit(event)">
         <div style="text-align: center; margin-bottom: 20px;">
           <div style="font-size: 2.5rem; margin-bottom: 10px;">📧</div>
           <h3 style="color: var(--accent); font-size: 1.1rem; margin-bottom: 8px;">تحقق من إيميلك</h3>
-          <p style="color: var(--text-sub); font-size: 0.85rem;">
-            أرسلنا كود مكوّن من 6 أرقام إلى<br>
-            <strong id="verifyEmailDisplay" style="color: var(--accent);"></strong>
-          </p>
+          <p style="color: var(--text-sub); font-size: 0.85rem;">أرسلنا كود مكوّن من 6 أرقام إلى<br><strong id="verifyEmailDisplay" style="color: var(--accent);"></strong></p>
         </div>
-        <div class="form-group">
-          <label>كود التحقق</label>
-          <input type="text" id="verifyCode" required maxlength="6" 
-                 placeholder="000000" 
-                 style="text-align: center; font-size: 1.5rem; letter-spacing: 8px; font-weight: 900; font-family: monospace;">
-        </div>
+        <div class="form-group"><label>كود التحقق</label><input type="text" id="verifyCode" required maxlength="6" placeholder="000000" style="text-align: center; font-size: 1.5rem; letter-spacing: 8px; font-weight: 900; font-family: monospace;"></div>
         <button type="submit" class="btn-submit">✅ تفعيل الحساب</button>
         <div style="text-align: center; margin-top: 15px;">
-          <button type="button" onclick="resendCode()" style="background: none; border: none; color: var(--accent); cursor: pointer; font-weight: 700; font-size: 0.85rem; text-decoration: underline;">
-            🔄 إعادة إرسال الكود
-          </button>
+          <button type="button" onclick="resendCode()" style="background: none; border: none; color: var(--accent); cursor: pointer; font-weight: 700; font-size: 0.85rem; text-decoration: underline;">🔄 إعادة إرسال الكود</button>
         </div>
         <div style="text-align: center; margin-top: 10px;">
-          <button type="button" onclick="switchAuthTab('register')" style="background: none; border: none; color: var(--text-sub); cursor: pointer; font-size: 0.8rem;">
-            ← رجوع
-          </button>
+          <button type="button" onclick="switchAuthTab('register')" style="background: none; border: none; color: var(--text-sub); cursor: pointer; font-size: 0.8rem;">← رجوع</button>
         </div>
       </form>
 
-      <!-- 🔐 شاشة إدخال كود الدخول -->
       <form id="loginCodeForm" style="display: none;" onsubmit="handleLoginCodeSubmit(event)">
         <div style="text-align: center; margin-bottom: 20px;">
           <div style="font-size: 2.5rem; margin-bottom: 10px;">🔐</div>
           <h3 style="color: var(--accent); font-size: 1.1rem; margin-bottom: 8px;">كود تسجيل الدخول</h3>
-          <p style="color: var(--text-sub); font-size: 0.85rem;">
-            أرسلنا كود تسجيل الدخول إلى<br>
-            <strong id="loginCodeEmailDisplay" style="color: var(--accent);"></strong>
-          </p>
+          <p style="color: var(--text-sub); font-size: 0.85rem;">أرسلنا كود تسجيل الدخول إلى<br><strong id="loginCodeEmailDisplay" style="color: var(--accent);"></strong></p>
         </div>
-        <div class="form-group">
-          <label>كود الدخول</label>
-          <input type="text" id="loginCode" required maxlength="6" 
-                 placeholder="000000"
-                 style="text-align: center; font-size: 1.5rem; letter-spacing: 8px; font-weight: 900; font-family: monospace;">
-        </div>
+        <div class="form-group"><label>كود الدخول</label><input type="text" id="loginCode" required maxlength="6" placeholder="000000" style="text-align: center; font-size: 1.5rem; letter-spacing: 8px; font-weight: 900; font-family: monospace;"></div>
         <button type="submit" class="btn-submit">🔓 دخول</button>
         <div style="text-align: center; margin-top: 15px;">
-          <button type="button" onclick="switchAuthTab('login')" style="background: none; border: none; color: var(--text-sub); cursor: pointer; font-size: 0.8rem;">
-            ← رجوع
-          </button>
+          <button type="button" onclick="switchAuthTab('login')" style="background: none; border: none; color: var(--text-sub); cursor: pointer; font-size: 0.8rem;">← رجوع</button>
         </div>
       </form>
     </div>
@@ -1285,12 +775,10 @@
     <div class="custom-modal" style="max-width: 480px;">
       <button class="modal-close-icon" onclick="closeProfileModal()">✕</button>
       <h3 style="color: var(--accent); margin-bottom: 15px; font-size: 1.2rem;">👤 لوحة الحساب والبروفايل الشخصي</h3>
-      
       <div style="background: rgba(15, 23, 42, 0.6); padding: 15px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.05); margin-bottom: 15px;">
         <div style="font-weight: 800; color: #fff; font-size: 1rem; margin-bottom: 5px;" id="profileUsername">--</div>
         <div style="color: var(--text-sub); font-size: 0.85rem;" id="profileEmail">--</div>
       </div>
-
       <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 15px;">
         <div style="background: linear-gradient(135deg, rgba(16, 185, 129, 0.15), rgba(15, 23, 42, 0.8)); border: 1px solid rgba(16, 185, 129, 0.3); padding: 15px; border-radius: 12px; text-align: center;">
           <div style="font-size: 0.75rem; color: var(--text-sub); margin-bottom: 4px;">💰 الرصيد</div>
@@ -1301,22 +789,11 @@
           <div style="font-weight: 900; color: #38bdf8; font-size: 1.4rem;" id="userPoints">0</div>
         </div>
       </div>
-
       <div id="profileStats" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 20px; text-align: center;">
-        <div style="background: rgba(2, 132, 199, 0.1); border: 1px solid rgba(255,255,255,0.05); padding: 10px; border-radius: 10px;">
-          <div style="font-weight: 900; color: var(--accent); font-size: 1.1rem;" id="statTotalTickets">0</div>
-          <div style="font-size: 0.75rem; color: var(--text-sub);">إجمالي التذاكر</div>
-        </div>
-        <div style="background: rgba(16, 185, 129, 0.1); border: 1px solid rgba(255,255,255,0.05); padding: 10px; border-radius: 10px;">
-          <div style="font-weight: 900; color: var(--success); font-size: 1.1rem;" id="statCompleted">0</div>
-          <div style="font-size: 0.75rem; color: var(--text-sub);">مكتملة</div>
-        </div>
-        <div style="background: rgba(245, 158, 11, 0.1); border: 1px solid rgba(255,255,255,0.05); padding: 10px; border-radius: 10px;">
-          <div style="font-weight: 900; color: var(--warning); font-size: 1.1rem;" id="statAmount">$0</div>
-          <div style="font-size: 0.75rem; color: var(--text-sub);">إجمالي المبالغ</div>
-        </div>
+        <div style="background: rgba(2, 132, 199, 0.1); border: 1px solid rgba(255,255,255,0.05); padding: 10px; border-radius: 10px;"><div style="font-weight: 900; color: var(--accent); font-size: 1.1rem;" id="statTotalTickets">0</div><div style="font-size: 0.75rem; color: var(--text-sub);">إجمالي التذاكر</div></div>
+        <div style="background: rgba(16, 185, 129, 0.1); border: 1px solid rgba(255,255,255,0.05); padding: 10px; border-radius: 10px;"><div style="font-weight: 900; color: var(--success); font-size: 1.1rem;" id="statCompleted">0</div><div style="font-size: 0.75rem; color: var(--text-sub);">مكتملة</div></div>
+        <div style="background: rgba(245, 158, 11, 0.1); border: 1px solid rgba(255,255,255,0.05); padding: 10px; border-radius: 10px;"><div style="font-weight: 900; color: var(--warning); font-size: 1.1rem;" id="statAmount">$0</div><div style="font-size: 0.75rem; color: var(--text-sub);">إجمالي المبالغ</div></div>
       </div>
-
       <h4 style="font-size: 0.95rem; color: #fff; margin-bottom: 10px;">سجل تذاكرك الأخيرة:</h4>
       <div id="profileTicketsList" style="max-height: 180px; overflow-y: auto; display: flex; flex-direction: column; gap: 8px;">
         <div style="text-align: center; color: var(--text-sub); font-size: 0.82rem; padding: 15px;">جاري التحميل...</div>
@@ -1333,20 +810,16 @@
         </div>
         <button class="modal-close-icon" style="position: static;" onclick="closeTicketModal()">✕</button>
       </div>
-
       <div class="modal-status-bar" data-html2canvas-ignore="true">
         <span>الحالة:</span>
         <span class="status-badge status-pending" id="modalTicketStatus">Pending</span>
         <button style="background: rgba(255,255,255,0.08); color: #fff; border: 1px solid var(--card-border); padding: 4px 10px; border-radius: 8px; font-size: 0.75rem; font-weight: bold; cursor: pointer; margin-right: auto;" onclick="exportToPDF()">📄 تصدير عقد PDF</button>
       </div>
-
       <div class="modal-messages" id="modalMessagesBox"></div>
-
       <div class="ticket-action-bar" id="ticketActionButtons" data-html2canvas-ignore="true">
         <button onclick="updateTicketStatus('completed')" style="flex: 1; background: #10b981; color: #fff; border: none; padding: 8px; border-radius: 8px; font-weight: bold; cursor: pointer; font-size: 0.85rem;">✅ تأكيد الاستلام وإبراء الذمة</button>
         <button onclick="updateTicketStatus('canceled')" style="flex: 1; background: #ef4444; color: #fff; border: none; padding: 8px; border-radius: 8px; font-weight: bold; cursor: pointer; font-size: 0.85rem;">❌ إلغاء التذكرة</button>
       </div>
-
       <div id="imagePreviewBox" data-html2canvas-ignore="true">
         <div class="preview-container">
           <img id="imagePreview" src="" alt="معاينة" />
@@ -1354,7 +827,6 @@
         </div>
         <div class="preview-label">📷 جاهزة للإرسال</div>
       </div>
-
       <form class="modal-input-area" onsubmit="sendModalMessage(event)" data-html2canvas-ignore="true">
         <input type="file" id="imageInput" accept="image/*" style="display: none;" onchange="handleImageSelect(event)">
         <button type="button" class="btn-image-picker" onclick="document.getElementById('imageInput').click()" title="إرسال صورة">📎</button>
@@ -1370,7 +842,6 @@
       <span class="widget-emoji" style="display: none;">🎫</span>
       <span id="floating-tickets-badge" style="background: #0f172a; color: #38bdf8; padding: 2px 8px; border-radius: 12px; font-size: 0.8rem; display: none;">0</span>
     </button>
-
     <div id="floating-tickets-popup" style="display: none; position: absolute; bottom: 55px; left: 0; width: 320px; max-height: 400px; background: #121826; border: 1px solid rgba(56, 189, 248, 0.2); border-radius: 15px; box-shadow: 0 10px 25px rgba(0,0,0,0.5); overflow-y: auto; padding: 15px; color: #f8fafc;">
       <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; border-bottom: 1px solid #2d3748; padding-bottom: 8px;">
         <h4 style="margin: 0; font-size: 1rem; color: #38bdf8;">غرف التذاكر الخاصة بك</h4>
@@ -1387,9 +858,7 @@
     <img id="lightboxImage" src="" alt="صورة" onclick="event.stopPropagation()" />
   </div>
 
-  <footer>
-    جميع الحقوق محفوظة &copy; 2026 منصة ضماني للوساطة الرقمية المضمونة
-  </footer>
+  <footer>جميع الحقوق محفوظة &copy; 2026 منصة ضماني للوساطة الرقمية المضمونة</footer>
 
   <script>
     const API_BASE = 'https://escrow-api-61us.onrender.com';
@@ -1399,7 +868,7 @@
     let pendingImageData = null;
 
     if (typeof io === 'undefined') {
-      console.error('❌ Socket.io client library NOT loaded! Check the script tag.');
+      console.error('❌ Socket.io client library NOT loaded!');
     } else {
       try {
         socket = io(API_BASE, {
@@ -1407,23 +876,15 @@
           reconnection: true,
           reconnectionAttempts: 15,
           reconnectionDelay: 1000,
-          reconnectionDelayMax: 5000,
-          timeout: 20000,
-          autoConnect: true
+          timeout: 20000
         });
 
         socket.on('connect', () => {
           console.log('✅ Socket connected:', socket.id);
           socketReady = true;
-
           const userId = localStorage.getItem('userId');
-          if (userId) {
-            socket.emit('register_user', userId);
-          }
-
-          if (currentTicketId) {
-            socket.emit('join_ticket', currentTicketId);
-          }
+          if (userId) socket.emit('register_user', userId);
+          if (currentTicketId) socket.emit('join_ticket', currentTicketId);
         });
 
         socket.on('disconnect', (reason) => {
@@ -1433,25 +894,9 @@
 
         socket.on('connect_error', (err) => {
           console.error('❌ Socket connect_error:', err.message);
-          socketReady = false;
         });
 
         socket.on('receive_message', (data) => {
-          console.log('📥 receive_message:', data);
-          if (document.getElementById('ticketModal').classList.contains('active')) {
-            renderModalMessage(data);
-          }
-        });
-
-        socket.on('new_message', (data) => {
-          console.log('📥 new_message:', data);
-          if (document.getElementById('ticketModal').classList.contains('active')) {
-            renderModalMessage(data);
-          }
-        });
-
-        socket.on('message', (data) => {
-          console.log('📥 message:', data);
           if (document.getElementById('ticketModal').classList.contains('active')) {
             renderModalMessage(data);
           }
@@ -1464,11 +909,10 @@
         });
 
         socket.on('balance_updated', (data) => {
-          console.log('💰 تحديث رصيد:', data);
           const balanceEl = document.getElementById('headerBalanceValue');
-          if (balanceEl) balanceEl.innerText = `$${data.balance || 0}`;
+          if (balanceEl) balanceEl.innerText = '$' + (data.balance || 0);
           const profileBal = document.getElementById('userBalance');
-          if (profileBal) profileBal.innerText = `$${data.balance || 0}`;
+          if (profileBal) profileBal.innerText = '$' + (data.balance || 0);
           const profilePts = document.getElementById('userPoints');
           if (profilePts) profilePts.innerText = data.points || 0;
           if (data.message) showAlert(data.message, 'success');
@@ -1489,22 +933,16 @@
     function watchTicketModal() {
       const ticketModal = document.getElementById('ticketModal');
       if (!ticketModal) return;
-      
       const observer = new MutationObserver(() => {
         const isOpen = ticketModal.classList.contains('active');
         const isMobile = window.innerWidth <= 900;
-        
         if (isMobile && isOpen) {
           document.body.classList.add('chat-open-mobile');
         } else {
           document.body.classList.remove('chat-open-mobile');
         }
       });
-      
-      observer.observe(ticketModal, { 
-        attributes: true, 
-        attributeFilter: ['class'] 
-      });
+      observer.observe(ticketModal, { attributes: true, attributeFilter: ['class'] });
     }
 
     function toggleFaq(el) {
@@ -1518,8 +956,8 @@
       const container = document.getElementById('toastContainer');
       const icons = { warning: '⚠️', error: '❌', success: '✅' };
       const toast = document.createElement('div');
-      toast.className = `custom-toast toast-${type}`;
-      toast.innerHTML = `<span>${icons[type] || '⚠️'}</span><div>${message}</div>`;
+      toast.className = 'custom-toast toast-' + type;
+      toast.innerHTML = '<span>' + (icons[type] || '⚠️') + '</span><div>' + message + '</div>';
       container.appendChild(toast);
       setTimeout(() => toast.classList.add('show'), 10);
       setTimeout(() => {
@@ -1553,7 +991,7 @@
       if (token) {
         document.getElementById('loggedOutView').style.display = 'none';
         document.getElementById('loggedInView').style.display = 'flex';
-        document.getElementById('navUsername').innerText = `👤 ${username}`;
+        document.getElementById('navUsername').innerText = '👤 ' + username;
         document.getElementById('adminDashboardBtn').style.display = (role === 'admin') ? 'flex' : 'none';
         document.getElementById('headerBalance').style.display = 'flex';
       } else {
@@ -1568,13 +1006,13 @@
       const token = localStorage.getItem('token') || localStorage.getItem('accessToken');
       if (!token) return;
       try {
-        const res = await fetch(`${API_BASE}/api/wallet/my-balance`, {
-          headers: { 'Authorization': `Bearer ${token}`, 'x-auth-token': token }
+        const res = await fetch(API_BASE + '/api/wallet/my-balance', {
+          headers: { 'Authorization': 'Bearer ' + token, 'x-auth-token': token }
         });
         const data = await res.json();
         if (res.ok) {
           const headerEl = document.getElementById('headerBalanceValue');
-          if (headerEl) headerEl.innerText = `$${data.balance || 0}`;
+          if (headerEl) headerEl.innerText = '$' + (data.balance || 0);
         }
       } catch (e) { console.error('Balance load error:', e); }
     }
@@ -1600,41 +1038,37 @@
       if (!token) return;
 
       try {
-        const balRes = await fetch(`${API_BASE}/api/wallet/my-balance`, {
-          headers: { 'Authorization': `Bearer ${token}`, 'x-auth-token': token }
+        const balRes = await fetch(API_BASE + '/api/wallet/my-balance', {
+          headers: { 'Authorization': 'Bearer ' + token, 'x-auth-token': token }
         });
         const balData = await balRes.json();
         if (balRes.ok) {
-          document.getElementById('userBalance').innerText = `$${balData.balance || 0}`;
+          document.getElementById('userBalance').innerText = '$' + (balData.balance || 0);
           document.getElementById('userPoints').innerText = balData.points || 0;
         }
       } catch (e) { console.error(e); }
 
       try {
-        const res = await fetch(`${API_BASE}/api/auth/profile`, {
-          headers: { 'Authorization': `Bearer ${token}`, 'x-auth-token': token }
+        const res = await fetch(API_BASE + '/api/auth/profile', {
+          headers: { 'Authorization': 'Bearer ' + token, 'x-auth-token': token }
         });
         const data = await res.json();
 
         if (res.ok) {
-          document.getElementById('profileUsername').innerText = `👤 ${data.user.username}`;
-          document.getElementById('profileEmail').innerText = `📧 ${data.user.email}`;
+          document.getElementById('profileUsername').innerText = '👤 ' + data.user.username;
+          document.getElementById('profileEmail').innerText = '📧 ' + data.user.email;
           document.getElementById('statTotalTickets').innerText = data.stats.totalTickets;
           document.getElementById('statCompleted').innerText = data.stats.completedTickets;
-          document.getElementById('statAmount').innerText = `$${data.stats.totalAmount}`;
+          document.getElementById('statAmount').innerText = '$' + data.stats.totalAmount;
 
           const list = document.getElementById('profileTicketsList');
           if (data.tickets && data.tickets.length > 0) {
             list.innerHTML = '';
             data.tickets.forEach(t => {
-              list.innerHTML += `
-                <div style="background: #090d16; padding: 10px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.05); display: flex; justify-content: space-between; align-items: center; font-size: 0.82rem;">
-                  <div>
-                    <div style="font-weight: bold; color: #fff;">${t.title || 'تذكرة وساطة'}</div>
-                    <div style="color: var(--text-sub);">المبلغ: $${t.amount || 0}</div>
-                  </div>
-                </div>
-              `;
+              list.innerHTML += '<div style="background: #090d16; padding: 10px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.05); font-size: 0.82rem;">' +
+                '<div style="font-weight: bold; color: #fff;">' + (t.title || 'تذكرة وساطة') + '</div>' +
+                '<div style="color: var(--text-sub);">المبلغ: $' + (t.amount || 0) + '</div>' +
+                '</div>';
             });
           } else {
             list.innerHTML = '<div style="text-align: center; color: var(--text-sub); font-size: 0.82rem; padding: 15px;">ليس لديك معاملات مسجلة بعد.</div>';
@@ -1648,17 +1082,14 @@
     }
 
     function switchAuthTab(mode) {
-      // إخفاء الكل
       document.getElementById('loginForm').style.display = 'none';
       document.getElementById('registerForm').style.display = 'none';
       document.getElementById('verifyForm').style.display = 'none';
       document.getElementById('loginCodeForm').style.display = 'none';
       
-      // إزالة active من التابات
       document.getElementById('tabLogin').classList.remove('active');
       document.getElementById('tabRegister').classList.remove('active');
       
-      // إظهار التابات فقط في login/register
       const tabsHeader = document.getElementById('authTabsHeader');
       if (mode === 'login' || mode === 'register') {
         tabsHeader.style.display = 'flex';
@@ -1679,7 +1110,6 @@
       }
     }
 
-    // 📧 تسجيل الدخول (يرسل كود)
     async function handleLoginSubmit(e) {
       e.preventDefault();
       const inputVal = document.getElementById('loginUsername').value.trim();
@@ -1698,7 +1128,7 @@
       };
 
       try {
-        const res = await fetch(`${API_BASE}/api/auth/login`, {
+        const res = await fetch(API_BASE + '/api/auth/login', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(payload)
@@ -1706,18 +1136,14 @@
         const data = await res.json();
 
         if (res.ok && data.requiresCode) {
-          // 🔐 كود وصل على الإيميل
           document.getElementById('loginCodeEmailDisplay').innerText = data.email;
           window.loginEmail = data.email;
-          
           showAlert('📧 ' + data.message, 'success');
           switchAuthTab('loginCode');
         } 
         else if (res.ok && data.requiresVerification) {
-          // ⚠️ الحساب غير مفعّل
           document.getElementById('verifyEmailDisplay').innerText = data.email;
           window.pendingEmail = data.email;
-          
           showAlert('⚠️ حسابك غير مفعل، تحقق من إيميلك', 'warning');
           switchAuthTab('verify');
         }
@@ -1729,7 +1155,6 @@
       }
     }
 
-    // 📝 تسجيل حساب جديد (يرسل كود التحقق)
     async function handleRegisterSubmit(e) {
       e.preventDefault();
       const username = document.getElementById('regUsername').value.trim();
@@ -1754,7 +1179,7 @@
       }
 
       try {
-        const res = await fetch(`${API_BASE}/api/auth/register`, {
+        const res = await fetch(API_BASE + '/api/auth/register', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ username, email, password })
@@ -1762,10 +1187,8 @@
         const data = await res.json();
 
         if (res.ok) {
-          // 📧 عرض شاشة إدخال الكود
           document.getElementById('verifyEmailDisplay').innerText = email;
           window.pendingEmail = email;
-          
           showAlert('✅ ' + data.message, 'success');
           switchAuthTab('verify');
         } else {
@@ -1786,7 +1209,6 @@
       }
     }
 
-    // ✅ تأكيد كود التسجيل
     async function handleVerifySubmit(e) {
       e.preventDefault();
       const code = document.getElementById('verifyCode').value.trim();
@@ -1798,7 +1220,7 @@
       }
 
       try {
-        const res = await fetch(`${API_BASE}/api/auth/verify`, {
+        const res = await fetch(API_BASE + '/api/auth/verify', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ email, code })
@@ -1810,7 +1232,6 @@
           localStorage.setItem('username', data.user.username);
           localStorage.setItem('role', data.user.role);
           localStorage.setItem('userId', data.user.id);
-          
           closeAuthModal();
           checkAuthState();
           checkFloatingTicketsCount();
@@ -1824,13 +1245,12 @@
       }
     }
 
-    // 🔄 إعادة إرسال الكود
     async function resendCode() {
       const email = window.pendingEmail;
       if (!email) return;
 
       try {
-        const res = await fetch(`${API_BASE}/api/auth/resend-code`, {
+        const res = await fetch(API_BASE + '/api/auth/resend-code', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ email })
@@ -1847,7 +1267,6 @@
       }
     }
 
-    // 🔓 تأكيد كود الدخول
     async function handleLoginCodeSubmit(e) {
       e.preventDefault();
       const code = document.getElementById('loginCode').value.trim();
@@ -1859,7 +1278,7 @@
       }
 
       try {
-        const res = await fetch(`${API_BASE}/api/auth/verify-login`, {
+        const res = await fetch(API_BASE + '/api/auth/verify-login', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ email, code })
@@ -1871,7 +1290,6 @@
           localStorage.setItem('username', data.user.username);
           localStorage.setItem('role', data.user.role);
           localStorage.setItem('userId', data.user.id);
-          
           closeAuthModal();
           checkAuthState();
           checkFloatingTicketsCount();
@@ -1899,7 +1317,7 @@
 
     async function handleCreateTicket(e) {
       e.preventDefault();
-      let token = localStorage.getItem('token') || localStorage.getItem('accessToken') || localStorage.getItem('jwt');
+      let token = localStorage.getItem('token') || localStorage.getItem('accessToken');
 
       if (!token) {
         closeCreateTicketModal();
@@ -1913,11 +1331,11 @@
       const details = document.getElementById('detailsInput').value.trim();
 
       try {
-        const res = await fetch(`${API_BASE}/api/tickets`, {
+        const res = await fetch(API_BASE + '/api/tickets', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
-            'Authorization': `Bearer ${token}`,
+            'Authorization': 'Bearer ' + token,
             'x-auth-token': token
           },
           body: JSON.stringify({ title, amount, details, description: details })
@@ -1932,7 +1350,7 @@
           return;
         }
 
-        let ticketId = data.ticketId || data._id || data.id || data.ticket?._id || data.ticket?.id;
+        let ticketId = data.ticketId || data._id || data.id || (data.ticket && data.ticket._id) || (data.ticket && data.ticket.id);
 
         if (res.ok && ticketId) {
           closeCreateTicketModal();
@@ -1949,8 +1367,8 @@
 
     function openTicketModal(id, title, amount) {
       currentTicketId = id;
-      document.getElementById('modalTicketId').innerText = `ID: ${id}`;
-      document.getElementById('modalTicketTitle').innerText = title ? `${title} ($${amount})` : 'غرفة الوساطة المباشرة';
+      document.getElementById('modalTicketId').innerText = 'ID: ' + id;
+      document.getElementById('modalTicketTitle').innerText = title ? (title + ' ($' + amount + ')') : 'غرفة الوساطة المباشرة';
       document.getElementById('ticketModal').classList.add('active');
 
       const userRole = localStorage.getItem('role');
@@ -1964,7 +1382,6 @@
       }
 
       cancelImageSend();
-
       document.getElementById('modalMessagesBox').innerHTML = '';
       loadModalHistory(id);
     }
@@ -1977,15 +1394,15 @@
     async function loadModalHistory(id) {
       const token = localStorage.getItem('token') || localStorage.getItem('accessToken');
       try {
-        const res = await fetch(`${API_BASE}/api/tickets`, {
-          headers: { 'Authorization': `Bearer ${token}`, 'x-auth-token': token }
+        const res = await fetch(API_BASE + '/api/tickets', {
+          headers: { 'Authorization': 'Bearer ' + token, 'x-auth-token': token }
         });
         const data = await res.json();
         const tickets = data.data || data.tickets || [];
         const t = tickets.find(ticket => (ticket._id === id || ticket.id === id));
 
         if (t) {
-          document.getElementById('modalTicketTitle').innerText = `${t.title || 'تذكرة'} ($${t.amount || 0})`;
+          document.getElementById('modalTicketTitle').innerText = (t.title || 'تذكرة') + ' ($' + (t.amount || 0) + ')';
           setModalTicketStatus(t.status);
           const box = document.getElementById('modalMessagesBox');
           box.innerHTML = '';
@@ -2007,30 +1424,27 @@
       const imageData = data.image || data.imageUrl || null;
 
       const lastMsg = box.lastElementChild;
-      const fingerprint = `${senderName}|${messageText}|${imageData ? imageData.substring(0, 50) : ''}`;
+      const fingerprint = senderName + '|' + messageText + '|' + (imageData ? imageData.substring(0, 50) : '');
       if (lastMsg && lastMsg.dataset.fingerprint === fingerprint) return;
 
       const containerDiv = document.createElement('div');
-      containerDiv.className = `msg-container ${isMe ? 'me-container' : ''}`;
+      containerDiv.className = 'msg-container' + (isMe ? ' me-container' : '');
       containerDiv.dataset.fingerprint = fingerprint;
 
       const trimmedName = senderName.trim();
       const firstChar = trimmedName ? trimmedName.charAt(0) : '؟';
 
-      let bubbleContent = `<div class="msg-sender">${isMe ? 'أنت' : senderName}</div>`;
+      let bubbleContent = '<div class="msg-sender">' + (isMe ? 'أنت' : senderName) + '</div>';
 
       if (messageText) {
-        bubbleContent += `<div>${messageText}</div>`;
+        bubbleContent += '<div>' + messageText + '</div>';
       }
 
       if (imageData) {
-        bubbleContent += `<img src="${imageData}" alt="صورة" onclick="openLightbox(this.src)" onerror="this.style.display='none'" />`;
+        bubbleContent += '<img src="' + imageData + '" alt="صورة" onclick="openLightbox(this.src)" onerror="this.style.display=\'none\'" />';
       }
 
-      containerDiv.innerHTML = `
-        <div class="msg-avatar">${firstChar}</div>
-        <div class="msg-bubble">${bubbleContent}</div>
-      `;
+      containerDiv.innerHTML = '<div class="msg-avatar">' + firstChar + '</div><div class="msg-bubble">' + bubbleContent + '</div>';
 
       box.appendChild(containerDiv);
       box.scrollTop = box.scrollHeight;
@@ -2082,7 +1496,7 @@
 
     function setModalTicketStatus(status) {
       const badge = document.getElementById('modalTicketStatus');
-      badge.className = `status-badge status-${status}`;
+      badge.className = 'status-badge status-' + status;
       const labels = { pending: 'قيد الانتظار', in_progress: 'قيد التنفيذ', completed: 'مكتملة', canceled: 'ملغاة' };
       badge.innerText = labels[status] || status;
     }
@@ -2092,11 +1506,11 @@
       const token = localStorage.getItem('token') || localStorage.getItem('accessToken');
 
       try {
-        const res = await fetch(`${API_BASE}/api/tickets/${currentTicketId}/status`, {
+        const res = await fetch(API_BASE + '/api/tickets/' + currentTicketId + '/status', {
           method: 'PATCH',
           headers: {
             'Content-Type': 'application/json',
-            'Authorization': `Bearer ${token}`,
+            'Authorization': 'Bearer ' + token,
             'x-auth-token': token
           },
           body: JSON.stringify({ status: newStatus })
@@ -2151,19 +1565,17 @@
 
         input.value = '';
         cancelImageSend();
-        console.log('📤 Message sent via socket' + (pendingImageData ? ' with image' : ''));
         return;
       }
 
-      console.error('❌ Cannot send: Socket is not connected');
-      showAlert('فشل إرسال الرسالة: الاتصال بالسيرفر غير متاح. تأكد من اتصالك بالإنترنت.', 'error');
+      showAlert('فشل إرسال الرسالة: الاتصال بالسيرفر غير متاح.', 'error');
     }
 
     function exportToPDF() {
       const element = document.getElementById('pdfArea');
       const opt = {
         margin: 10,
-        filename: `ticket_${currentTicketId}.pdf`,
+        filename: 'ticket_' + currentTicketId + '.pdf',
         image: { type: 'jpeg', quality: 0.98 },
         html2canvas: { scale: 2, useCORS: true },
         jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
@@ -2175,7 +1587,7 @@
       const val = parseFloat(document.getElementById('calcAmount').value) || 0;
       const fee = val * 0.05;
       const net = val - fee;
-      document.getElementById('calcResult').innerText = `العمولة (5%): $${fee.toFixed(2)} | صافي البائع: $${net.toFixed(2)}`;
+      document.getElementById('calcResult').innerText = 'العمولة (5%): $' + fee.toFixed(2) + ' | صافي البائع: $' + net.toFixed(2);
     }
 
     function toggleFloatingTicketsWidget() {
@@ -2199,10 +1611,10 @@
       }
 
       try {
-        const res = await fetch(`${API_BASE}/api/tickets`, {
+        const res = await fetch(API_BASE + '/api/tickets', {
           method: 'GET',
           headers: {
-            'Authorization': `Bearer ${token}`,
+            'Authorization': 'Bearer ' + token,
             'x-auth-token': token,
             'Content-Type': 'application/json'
           }
@@ -2222,16 +1634,14 @@
               const statusColor = ticket.status === 'completed' ? '#22c55e' : (ticket.status === 'canceled' ? '#ef4444' : '#eab308');
               const statusText = ticket.status === 'completed' ? 'مكتملة' : (ticket.status === 'in_progress' ? 'قيد التنفيذ' : (ticket.status === 'canceled' ? 'ملغاة' : 'قيد الانتظار'));
 
-              listContainer.innerHTML += `
-                <div style="background: #090d16; padding: 10px; border-radius: 10px; margin-bottom: 10px; border: 1px solid #1e293b;">
-                  <div style="font-weight: 700; font-size: 0.9rem; margin-bottom: 4px; color: #fff; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${ticket.title || 'تذكرة وساطة'}</div>
-                  <div style="display: flex; justify-content: space-between; align-items: center; font-size: 0.8rem; color: #94a3b8; margin-bottom: 8px;">
-                    <span>المبلغ: $${ticket.amount || 0}</span>
-                    <span style="color: ${statusColor}; font-weight: bold;">${statusText}</span>
-                  </div>
-                  <button onclick="openTicketModal('${ticketId}', '${ticket.title || 'تذكرة'}', ${ticket.amount || 0}); toggleFloatingTicketsWidget();" style="width: 100%; background: #0284c7; color: #fff; border: none; padding: 6px; border-radius: 6px; font-weight: bold; cursor: pointer; font-size: 0.8rem;">دخول التذكرة ⚡</button>
-                </div>
-              `;
+              listContainer.innerHTML += '<div style="background: #090d16; padding: 10px; border-radius: 10px; margin-bottom: 10px; border: 1px solid #1e293b;">' +
+                '<div style="font-weight: 700; font-size: 0.9rem; margin-bottom: 4px; color: #fff; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">' + (ticket.title || 'تذكرة وساطة') + '</div>' +
+                '<div style="display: flex; justify-content: space-between; align-items: center; font-size: 0.8rem; color: #94a3b8; margin-bottom: 8px;">' +
+                '<span>المبلغ: $' + (ticket.amount || 0) + '</span>' +
+                '<span style="color: ' + statusColor + '; font-weight: bold;">' + statusText + '</span>' +
+                '</div>' +
+                '<button onclick="openTicketModal(\'' + ticketId + '\', \'' + (ticket.title || 'تذكرة') + '\', ' + (ticket.amount || 0) + '); toggleFloatingTicketsWidget();" style="width: 100%; background: #0284c7; color: #fff; border: none; padding: 6px; border-radius: 6px; font-weight: bold; cursor: pointer; font-size: 0.8rem;">دخول التذكرة ⚡</button>' +
+                '</div>';
             });
           } else {
             listContainer.innerHTML = '<div style="text-align: center; color: #718096; font-size: 0.85rem; padding: 15px;">ليس لديك تذاكر نشطة حالياً.</div>';
@@ -2250,8 +1660,8 @@
       const token = localStorage.getItem('token') || localStorage.getItem('accessToken');
       if (!token) return;
 
-      fetch(`${API_BASE}/api/tickets`, {
-        headers: { 'Authorization': `Bearer ${token}`, 'x-auth-token': token }
+      fetch(API_BASE + '/api/tickets', {
+        headers: { 'Authorization': 'Bearer ' + token, 'x-auth-token': token }
       })
       .then(res => res.json())
       .then(data => {
