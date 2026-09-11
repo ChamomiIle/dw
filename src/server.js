@@ -9,6 +9,7 @@ require('dotenv').config();
 // استيراد مسارات الـ Routes
 const authRoutes = require('./routes/authRoutes');
 const ticketRoutes = require('./routes/ticketRoutes');
+const walletRoutes = require('./routes/walletRoutes'); // 💰 جديد
 
 const app = express();
 const server = http.createServer(app);
@@ -22,7 +23,7 @@ const io = new Server(server, {
   maxHttpBufferSize: 1e7 // 📸 10 ميجا للصور
 });
 
-// ✅ مشاركة io مع الراوترات (مهم لحذف التذاكر)
+// ✅ مشاركة io مع الراوترات
 app.set('io', io);
 
 app.use(cors({
@@ -35,18 +36,25 @@ app.use(cors({
 app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ extended: true, limit: '10mb' }));
 
-// تقديم الملفات الثابتة (HTML, CSS, JS) من مجلد public
+// تقديم الملفات الثابتة
 app.use(express.static(path.join(__dirname, 'public')));
 
 // ربط المسارات (Routes)
 app.use('/api/auth', authRoutes);
 app.use('/api/tickets', ticketRoutes);
+app.use('/api/wallet', walletRoutes); // 💰 جديد
 
 // ============================================
 // 🔌 ربط نظام الشات الحقيقي - Socket.io
 // ============================================
 io.on('connection', (socket) => {
   console.log(`🔌 تم اتصال عميل جديد بالـ Socket: ${socket.id}`);
+
+  // 👤 غرفة خاصة لكل مستخدم (للإشعارات) — 💰 جديد
+  socket.on('register_user', (userId) => {
+    socket.join(`user_${userId}`);
+    console.log(`👤 المستخدم ${userId} انضم لغرفته الخاصة`);
+  });
 
   // الانضمام لغرفة تذكرة
   socket.on('join_ticket', (ticketId) => {
@@ -68,7 +76,7 @@ io.on('connection', (socket) => {
           messages: {
             sender,
             message: message || '',
-            image: image || null,        // 📸 الصورة Base64
+            image: image || null,
             hasImage: hasImage || false,
             socketId: socket.id,
             timestamp: new Date()
