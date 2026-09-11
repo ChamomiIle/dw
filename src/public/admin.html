@@ -123,6 +123,71 @@
       box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3);
     }
 
+    /* 💰 زر الشحن والخصم */
+    .btn-charge {
+      background: rgba(16, 185, 129, 0.15);
+      color: var(--success);
+      border: 1px solid rgba(16, 185, 129, 0.4);
+      padding: 6px 12px;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 0.78rem;
+      cursor: pointer;
+      transition: 0.2s;
+      font-family: 'Cairo', sans-serif;
+    }
+    .btn-charge:hover {
+      background: rgba(16, 185, 129, 0.3);
+      transform: translateY(-1px);
+    }
+
+    .btn-deduct {
+      background: rgba(245, 158, 11, 0.15);
+      color: var(--warning);
+      border: 1px solid rgba(245, 158, 11, 0.4);
+      padding: 6px 12px;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 0.78rem;
+      cursor: pointer;
+      transition: 0.2s;
+      font-family: 'Cairo', sans-serif;
+    }
+    .btn-deduct:hover {
+      background: rgba(245, 158, 11, 0.3);
+      transform: translateY(-1px);
+    }
+
+    .btn-history {
+      background: rgba(51, 65, 85, 0.6);
+      color: #cbd5e1;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 6px 12px;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 0.78rem;
+      cursor: pointer;
+      transition: 0.2s;
+      font-family: 'Cairo', sans-serif;
+    }
+    .btn-history:hover {
+      background: rgba(51, 65, 85, 0.9);
+    }
+
+    .search-input {
+      width: 100%;
+      padding: 12px 16px;
+      background: rgba(15, 23, 42, 0.8);
+      border: 1px solid var(--card-border);
+      border-radius: 10px;
+      color: #fff;
+      font-size: 0.9rem;
+      outline: none;
+      margin-bottom: 15px;
+      font-family: 'Cairo', sans-serif;
+    }
+    .search-input:focus { border-color: var(--accent); }
+
     .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(5, 8, 15, 0.8); backdrop-filter: blur(8px); display: none; justify-content: center; align-items: center; z-index: 1000; padding: 15px; }
     .modal-overlay.active { display: flex; }
     .ticket-modal { background: #0f172a; border: 1px solid var(--card-border); width: 100%; max-width: 680px; height: 82vh; border-radius: 24px; display: flex; flex-direction: column; overflow: hidden; }
@@ -178,7 +243,8 @@
     
     .settings-form { padding: 25px; display: flex; flex-direction: column; gap: 15px; }
     .settings-form label { font-size: 0.85rem; color: var(--text-sub); font-weight: 700; }
-    .settings-form input { padding: 10px 14px; background: rgba(15, 23, 42, 0.8); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 8px; color: #fff; outline: none; }
+    .settings-form input { padding: 10px 14px; background: rgba(15, 23, 42, 0.8); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 8px; color: #fff; outline: none; font-family: 'Cairo', sans-serif; }
+    .settings-form input:focus { border-color: var(--accent); }
 
     /* 📸 صور في الشات */
     .msg img {
@@ -233,6 +299,36 @@
       align-items: center;
       justify-content: center;
     }
+
+    /* 💰 بطاقة معلومات المستخدم في شاشة الشحن */
+    .user-info-card {
+      background: rgba(2, 132, 199, 0.1);
+      padding: 12px 16px;
+      border-radius: 10px;
+      border: 1px solid var(--card-border);
+    }
+    .user-info-card .name { font-weight: 800; color: #fff; font-size: 1rem; }
+    .user-info-card .balance { color: var(--text-sub); font-size: 0.82rem; margin-top: 4px; }
+    .user-info-card .balance span { color: var(--success); font-weight: 800; }
+
+    /* 💰 سجل الحركات */
+    .tx-item {
+      background: #090d16;
+      padding: 10px 14px;
+      border-radius: 10px;
+      margin-bottom: 8px;
+      border: 1px solid rgba(255,255,255,0.05);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.82rem;
+    }
+    .tx-item .tx-info { display: flex; flex-direction: column; gap: 3px; }
+    .tx-item .tx-reason { color: #fff; font-weight: 700; }
+    .tx-item .tx-meta { color: var(--text-sub); font-size: 0.72rem; }
+    .tx-item .tx-amount { font-weight: 900; font-size: 0.95rem; }
+    .tx-charge { color: var(--success); }
+    .tx-deduct { color: var(--warning); }
   </style>
 </head>
 <body>
@@ -252,7 +348,7 @@
       </div>
       <div style="display: flex; gap: 10px; flex-wrap: wrap;">
         <button class="action-btn" onclick="openProfileSettings()" style="background: #334155; padding: 10px 18px; font-weight: 800;">⚙️ إعدادات الحساب</button>
-        <button class="action-btn" onclick="loadAllTickets()" style="padding: 10px 18px; font-weight: 800;">🔄 تحديث البيانات</button>
+        <button class="action-btn" onclick="loadAllTickets(); loadAllUsers();" style="padding: 10px 18px; font-weight: 800;">🔄 تحديث البيانات</button>
       </div>
     </div>
 
@@ -268,6 +364,38 @@
       <div class="stat-box">
         <div class="lbl">إجمالي الأموال المحمية</div>
         <div class="val" id="statAmount" style="color: var(--accent);">$0</div>
+      </div>
+      <!-- 💰 إحصائيات المحفظة -->
+      <div class="stat-box">
+        <div class="lbl">إجمالي أرصدة المستخدمين</div>
+        <div class="val" id="statTotalBalance" style="color: var(--success);">$0</div>
+      </div>
+    </div>
+
+    <!-- 💰 قسم محافظ المستخدمين (جديد) -->
+    <div class="card" style="margin-bottom: 30px;">
+      <div class="card-title">💰 إدارة محافظ المستخدمين</div>
+      
+      <input type="text" id="userSearchInput" class="search-input" placeholder="🔍 ابحث باسم المستخدم أو البريد الإلكتروني..." oninput="filterUsers()">
+      
+      <div class="table-responsive">
+        <table>
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>المستخدم</th>
+              <th>البريد الإلكتروني</th>
+              <th>💰 الرصيد ($)</th>
+              <th>🎯 النقاط</th>
+              <th>الإجراءات</th>
+            </tr>
+          </thead>
+          <tbody id="usersTableBody">
+            <tr>
+              <td colspan="6" style="text-align: center; color: var(--text-sub); padding: 30px;">جاري تحميل المستخدمين...</td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </div>
 
@@ -340,6 +468,64 @@
     </div>
   </div>
 
+  <!-- 💰 شاشة شحن / خصم الرصيد -->
+  <div class="modal-overlay" id="chargeModal">
+    <div class="ticket-modal" style="height: auto; max-width: 500px;">
+      <div class="modal-header">
+        <h3 style="color: var(--accent); font-size: 1.1rem;" id="chargeModalTitle">💰 شحن رصيد</h3>
+        <button class="modal-close-icon" onclick="closeChargeModal()">✕</button>
+      </div>
+      
+      <form class="settings-form" onsubmit="submitCharge(event)">
+        <input type="hidden" id="chargeUserId">
+        <input type="hidden" id="chargeAction">
+        
+        <div class="user-info-card">
+          <div class="name" id="chargeUserDisplay">--</div>
+          <div class="balance">الرصيد الحالي: <span id="chargeCurrentBalance">$0</span></div>
+        </div>
+        
+        <div>
+          <label>💵 المبلغ بالدولار ($):</label>
+          <input type="number" id="chargeAmount" min="1" step="0.01" placeholder="مثال: 50" required>
+        </div>
+        
+        <div>
+          <label>🎯 النقاط (اختياري):</label>
+          <input type="number" id="chargePoints" min="0" placeholder="مثال: 100">
+        </div>
+        
+        <div>
+          <label>📝 سبب الحركة:</label>
+          <input type="text" id="chargeReason" placeholder="مثال: مكافأة نشاط - إيداع يدوي" required minlength="3">
+        </div>
+        
+        <div>
+          <label>✍️ توقيع المشرف:</label>
+          <input type="text" id="chargeSignature" placeholder="اكتب اسمك كمشرف مسؤول" required minlength="3">
+        </div>
+        
+        <button type="submit" class="action-btn" style="padding: 14px; font-weight: 800; font-size: 1rem;" id="chargeSubmitBtn">
+          ✅ تأكيد العملية
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- 💰 شاشة سجل الحركات -->
+  <div class="modal-overlay" id="historyModal">
+    <div class="ticket-modal" style="height: auto; max-width: 600px;">
+      <div class="modal-header">
+        <h3 style="color: var(--accent); font-size: 1.1rem;" id="historyModalTitle">📜 سجل الحركات</h3>
+        <button class="modal-close-icon" onclick="closeHistoryModal()">✕</button>
+      </div>
+      
+      <div style="padding: 20px; max-height: 60vh; overflow-y: auto;" id="historyContent">
+        <div style="text-align: center; color: var(--text-sub); padding: 30px;">جاري التحميل...</div>
+      </div>
+    </div>
+  </div>
+
   <!-- 📸 عارض الصور المكبّر -->
   <div class="image-lightbox" id="adminImageLightbox" onclick="closeAdminLightbox()">
     <button class="close-lightbox" onclick="closeAdminLightbox()">✕</button>
@@ -351,6 +537,7 @@
     let socket = null;
     try { socket = io(API_BASE); } catch (e) { console.warn("Socket connection failed"); }
     let activeAdminTicketId = null;
+    let allUsers = []; // 💰
 
     function getAdminProfile() {
       return {
@@ -364,6 +551,7 @@
       if (!authorized) return;
 
       loadAllTickets();
+      loadAllUsers(); // 💰
       updateWelcomeHeader();
 
       if (socket) {
@@ -379,6 +567,12 @@
               setTimeout(() => row.remove(), 300);
             }
           });
+        });
+
+        // 💰 تحديث الرصيد من الخادم
+        socket.on('balance_updated', (data) => {
+          console.log('💰 تحديث رصيد:', data);
+          loadAllUsers();
         });
       }
     };
@@ -597,11 +791,9 @@
       
       const isMe = (data.sender === profile.name || data.sender === 'مشرف معتمد 🛡️' || data.sender === 'المشرف');
       
-      // 📸 استخراج النص والصورة
       const messageText = data.message || data.text || data.content || '';
       const imageData = data.image || data.imageUrl || null;
 
-      // ✅ منع التكرار
       const lastMsg = box.lastElementChild;
       const fingerprint = `${data.sender}|${messageText}|${imageData ? imageData.substring(0, 50) : ''}`;
       if (lastMsg && lastMsg.dataset.fingerprint === fingerprint) return;
@@ -617,7 +809,6 @@
         avatarContent = `<img src="${profile.avatar}" alt="Avatar">`;
       }
 
-      // 📸 بناء محتوى الرسالة
       let bubbleContent = `<div class="sender">${senderName}</div>`;
       
       if (messageText) {
@@ -637,7 +828,6 @@
       box.scrollTop = box.scrollHeight;
     }
 
-    // 📸 فتح الصورة مكبّرة
     function openAdminLightbox(src) {
       document.getElementById('adminLightboxImage').src = src;
       document.getElementById('adminImageLightbox').classList.add('active');
@@ -717,6 +907,193 @@
       } catch (err) {
         showAlert('خطأ في الاتصال بالسيرفر', 'error');
       }
+    }
+
+    // ============================================
+    // 💰 نظام إدارة المحافظ
+    // ============================================
+
+    async function loadAllUsers() {
+      const token = localStorage.getItem('token') || localStorage.getItem('accessToken');
+      try {
+        const res = await fetch(`${API_BASE}/api/wallet/users`, {
+          headers: { 'Authorization': `Bearer ${token}`, 'x-auth-token': token }
+        });
+        const data = await res.json();
+        if (res.ok) {
+          allUsers = data.users || [];
+          renderUsersTable(allUsers);
+          
+          // إجمالي الأرصدة
+          const totalBalance = allUsers.reduce((sum, u) => sum + (u.balance || 0), 0);
+          document.getElementById('statTotalBalance').innerText = `$${totalBalance.toFixed(2)}`;
+        } else {
+          showAlert(data.message || 'فشل جلب المستخدمين', 'error');
+        }
+      } catch (err) {
+        console.error(err);
+      }
+    }
+
+    function renderUsersTable(users) {
+      const tbody = document.getElementById('usersTableBody');
+      if (!tbody) return;
+      tbody.innerHTML = '';
+
+      if (users.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="6" style="text-align:center; color: var(--text-sub); padding: 30px;">لا يوجد مستخدمون.</td></tr>';
+        return;
+      }
+
+      users.forEach((u, i) => {
+        const id = u._id;
+        tbody.innerHTML += `
+          <tr data-user-id="${id}">
+            <td style="color: var(--text-sub); font-size: 0.8rem;">${i + 1}</td>
+            <td style="font-weight: 700;">👤 ${u.username}</td>
+            <td style="font-size: 0.82rem; color: var(--text-sub);">${u.email}</td>
+            <td style="color: var(--success); font-weight: 800;">$${u.balance || 0}</td>
+            <td style="color: var(--accent); font-weight: 800;">${u.points || 0}</td>
+            <td style="display: flex; gap: 6px; flex-wrap: wrap;">
+              <button class="btn-charge" onclick="openChargeModal('${id}', '${u.username}', ${u.balance || 0}, 'charge')">💰 شحن</button>
+              <button class="btn-deduct" onclick="openChargeModal('${id}', '${u.username}', ${u.balance || 0}, 'deduct')">💸 خصم</button>
+              <button class="btn-history" onclick="viewUserTransactions('${id}', '${u.username}')">📜 سجل</button>
+            </td>
+          </tr>
+        `;
+      });
+    }
+
+    function filterUsers() {
+      const query = document.getElementById('userSearchInput').value.trim().toLowerCase();
+      if (!query) return renderUsersTable(allUsers);
+      const filtered = allUsers.filter(u => 
+        u.username.toLowerCase().includes(query) || 
+        u.email.toLowerCase().includes(query)
+      );
+      renderUsersTable(filtered);
+    }
+
+    function openChargeModal(userId, username, balance, action) {
+      document.getElementById('chargeUserId').value = userId;
+      document.getElementById('chargeAction').value = action;
+      document.getElementById('chargeUserDisplay').innerText = `👤 ${username}`;
+      document.getElementById('chargeCurrentBalance').innerText = `$${balance}`;
+      
+      const isCharge = action === 'charge';
+      document.getElementById('chargeModalTitle').innerText = isCharge ? '💰 شحن رصيد' : '💸 خصم رصيد';
+      document.getElementById('chargeSubmitBtn').innerText = isCharge ? '✅ شحن الرصيد' : '✅ خصم المبلغ';
+      document.getElementById('chargeSubmitBtn').style.background = isCharge ? 'var(--success)' : 'var(--warning)';
+      
+      document.getElementById('chargeAmount').value = '';
+      document.getElementById('chargePoints').value = '';
+      document.getElementById('chargeReason').value = '';
+      document.getElementById('chargeSignature').value = localStorage.getItem('admin_custom_name') || '';
+      
+      document.getElementById('chargeModal').classList.add('active');
+    }
+
+    function closeChargeModal() {
+      document.getElementById('chargeModal').classList.remove('active');
+    }
+
+    async function submitCharge(e) {
+      e.preventDefault();
+      const token = localStorage.getItem('token') || localStorage.getItem('accessToken');
+      
+      const userId = document.getElementById('chargeUserId').value;
+      const action = document.getElementById('chargeAction').value;
+      const amount = parseFloat(document.getElementById('chargeAmount').value);
+      const points = parseInt(document.getElementById('chargePoints').value) || 0;
+      const reason = document.getElementById('chargeReason').value.trim();
+      const signature = document.getElementById('chargeSignature').value.trim();
+
+      if (!userId || !amount || amount <= 0) {
+        return showAlert('المبلغ غير صحيح', 'error');
+      }
+      if (!reason || reason.length < 3) {
+        return showAlert('السبب مطلوب (3 أحرف على الأقل)', 'error');
+      }
+      if (!signature || signature.length < 3) {
+        return showAlert('التوقيع مطلوب', 'error');
+      }
+
+      const endpoint = action === 'charge' ? 'charge' : 'deduct';
+      
+      try {
+        const res = await fetch(`${API_BASE}/api/wallet/${endpoint}`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`,
+            'x-auth-token': token
+          },
+          body: JSON.stringify({ userId, amount, points, reason, signature })
+        });
+        
+        const data = await res.json();
+        
+        if (res.ok) {
+          showAlert(`✅ ${data.message}`, 'success');
+          closeChargeModal();
+          loadAllUsers();
+        } else {
+          showAlert(data.message || 'فشل العملية', 'error');
+        }
+      } catch (err) {
+        console.error(err);
+        showAlert('خطأ في الاتصال بالسيرفر', 'error');
+      }
+    }
+
+    async function viewUserTransactions(userId, username) {
+      const token = localStorage.getItem('token') || localStorage.getItem('accessToken');
+      document.getElementById('historyModalTitle').innerText = `📜 سجل حركات: ${username}`;
+      document.getElementById('historyContent').innerHTML = '<div style="text-align: center; color: var(--text-sub); padding: 30px;">جاري التحميل...</div>';
+      document.getElementById('historyModal').classList.add('active');
+
+      try {
+        const res = await fetch(`${API_BASE}/api/wallet/user/${userId}/transactions`, {
+          headers: { 'Authorization': `Bearer ${token}`, 'x-auth-token': token }
+        });
+        const data = await res.json();
+        
+        if (res.ok && data.transactions) {
+          if (data.transactions.length === 0) {
+            document.getElementById('historyContent').innerHTML = '<div style="text-align: center; color: var(--text-sub); padding: 30px;">لا توجد حركات مسجلة.</div>';
+            return;
+          }
+
+          let html = '';
+          data.transactions.forEach(t => {
+            const isCharge = t.type === 'charge';
+            const sign = isCharge ? '+' : '-';
+            const cls = isCharge ? 'tx-charge' : 'tx-deduct';
+            const emoji = isCharge ? '💰' : '💸';
+            const date = new Date(t.createdAt).toLocaleString('ar-EG');
+
+            html += `
+              <div class="tx-item">
+                <div class="tx-info">
+                  <div class="tx-reason">${emoji} ${t.reason || 'بدون سبب'}</div>
+                  <div class="tx-meta">✍️ ${t.signature || 'لا يوجد توقيع'} • ${date}</div>
+                </div>
+                <div class="tx-amount ${cls}">${sign}$${t.amount}</div>
+              </div>
+            `;
+          });
+          document.getElementById('historyContent').innerHTML = html;
+        } else {
+          document.getElementById('historyContent').innerHTML = '<div style="text-align: center; color: var(--danger); padding: 30px;">فشل جلب السجل.</div>';
+        }
+      } catch (err) {
+        console.error(err);
+        document.getElementById('historyContent').innerHTML = '<div style="text-align: center; color: var(--danger); padding: 30px;">خطأ في الاتصال.</div>';
+      }
+    }
+
+    function closeHistoryModal() {
+      document.getElementById('historyModal').classList.remove('active');
     }
   </script>
 </body>
