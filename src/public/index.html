@@ -861,14 +861,14 @@
   <footer>جميع الحقوق محفوظة &copy; 2026 منصة ضماني للوساطة الرقمية المضمونة</footer>
 
   <script>
-    const API_BASE = 'https://escrow-api-61us.onrender.com';
-    let socket = null;
-    let currentTicketId = null;
-    let socketReady = false;
-    let pendingImageData = null;
+    var API_BASE = 'https://escrow-api-61us.onrender.com';
+    var socket = null;
+    var currentTicketId = null;
+    var socketReady = false;
+    var pendingImageData = null;
 
     if (typeof io === 'undefined') {
-      console.error('❌ Socket.io client library NOT loaded!');
+      console.error('Socket.io client library NOT loaded!');
     } else {
       try {
         socket = io(API_BASE, {
@@ -879,41 +879,41 @@
           timeout: 20000
         });
 
-        socket.on('connect', () => {
-          console.log('✅ Socket connected:', socket.id);
+        socket.on('connect', function() {
+          console.log('Socket connected:', socket.id);
           socketReady = true;
-          const userId = localStorage.getItem('userId');
+          var userId = localStorage.getItem('userId');
           if (userId) socket.emit('register_user', userId);
           if (currentTicketId) socket.emit('join_ticket', currentTicketId);
         });
 
-        socket.on('disconnect', (reason) => {
-          console.warn('⚠️ Socket disconnected:', reason);
+        socket.on('disconnect', function(reason) {
+          console.warn('Socket disconnected:', reason);
           socketReady = false;
         });
 
-        socket.on('connect_error', (err) => {
-          console.error('❌ Socket connect_error:', err.message);
+        socket.on('connect_error', function(err) {
+          console.error('Socket connect_error:', err.message);
         });
 
-        socket.on('receive_message', (data) => {
+        socket.on('receive_message', function(data) {
           if (document.getElementById('ticketModal').classList.contains('active')) {
             renderModalMessage(data);
           }
         });
 
-        socket.on('status_updated', (data) => {
+        socket.on('status_updated', function(data) {
           if (data.ticketId === currentTicketId) {
             setModalTicketStatus(data.status);
           }
         });
 
-        socket.on('balance_updated', (data) => {
-          const balanceEl = document.getElementById('headerBalanceValue');
+        socket.on('balance_updated', function(data) {
+          var balanceEl = document.getElementById('headerBalanceValue');
           if (balanceEl) balanceEl.innerText = '$' + (data.balance || 0);
-          const profileBal = document.getElementById('userBalance');
+          var profileBal = document.getElementById('userBalance');
           if (profileBal) profileBal.innerText = '$' + (data.balance || 0);
-          const profilePts = document.getElementById('userPoints');
+          var profilePts = document.getElementById('userPoints');
           if (profilePts) profilePts.innerText = data.points || 0;
           if (data.message) showAlert(data.message, 'success');
         });
@@ -931,11 +931,11 @@
     };
 
     function watchTicketModal() {
-      const ticketModal = document.getElementById('ticketModal');
+      var ticketModal = document.getElementById('ticketModal');
       if (!ticketModal) return;
-      const observer = new MutationObserver(() => {
-        const isOpen = ticketModal.classList.contains('active');
-        const isMobile = window.innerWidth <= 900;
+      var observer = new MutationObserver(function() {
+        var isOpen = ticketModal.classList.contains('active');
+        var isMobile = window.innerWidth <= 900;
         if (isMobile && isOpen) {
           document.body.classList.add('chat-open-mobile');
         } else {
@@ -946,23 +946,24 @@
     }
 
     function toggleFaq(el) {
-      const parent = el.parentElement;
+      var parent = el.parentElement;
       parent.classList.toggle('active');
-      const icon = el.children[1];
+      var icon = el.children[1];
       icon.innerText = parent.classList.contains('active') ? '➖' : '➕';
     }
 
-    function showAlert(message, type = 'warning') {
-      const container = document.getElementById('toastContainer');
-      const icons = { warning: '⚠️', error: '❌', success: '✅' };
-      const toast = document.createElement('div');
+    function showAlert(message, type) {
+      type = type || 'warning';
+      var container = document.getElementById('toastContainer');
+      var icons = { warning: '⚠️', error: '❌', success: '✅' };
+      var toast = document.createElement('div');
       toast.className = 'custom-toast toast-' + type;
       toast.innerHTML = '<span>' + (icons[type] || '⚠️') + '</span><div>' + message + '</div>';
       container.appendChild(toast);
-      setTimeout(() => toast.classList.add('show'), 10);
-      setTimeout(() => {
+      setTimeout(function() { toast.classList.add('show'); }, 10);
+      setTimeout(function() {
         toast.classList.remove('show');
-        setTimeout(() => toast.remove(), 350);
+        setTimeout(function() { toast.remove(); }, 350);
       }, 4000);
     }
 
@@ -984,9 +985,9 @@
     }
 
     function checkAuthState() {
-      const token = localStorage.getItem('token') || localStorage.getItem('accessToken');
-      const username = localStorage.getItem('username') || 'مستخدم';
-      const role = localStorage.getItem('role');
+      var token = localStorage.getItem('token') || localStorage.getItem('accessToken');
+      var username = localStorage.getItem('username') || 'مستخدم';
+      var role = localStorage.getItem('role');
 
       if (token) {
         document.getElementById('loggedOutView').style.display = 'none';
@@ -1003,15 +1004,15 @@
     }
 
     async function loadBalance() {
-      const token = localStorage.getItem('token') || localStorage.getItem('accessToken');
+      var token = localStorage.getItem('token') || localStorage.getItem('accessToken');
       if (!token) return;
       try {
-        const res = await fetch(API_BASE + '/api/wallet/my-balance', {
+        var res = await fetch(API_BASE + '/api/wallet/my-balance', {
           headers: { 'Authorization': 'Bearer ' + token, 'x-auth-token': token }
         });
-        const data = await res.json();
+        var data = await res.json();
         if (res.ok) {
-          const headerEl = document.getElementById('headerBalanceValue');
+          var headerEl = document.getElementById('headerBalanceValue');
           if (headerEl) headerEl.innerText = '$' + (data.balance || 0);
         }
       } catch (e) { console.error('Balance load error:', e); }
@@ -1032,16 +1033,16 @@
     }
 
     async function openProfileModal() {
-      const modal = document.getElementById('profileModal');
+      var modal = document.getElementById('profileModal');
       modal.classList.add('active');
-      const token = localStorage.getItem('token') || localStorage.getItem('accessToken');
+      var token = localStorage.getItem('token') || localStorage.getItem('accessToken');
       if (!token) return;
 
       try {
-        const balRes = await fetch(API_BASE + '/api/wallet/my-balance', {
+        var balRes = await fetch(API_BASE + '/api/wallet/my-balance', {
           headers: { 'Authorization': 'Bearer ' + token, 'x-auth-token': token }
         });
-        const balData = await balRes.json();
+        var balData = await balRes.json();
         if (balRes.ok) {
           document.getElementById('userBalance').innerText = '$' + (balData.balance || 0);
           document.getElementById('userPoints').innerText = balData.points || 0;
@@ -1049,10 +1050,10 @@
       } catch (e) { console.error(e); }
 
       try {
-        const res = await fetch(API_BASE + '/api/auth/profile', {
+        var res = await fetch(API_BASE + '/api/auth/profile', {
           headers: { 'Authorization': 'Bearer ' + token, 'x-auth-token': token }
         });
-        const data = await res.json();
+        var data = await res.json();
 
         if (res.ok) {
           document.getElementById('profileUsername').innerText = '👤 ' + data.user.username;
@@ -1061,10 +1062,10 @@
           document.getElementById('statCompleted').innerText = data.stats.completedTickets;
           document.getElementById('statAmount').innerText = '$' + data.stats.totalAmount;
 
-          const list = document.getElementById('profileTicketsList');
+          var list = document.getElementById('profileTicketsList');
           if (data.tickets && data.tickets.length > 0) {
             list.innerHTML = '';
-            data.tickets.forEach(t => {
+            data.tickets.forEach(function(t) {
               list.innerHTML += '<div style="background: #090d16; padding: 10px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.05); font-size: 0.82rem;">' +
                 '<div style="font-weight: bold; color: #fff;">' + (t.title || 'تذكرة وساطة') + '</div>' +
                 '<div style="color: var(--text-sub);">المبلغ: $' + (t.amount || 0) + '</div>' +
@@ -1090,7 +1091,7 @@
       document.getElementById('tabLogin').classList.remove('active');
       document.getElementById('tabRegister').classList.remove('active');
       
-      const tabsHeader = document.getElementById('authTabsHeader');
+      var tabsHeader = document.getElementById('authTabsHeader');
       if (mode === 'login' || mode === 'register') {
         tabsHeader.style.display = 'flex';
       } else {
@@ -1112,28 +1113,28 @@
 
     async function handleLoginSubmit(e) {
       e.preventDefault();
-      const inputVal = document.getElementById('loginUsername').value.trim();
-      const password = document.getElementById('loginPassword').value.trim();
+      var inputVal = document.getElementById('loginUsername').value.trim();
+      var password = document.getElementById('loginPassword').value.trim();
 
       if (password.length < 6) {
         showAlert('كلمة المرور يجب أن تكون 6 أحرف على الأقل', 'warning');
         return;
       }
 
-      const isEmail = inputVal.includes('@');
-      const payload = {
+      var isEmail = inputVal.includes('@');
+      var payload = {
         password: password,
         email: isEmail ? inputVal : undefined,
         username: !isEmail ? inputVal : undefined
       };
 
       try {
-        const res = await fetch(API_BASE + '/api/auth/login', {
+        var res = await fetch(API_BASE + '/api/auth/login', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(payload)
         });
-        const data = await res.json();
+        var data = await res.json();
 
         if (res.ok && data.requiresCode) {
           document.getElementById('loginCodeEmailDisplay').innerText = data.email;
@@ -1157,9 +1158,9 @@
 
     async function handleRegisterSubmit(e) {
       e.preventDefault();
-      const username = document.getElementById('regUsername').value.trim();
-      const email = document.getElementById('regEmail').value.trim();
-      const password = document.getElementById('regPassword').value.trim();
+      var username = document.getElementById('regUsername').value.trim();
+      var email = document.getElementById('regEmail').value.trim();
+      var password = document.getElementById('regPassword').value.trim();
 
       if (username.length < 3) {
         showAlert('اسم المستخدم يجب أن يكون 3 أحرف على الأقل', 'warning');
@@ -1179,12 +1180,12 @@
       }
 
       try {
-        const res = await fetch(API_BASE + '/api/auth/register', {
+        var res = await fetch(API_BASE + '/api/auth/register', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ username, email, password })
+          body: JSON.stringify({ username: username, email: email, password: password })
         });
-        const data = await res.json();
+        var data = await res.json();
 
         if (res.ok) {
           document.getElementById('verifyEmailDisplay').innerText = email;
@@ -1192,7 +1193,7 @@
           showAlert('✅ ' + data.message, 'success');
           switchAuthTab('verify');
         } else {
-          let errorMsg = cleanMongooseError(data.message || data.error);
+          var errorMsg = cleanMongooseError(data.message || data.error);
 
           if (errorMsg.includes('duplicate key') && errorMsg.includes('email')) {
             errorMsg = 'هذا البريد الإلكتروني مسجل مسبقاً';
@@ -1211,8 +1212,8 @@
 
     async function handleVerifySubmit(e) {
       e.preventDefault();
-      const code = document.getElementById('verifyCode').value.trim();
-      const email = window.pendingEmail;
+      var code = document.getElementById('verifyCode').value.trim();
+      var email = window.pendingEmail;
 
       if (!code || code.length !== 6) {
         showAlert('أدخل كوداً صحيحاً من 6 أرقام', 'warning');
@@ -1220,12 +1221,12 @@
       }
 
       try {
-        const res = await fetch(API_BASE + '/api/auth/verify', {
+        var res = await fetch(API_BASE + '/api/auth/verify', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ email, code })
+          body: JSON.stringify({ email: email, code: code })
         });
-        const data = await res.json();
+        var data = await res.json();
 
         if (res.ok && data.token) {
           localStorage.setItem('token', data.token);
@@ -1246,16 +1247,16 @@
     }
 
     async function resendCode() {
-      const email = window.pendingEmail;
+      var email = window.pendingEmail;
       if (!email) return;
 
       try {
-        const res = await fetch(API_BASE + '/api/auth/resend-code', {
+        var res = await fetch(API_BASE + '/api/auth/resend-code', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ email })
+          body: JSON.stringify({ email: email })
         });
-        const data = await res.json();
+        var data = await res.json();
         
         if (res.ok) {
           showAlert('📧 ' + data.message, 'success');
@@ -1269,8 +1270,8 @@
 
     async function handleLoginCodeSubmit(e) {
       e.preventDefault();
-      const code = document.getElementById('loginCode').value.trim();
-      const email = window.loginEmail;
+      var code = document.getElementById('loginCode').value.trim();
+      var email = window.loginEmail;
 
       if (!code || code.length !== 6) {
         showAlert('أدخل كوداً صحيحاً من 6 أرقام', 'warning');
@@ -1278,12 +1279,12 @@
       }
 
       try {
-        const res = await fetch(API_BASE + '/api/auth/verify-login', {
+        var res = await fetch(API_BASE + '/api/auth/verify-login', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ email, code })
+          body: JSON.stringify({ email: email, code: code })
         });
-        const data = await res.json();
+        var data = await res.json();
 
         if (res.ok && data.token) {
           localStorage.setItem('token', data.token);
@@ -1317,7 +1318,7 @@
 
     async function handleCreateTicket(e) {
       e.preventDefault();
-      let token = localStorage.getItem('token') || localStorage.getItem('accessToken');
+      var token = localStorage.getItem('token') || localStorage.getItem('accessToken');
 
       if (!token) {
         closeCreateTicketModal();
@@ -1326,22 +1327,22 @@
         return;
       }
 
-      const title = document.getElementById('titleInput').value.trim();
-      const amount = parseFloat(document.getElementById('amountInput').value);
-      const details = document.getElementById('detailsInput').value.trim();
+      var title = document.getElementById('titleInput').value.trim();
+      var amount = parseFloat(document.getElementById('amountInput').value);
+      var details = document.getElementById('detailsInput').value.trim();
 
       try {
-        const res = await fetch(API_BASE + '/api/tickets', {
+        var res = await fetch(API_BASE + '/api/tickets', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
             'Authorization': 'Bearer ' + token,
             'x-auth-token': token
           },
-          body: JSON.stringify({ title, amount, details, description: details })
+          body: JSON.stringify({ title: title, amount: amount, details: details, description: details })
         });
 
-        const data = await res.json();
+        var data = await res.json();
 
         if (res.status === 401 || res.status === 403) {
           closeCreateTicketModal();
@@ -1350,7 +1351,7 @@
           return;
         }
 
-        let ticketId = data.ticketId || data._id || data.id || (data.ticket && data.ticket._id) || (data.ticket && data.ticket.id);
+        var ticketId = data.ticketId || data._id || data.id || (data.ticket && data.ticket._id) || (data.ticket && data.ticket.id);
 
         if (res.ok && ticketId) {
           closeCreateTicketModal();
@@ -1371,14 +1372,14 @@
       document.getElementById('modalTicketTitle').innerText = title ? (title + ' ($' + amount + ')') : 'غرفة الوساطة المباشرة';
       document.getElementById('ticketModal').classList.add('active');
 
-      const userRole = localStorage.getItem('role');
-      const actionButtonsBar = document.getElementById('ticketActionButtons');
+      var userRole = localStorage.getItem('role');
+      var actionButtonsBar = document.getElementById('ticketActionButtons');
       actionButtonsBar.style.display = (userRole === 'admin') ? 'flex' : 'none';
 
       if (socket && socket.connected) {
         socket.emit('join_ticket', id);
       } else if (socket) {
-        socket.once('connect', () => socket.emit('join_ticket', id));
+        socket.once('connect', function() { socket.emit('join_ticket', id); });
       }
 
       cancelImageSend();
@@ -1392,22 +1393,22 @@
     }
 
     async function loadModalHistory(id) {
-      const token = localStorage.getItem('token') || localStorage.getItem('accessToken');
+      var token = localStorage.getItem('token') || localStorage.getItem('accessToken');
       try {
-        const res = await fetch(API_BASE + '/api/tickets', {
+        var res = await fetch(API_BASE + '/api/tickets', {
           headers: { 'Authorization': 'Bearer ' + token, 'x-auth-token': token }
         });
-        const data = await res.json();
-        const tickets = data.data || data.tickets || [];
-        const t = tickets.find(ticket => (ticket._id === id || ticket.id === id));
+        var data = await res.json();
+        var tickets = data.data || data.tickets || [];
+        var t = tickets.find(function(ticket) { return (ticket._id === id || ticket.id === id); });
 
         if (t) {
           document.getElementById('modalTicketTitle').innerText = (t.title || 'تذكرة') + ' ($' + (t.amount || 0) + ')';
           setModalTicketStatus(t.status);
-          const box = document.getElementById('modalMessagesBox');
+          var box = document.getElementById('modalMessagesBox');
           box.innerHTML = '';
           if (t.messages && t.messages.length > 0) {
-            t.messages.forEach(msg => renderModalMessage(msg));
+            t.messages.forEach(function(msg) { renderModalMessage(msg); });
           }
         }
       } catch (err) {
@@ -1416,25 +1417,25 @@
     }
 
     function renderModalMessage(data) {
-      const box = document.getElementById('modalMessagesBox');
-      const myUser = localStorage.getItem('username') || 'أنت';
-      const senderName = data.sender || 'مستخدم';
-      const isMe = senderName === myUser || (socket && data.socketId === socket.id);
-      const messageText = data.message || data.text || data.content || '';
-      const imageData = data.image || data.imageUrl || null;
+      var box = document.getElementById('modalMessagesBox');
+      var myUser = localStorage.getItem('username') || 'أنت';
+      var senderName = data.sender || 'مستخدم';
+      var isMe = senderName === myUser || (socket && data.socketId === socket.id);
+      var messageText = data.message || data.text || data.content || '';
+      var imageData = data.image || data.imageUrl || null;
 
-      const lastMsg = box.lastElementChild;
-      const fingerprint = senderName + '|' + messageText + '|' + (imageData ? imageData.substring(0, 50) : '');
+      var lastMsg = box.lastElementChild;
+      var fingerprint = senderName + '|' + messageText + '|' + (imageData ? imageData.substring(0, 50) : '');
       if (lastMsg && lastMsg.dataset.fingerprint === fingerprint) return;
 
-      const containerDiv = document.createElement('div');
+      var containerDiv = document.createElement('div');
       containerDiv.className = 'msg-container' + (isMe ? ' me-container' : '');
       containerDiv.dataset.fingerprint = fingerprint;
 
-      const trimmedName = senderName.trim();
-      const firstChar = trimmedName ? trimmedName.charAt(0) : '؟';
+      var trimmedName = senderName.trim();
+      var firstChar = trimmedName ? trimmedName.charAt(0) : '؟';
 
-      let bubbleContent = '<div class="msg-sender">' + (isMe ? 'أنت' : senderName) + '</div>';
+      var bubbleContent = '<div class="msg-sender">' + (isMe ? 'أنت' : senderName) + '</div>';
 
       if (messageText) {
         bubbleContent += '<div>' + messageText + '</div>';
@@ -1451,7 +1452,7 @@
     }
 
     function handleImageSelect(event) {
-      const file = event.target.files[0];
+      var file = event.target.files[0];
       if (!file) return;
 
       if (file.size > 5 * 1024 * 1024) {
@@ -1466,7 +1467,7 @@
         return;
       }
 
-      const reader = new FileReader();
+      var reader = new FileReader();
       reader.onload = function(e) {
         pendingImageData = e.target.result;
         document.getElementById('imagePreview').src = pendingImageData;
@@ -1477,11 +1478,11 @@
 
     function cancelImageSend() {
       pendingImageData = null;
-      const imgInput = document.getElementById('imageInput');
+      var imgInput = document.getElementById('imageInput');
       if (imgInput) imgInput.value = '';
-      const previewBox = document.getElementById('imagePreviewBox');
+      var previewBox = document.getElementById('imagePreviewBox');
       if (previewBox) previewBox.style.display = 'none';
-      const previewImg = document.getElementById('imagePreview');
+      var previewImg = document.getElementById('imagePreview');
       if (previewImg) previewImg.src = '';
     }
 
@@ -1495,18 +1496,18 @@
     }
 
     function setModalTicketStatus(status) {
-      const badge = document.getElementById('modalTicketStatus');
+      var badge = document.getElementById('modalTicketStatus');
       badge.className = 'status-badge status-' + status;
-      const labels = { pending: 'قيد الانتظار', in_progress: 'قيد التنفيذ', completed: 'مكتملة', canceled: 'ملغاة' };
+      var labels = { pending: 'قيد الانتظار', in_progress: 'قيد التنفيذ', completed: 'مكتملة', canceled: 'ملغاة' };
       badge.innerText = labels[status] || status;
     }
 
     async function updateTicketStatus(newStatus) {
       if (!currentTicketId) return;
-      const token = localStorage.getItem('token') || localStorage.getItem('accessToken');
+      var token = localStorage.getItem('token') || localStorage.getItem('accessToken');
 
       try {
-        const res = await fetch(API_BASE + '/api/tickets/' + currentTicketId + '/status', {
+        var res = await fetch(API_BASE + '/api/tickets/' + currentTicketId + '/status', {
           method: 'PATCH',
           headers: {
             'Content-Type': 'application/json',
@@ -1516,7 +1517,7 @@
           body: JSON.stringify({ status: newStatus })
         });
 
-        const data = await res.json();
+        var data = await res.json();
         if (res.ok) {
           showAlert('تم تحديث حالة التذكرة بنجاح!', 'success');
           setModalTicketStatus(newStatus);
@@ -1534,9 +1535,9 @@
 
     async function sendModalMessage(e) {
       e.preventDefault();
-      const input = document.getElementById('modalMessageInput');
-      const message = input.value.trim();
-      const myUser = localStorage.getItem('username') || 'مستخدم';
+      var input = document.getElementById('modalMessageInput');
+      var message = input.value.trim();
+      var myUser = localStorage.getItem('username') || 'مستخدم';
 
       if (!currentTicketId) {
         showAlert('لا توجد تذكرة مفتوحة', 'error');
@@ -1546,7 +1547,7 @@
       if (!message && !pendingImageData) return;
 
       if (socket && socket.connected) {
-        const payload = {
+        var payload = {
           ticketId: currentTicketId,
           sender: myUser,
           message: message || '',
@@ -1572,8 +1573,8 @@
     }
 
     function exportToPDF() {
-      const element = document.getElementById('pdfArea');
-      const opt = {
+      var element = document.getElementById('pdfArea');
+      var opt = {
         margin: 10,
         filename: 'ticket_' + currentTicketId + '.pdf',
         image: { type: 'jpeg', quality: 0.98 },
@@ -1584,14 +1585,14 @@
     }
 
     function calculateFee() {
-      const val = parseFloat(document.getElementById('calcAmount').value) || 0;
-      const fee = val * 0.05;
-      const net = val - fee;
+      var val = parseFloat(document.getElementById('calcAmount').value) || 0;
+      var fee = val * 0.05;
+      var net = val - fee;
       document.getElementById('calcResult').innerText = 'العمولة (5%): $' + fee.toFixed(2) + ' | صافي البائع: $' + net.toFixed(2);
     }
 
     function toggleFloatingTicketsWidget() {
-      const popup = document.getElementById('floating-tickets-popup');
+      var popup = document.getElementById('floating-tickets-popup');
       if (popup.style.display === 'none' || popup.style.display === '') {
         popup.style.display = 'block';
         loadUserFloatingTickets();
@@ -1601,9 +1602,9 @@
     }
 
     async function loadUserFloatingTickets() {
-      const token = localStorage.getItem('token') || localStorage.getItem('accessToken');
-      const listContainer = document.getElementById('floating-tickets-list');
-      const badge = document.getElementById('floating-tickets-badge');
+      var token = localStorage.getItem('token') || localStorage.getItem('accessToken');
+      var listContainer = document.getElementById('floating-tickets-list');
+      var badge = document.getElementById('floating-tickets-badge');
 
       if (!token) {
         listContainer.innerHTML = '<div style="text-align: center; color: #94a3b8; font-size: 0.85rem; padding: 15px;">يجب تسجيل الدخول لعرض تذاكرك.</div>';
@@ -1611,7 +1612,7 @@
       }
 
       try {
-        const res = await fetch(API_BASE + '/api/tickets', {
+        var res = await fetch(API_BASE + '/api/tickets', {
           method: 'GET',
           headers: {
             'Authorization': 'Bearer ' + token,
@@ -1620,19 +1621,19 @@
           }
         });
 
-        const result = await res.json();
+        var result = await res.json();
         if (res.ok) {
-          const tickets = result.data || result.tickets || [];
+          var tickets = result.data || result.tickets || [];
 
           if (tickets.length > 0) {
             badge.innerText = tickets.length;
             badge.style.display = 'inline-block';
             listContainer.innerHTML = '';
 
-            tickets.forEach(ticket => {
-              const ticketId = ticket._id || ticket.id;
-              const statusColor = ticket.status === 'completed' ? '#22c55e' : (ticket.status === 'canceled' ? '#ef4444' : '#eab308');
-              const statusText = ticket.status === 'completed' ? 'مكتملة' : (ticket.status === 'in_progress' ? 'قيد التنفيذ' : (ticket.status === 'canceled' ? 'ملغاة' : 'قيد الانتظار'));
+            tickets.forEach(function(ticket) {
+              var ticketId = ticket._id || ticket.id;
+              var statusColor = ticket.status === 'completed' ? '#22c55e' : (ticket.status === 'canceled' ? '#ef4444' : '#eab308');
+              var statusText = ticket.status === 'completed' ? 'مكتملة' : (ticket.status === 'in_progress' ? 'قيد التنفيذ' : (ticket.status === 'canceled' ? 'ملغاة' : 'قيد الانتظار'));
 
               listContainer.innerHTML += '<div style="background: #090d16; padding: 10px; border-radius: 10px; margin-bottom: 10px; border: 1px solid #1e293b;">' +
                 '<div style="font-weight: 700; font-size: 0.9rem; margin-bottom: 4px; color: #fff; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">' + (ticket.title || 'تذكرة وساطة') + '</div>' +
@@ -1657,16 +1658,16 @@
     }
 
     function checkFloatingTicketsCount() {
-      const token = localStorage.getItem('token') || localStorage.getItem('accessToken');
+      var token = localStorage.getItem('token') || localStorage.getItem('accessToken');
       if (!token) return;
 
       fetch(API_BASE + '/api/tickets', {
         headers: { 'Authorization': 'Bearer ' + token, 'x-auth-token': token }
       })
-      .then(res => res.json())
-      .then(data => {
-        const tickets = data.data || data.tickets || [];
-        const badge = document.getElementById('floating-tickets-badge');
+      .then(function(res) { return res.json(); })
+      .then(function(data) {
+        var tickets = data.data || data.tickets || [];
+        var badge = document.getElementById('floating-tickets-badge');
         if (tickets.length > 0) {
           badge.innerText = tickets.length;
           badge.style.display = 'inline-block';
@@ -1674,7 +1675,7 @@
           badge.style.display = 'none';
         }
       })
-      .catch(e => console.log(e));
+      .catch(function(e) { console.log(e); });
     }
   </script>
 </body>
