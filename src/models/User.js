@@ -33,7 +33,7 @@ const userSchema = new mongoose.Schema({
   isBanned: { type: Boolean, default: false },
   banReason: { type: String, default: '' },
   
-  // 💰 المحفظة (جديد)
+  // 💰 المحفظة
   balance: {
     type: Number,
     default: 0,
@@ -43,7 +43,28 @@ const userSchema = new mongoose.Schema({
     type: Number,
     default: 0,
     min: 0
-  }
+  },
+
+  // 📧 التوثيق بالإيميل (جديد)
+  isVerified: {
+    type: Boolean,
+    default: false
+  },
+  verificationCode: {
+    type: String,
+    select: false
+  },
+  verificationCodeExpires: {
+    type: Date,
+    select: false
+  },
+  verificationType: {
+    type: String,
+    enum: ['verify', 'login'],
+    select: false
+  },
+  
+  lastLogin: Date
 }, { timestamps: true });
 
 module.exports = mongoose.model('User', userSchema);
