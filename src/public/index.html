@@ -130,7 +130,6 @@
     .user-profile-badge:hover { border-color: var(--accent); background: rgba(56, 189, 248, 0.08); }
     .btn-logout { background: rgba(239, 68, 68, 0.2); color: #f87171; border: 1px solid rgba(239, 68, 68, 0.3); padding: 4px 8px; border-radius: 6px; font-weight: 700; font-size: 0.78rem; cursor: pointer; }
 
-    /* 💰 شارة الرصيد في الهيدر */
     #headerBalance {
       display: none;
       align-items: center;
@@ -351,7 +350,6 @@
     .modal-input-area button { padding: 10px 18px; background: var(--primary); border: none; color: #fff; font-weight: 800; border-radius: 8px; cursor: pointer; transition: 0.2s; }
     .modal-input-area button:hover { opacity: 0.9; }
 
-    /* 📸 إرسال الصور */
     .btn-image-picker {
       padding: 10px 14px !important;
       background: rgba(56, 189, 248, 0.15) !important;
@@ -470,10 +468,6 @@
       align-items: center;
       justify-content: center;
     }
-
-    /* ============================================ */
-    /* 📱 RESPONSIVE */
-    /* ============================================ */
 
     @media (max-width: 900px) {
       header {
@@ -836,7 +830,6 @@
         max-width: 130px !important;
       }
 
-      /* 📱 إصلاح مشكلة الجوال - الشات */
       .ticket-modal {
         height: 100dvh;
         max-height: 100dvh;
@@ -863,95 +856,38 @@
     }
 
     @media (max-width: 480px) {
-      .brand {
-        font-size: 1rem;
-      }
-
-      .hero h1 {
-        font-size: 1.5rem;
-      }
-
-      .hero p {
-        font-size: 0.85rem;
-      }
-
-      .nav-btn {
-        font-size: 0.68rem;
-        padding: 5px 8px;
-      }
-
-      .btn-auth-outline,
-      .btn-auth-solid {
-        padding: 5px 10px;
-        font-size: 0.7rem;
-      }
-
-      .stat-card {
-        flex: 1 1 100%;
-      }
-
-      .stat-card .value {
-        font-size: 1.25rem;
-      }
-
-      .section-title {
-        font-size: 1rem;
-      }
-
-      .msg-bubble {
-        max-width: 88%;
-        font-size: 0.82rem;
-      }
-
-      .nav-btn .icon {
-        display: none;
-      }
-
+      .brand { font-size: 1rem; }
+      .hero h1 { font-size: 1.5rem; }
+      .hero p { font-size: 0.85rem; }
+      .nav-btn { font-size: 0.68rem; padding: 5px 8px; }
+      .btn-auth-outline, .btn-auth-solid { padding: 5px 10px; font-size: 0.7rem; }
+      .stat-card { flex: 1 1 100%; }
+      .stat-card .value { font-size: 1.25rem; }
+      .section-title { font-size: 1rem; }
+      .msg-bubble { max-width: 88%; font-size: 0.82rem; }
+      .nav-btn .icon { display: none; }
       #profileModal div[style*="grid-template-columns: repeat(3"] {
         grid-template-columns: 1fr !important;
       }
     }
 
     @media (min-width: 769px) and (max-width: 1024px) {
-      .guarantee-grid,
-      .rules-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-
-      .reviews-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
+      .guarantee-grid, .rules-grid { grid-template-columns: repeat(2, 1fr); }
+      .reviews-grid { grid-template-columns: repeat(2, 1fr); }
     }
 
     @media (hover: none) and (pointer: coarse) {
-      .nav-btn,
-      .btn-auth-outline,
-      .btn-auth-solid,
-      .hero-action-btn,
-      .btn-submit,
-      .modal-input-area button {
+      .nav-btn, .btn-auth-outline, .btn-auth-solid, .hero-action-btn, .btn-submit, .modal-input-area button {
         min-height: 40px;
         -webkit-tap-highlight-color: transparent;
       }
-
-      .nav-btn:hover,
-      .guarantee-card:hover,
-      .btn-auth-outline:hover,
-      .btn-auth-solid:hover {
+      .nav-btn:hover, .guarantee-card:hover, .btn-auth-outline:hover, .btn-auth-solid:hover {
         transform: none;
       }
     }
 
-    html, body {
-      overflow-x: hidden;
-      max-width: 100%;
-    }
-
-    @media (max-width: 900px) {
-      body {
-        font-size: 15px;
-      }
-    }
+    html, body { overflow-x: hidden; max-width: 100%; }
+    @media (max-width: 900px) { body { font-size: 15px; } }
   </style>
 </head>
 <body>
@@ -959,9 +895,7 @@
   <div class="toast-container" id="toastContainer"></div>
 
   <header>
-    <a href="/" class="brand">
-      <span>ضماني</span> 🛡️
-    </a>
+    <a href="/" class="brand"><span>ضماني</span> 🛡️</a>
 
     <nav class="nav-links">
       <a href="#guarantee" class="nav-btn"><span class="icon">🛡️</span> الضمان والحماية</a>
@@ -981,7 +915,6 @@
         <button class="btn-auth-solid" onclick="openAuthModal('register')">حساب جديد</button>
       </div>
       <div style="display: flex; align-items: center; gap: 8px;">
-        <!-- 💰 شارة الرصيد -->
         <div id="headerBalance" onclick="openProfileModal()" title="رصيدي">
           💰 <span id="headerBalanceValue">$0</span>
         </div>
@@ -1058,7 +991,6 @@
     <div class="card">
       <div class="section-title">🛡️ لماذا تختار منصة ضماني؟</div>
       <div class="section-subtitle">نوفر لك بيئة تداول رقمية خالية تماماً من المخاطر والنصب</div>
-
       <div class="guarantee-grid">
         <div class="guarantee-card">
           <span class="guarantee-icon">💰</span>
@@ -1088,7 +1020,6 @@
     <div class="card">
       <div class="section-title">📜 قوانين وأساسيات منصة ضماني</div>
       <div class="section-subtitle">التزامك بهذه القوانين يضمن سلامة عملياتك المالية وحماية حسابك من الإلغاء</div>
-
       <div class="rules-grid">
         <div class="rule-card">
           <h4>⚖️ الأساسيات والالتزام</h4>
@@ -1130,7 +1061,6 @@
     <div class="card">
       <div class="section-title">⭐ آراء وانطباعات العملاء</div>
       <div class="section-subtitle">شاهد تجارب المتعاملين السابقين ودرجة رضاهم عن خدمات الوساطة</div>
-
       <div class="reviews-grid">
         <div class="review-card">
           <div class="review-header"><span class="reviewer-name">عبدالعزيز</span><span class="review-stars">★★★★★</span></div>
@@ -1200,7 +1130,6 @@
     <div class="card">
       <div class="section-title">❓ الأسئلة الشائعة والمعلومات</div>
       <div class="section-subtitle">إجابات مباشرة لأكثر الاستفسارات تداولاً بين المشترين والبائعين</div>
-
       <div class="faq-list">
         <div class="faq-item">
           <div class="faq-question" onclick="toggleFaq(this)"><span>كم يستغرق وقت إتمام صفقة الوساطة؟</span><span>➕</span></div>
@@ -1255,15 +1184,19 @@
     </div>
   </div>
 
+  <!-- ============================================ -->
+  <!-- 📧 Auth Modal (مع شاشات 2FA) -->
+  <!-- ============================================ -->
   <div class="modal-overlay" id="authModal">
     <div class="custom-modal">
       <button class="modal-close-icon" onclick="closeAuthModal()">✕</button>
       
-      <div class="auth-tabs">
+      <div class="auth-tabs" id="authTabsHeader">
         <div class="auth-tab active" id="tabLogin" onclick="switchAuthTab('login')">تسجيل الدخول</div>
         <div class="auth-tab" id="tabRegister" onclick="switchAuthTab('register')">حساب جديد</div>
       </div>
 
+      <!-- 📝 تسجيل الدخول -->
       <form id="loginForm" onsubmit="handleLoginSubmit(event)">
         <div class="form-group">
           <label>اسم المستخدم / البريد</label>
@@ -1276,6 +1209,7 @@
         <button type="submit" class="btn-submit">دخول الحساب 🔓</button>
       </form>
 
+      <!-- 📝 تسجيل حساب جديد -->
       <form id="registerForm" style="display: none;" onsubmit="handleRegisterSubmit(event)">
         <div class="form-group">
           <label>اسم المستخدم</label>
@@ -1291,6 +1225,59 @@
         </div>
         <button type="submit" class="btn-submit">إنشاء الحساب 🚀</button>
       </form>
+
+      <!-- 📧 شاشة إدخال كود التسجيل -->
+      <form id="verifyForm" style="display: none;" onsubmit="handleVerifySubmit(event)">
+        <div style="text-align: center; margin-bottom: 20px;">
+          <div style="font-size: 2.5rem; margin-bottom: 10px;">📧</div>
+          <h3 style="color: var(--accent); font-size: 1.1rem; margin-bottom: 8px;">تحقق من إيميلك</h3>
+          <p style="color: var(--text-sub); font-size: 0.85rem;">
+            أرسلنا كود مكوّن من 6 أرقام إلى<br>
+            <strong id="verifyEmailDisplay" style="color: var(--accent);"></strong>
+          </p>
+        </div>
+        <div class="form-group">
+          <label>كود التحقق</label>
+          <input type="text" id="verifyCode" required maxlength="6" 
+                 placeholder="000000" 
+                 style="text-align: center; font-size: 1.5rem; letter-spacing: 8px; font-weight: 900; font-family: monospace;">
+        </div>
+        <button type="submit" class="btn-submit">✅ تفعيل الحساب</button>
+        <div style="text-align: center; margin-top: 15px;">
+          <button type="button" onclick="resendCode()" style="background: none; border: none; color: var(--accent); cursor: pointer; font-weight: 700; font-size: 0.85rem; text-decoration: underline;">
+            🔄 إعادة إرسال الكود
+          </button>
+        </div>
+        <div style="text-align: center; margin-top: 10px;">
+          <button type="button" onclick="switchAuthTab('register')" style="background: none; border: none; color: var(--text-sub); cursor: pointer; font-size: 0.8rem;">
+            ← رجوع
+          </button>
+        </div>
+      </form>
+
+      <!-- 🔐 شاشة إدخال كود الدخول -->
+      <form id="loginCodeForm" style="display: none;" onsubmit="handleLoginCodeSubmit(event)">
+        <div style="text-align: center; margin-bottom: 20px;">
+          <div style="font-size: 2.5rem; margin-bottom: 10px;">🔐</div>
+          <h3 style="color: var(--accent); font-size: 1.1rem; margin-bottom: 8px;">كود تسجيل الدخول</h3>
+          <p style="color: var(--text-sub); font-size: 0.85rem;">
+            أرسلنا كود تسجيل الدخول إلى<br>
+            <strong id="loginCodeEmailDisplay" style="color: var(--accent);"></strong>
+          </p>
+        </div>
+        <div class="form-group">
+          <label>كود الدخول</label>
+          <input type="text" id="loginCode" required maxlength="6" 
+                 placeholder="000000"
+                 style="text-align: center; font-size: 1.5rem; letter-spacing: 8px; font-weight: 900; font-family: monospace;">
+        </div>
+        <button type="submit" class="btn-submit">🔓 دخول</button>
+        <div style="text-align: center; margin-top: 15px;">
+          <button type="button" onclick="switchAuthTab('login')" style="background: none; border: none; color: var(--text-sub); cursor: pointer; font-size: 0.8rem;">
+            ← رجوع
+          </button>
+        </div>
+      </form>
     </div>
   </div>
 
@@ -1304,7 +1291,6 @@
         <div style="color: var(--text-sub); font-size: 0.85rem;" id="profileEmail">--</div>
       </div>
 
-      <!-- 💰 الرصيد والنقاط -->
       <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 15px;">
         <div style="background: linear-gradient(135deg, rgba(16, 185, 129, 0.15), rgba(15, 23, 42, 0.8)); border: 1px solid rgba(16, 185, 129, 0.3); padding: 15px; border-radius: 12px; text-align: center;">
           <div style="font-size: 0.75rem; color: var(--text-sub); margin-bottom: 4px;">💰 الرصيد</div>
@@ -1430,7 +1416,6 @@
           console.log('✅ Socket connected:', socket.id);
           socketReady = true;
 
-          // 💰 تسجيل المستخدم في غرفته الخاصة
           const userId = localStorage.getItem('userId');
           if (userId) {
             socket.emit('register_user', userId);
@@ -1478,7 +1463,6 @@
           }
         });
 
-        // 💰 استقبال تحديث الرصيد
         socket.on('balance_updated', (data) => {
           console.log('💰 تحديث رصيد:', data);
           const balanceEl = document.getElementById('headerBalanceValue');
@@ -1499,7 +1483,7 @@
       checkAuthState();
       checkFloatingTicketsCount();
       watchTicketModal();
-      loadBalance(); // 💰
+      loadBalance();
     };
 
     function watchTicketModal() {
@@ -1571,16 +1555,15 @@
         document.getElementById('loggedInView').style.display = 'flex';
         document.getElementById('navUsername').innerText = `👤 ${username}`;
         document.getElementById('adminDashboardBtn').style.display = (role === 'admin') ? 'flex' : 'none';
-        document.getElementById('headerBalance').style.display = 'flex'; // 💰
+        document.getElementById('headerBalance').style.display = 'flex';
       } else {
         document.getElementById('loggedOutView').style.display = 'flex';
         document.getElementById('loggedInView').style.display = 'none';
         document.getElementById('adminDashboardBtn').style.display = 'none';
-        document.getElementById('headerBalance').style.display = 'none'; // 💰
+        document.getElementById('headerBalance').style.display = 'none';
       }
     }
 
-    // 💰 جلب الرصيد
     async function loadBalance() {
       const token = localStorage.getItem('token') || localStorage.getItem('accessToken');
       if (!token) return;
@@ -1616,7 +1599,6 @@
       const token = localStorage.getItem('token') || localStorage.getItem('accessToken');
       if (!token) return;
 
-      // 💰 جلب الرصيد أولاً
       try {
         const balRes = await fetch(`${API_BASE}/api/wallet/my-balance`, {
           headers: { 'Authorization': `Bearer ${token}`, 'x-auth-token': token }
@@ -1666,19 +1648,38 @@
     }
 
     function switchAuthTab(mode) {
+      // إخفاء الكل
+      document.getElementById('loginForm').style.display = 'none';
+      document.getElementById('registerForm').style.display = 'none';
+      document.getElementById('verifyForm').style.display = 'none';
+      document.getElementById('loginCodeForm').style.display = 'none';
+      
+      // إزالة active من التابات
+      document.getElementById('tabLogin').classList.remove('active');
+      document.getElementById('tabRegister').classList.remove('active');
+      
+      // إظهار التابات فقط في login/register
+      const tabsHeader = document.getElementById('authTabsHeader');
+      if (mode === 'login' || mode === 'register') {
+        tabsHeader.style.display = 'flex';
+      } else {
+        tabsHeader.style.display = 'none';
+      }
+
       if (mode === 'login') {
         document.getElementById('tabLogin').classList.add('active');
-        document.getElementById('tabRegister').classList.remove('active');
         document.getElementById('loginForm').style.display = 'block';
-        document.getElementById('registerForm').style.display = 'none';
-      } else {
+      } else if (mode === 'register') {
         document.getElementById('tabRegister').classList.add('active');
-        document.getElementById('tabLogin').classList.remove('active');
         document.getElementById('registerForm').style.display = 'block';
-        document.getElementById('loginForm').style.display = 'none';
+      } else if (mode === 'verify') {
+        document.getElementById('verifyForm').style.display = 'block';
+      } else if (mode === 'loginCode') {
+        document.getElementById('loginCodeForm').style.display = 'block';
       }
     }
 
+    // 📧 تسجيل الدخول (يرسل كود)
     async function handleLoginSubmit(e) {
       e.preventDefault();
       const inputVal = document.getElementById('loginUsername').value.trim();
@@ -1704,18 +1705,23 @@
         });
         const data = await res.json();
 
-        if (res.ok && (data.token || data.accessToken)) {
-          const token = data.token || data.accessToken;
-          localStorage.setItem('token', token);
-          localStorage.setItem('username', data.user?.username || inputVal);
-          localStorage.setItem('role', data.user?.role || 'user');
-          localStorage.setItem('userId', data.user?.id || data.user?._id || ''); // 💰
-          closeAuthModal();
-          checkAuthState();
-          checkFloatingTicketsCount();
-          loadBalance(); // 💰
-          showAlert('تم تسجيل الدخول بنجاح!', 'success');
-        } else {
+        if (res.ok && data.requiresCode) {
+          // 🔐 كود وصل على الإيميل
+          document.getElementById('loginCodeEmailDisplay').innerText = data.email;
+          window.loginEmail = data.email;
+          
+          showAlert('📧 ' + data.message, 'success');
+          switchAuthTab('loginCode');
+        } 
+        else if (res.ok && data.requiresVerification) {
+          // ⚠️ الحساب غير مفعّل
+          document.getElementById('verifyEmailDisplay').innerText = data.email;
+          window.pendingEmail = data.email;
+          
+          showAlert('⚠️ حسابك غير مفعل، تحقق من إيميلك', 'warning');
+          switchAuthTab('verify');
+        }
+        else {
           showAlert(cleanMongooseError(data.message) || 'بيانات الدخول غير صحيحة', 'error');
         }
       } catch (err) {
@@ -1723,6 +1729,7 @@
       }
     }
 
+    // 📝 تسجيل حساب جديد (يرسل كود التحقق)
     async function handleRegisterSubmit(e) {
       e.preventDefault();
       const username = document.getElementById('regUsername').value.trim();
@@ -1755,8 +1762,12 @@
         const data = await res.json();
 
         if (res.ok) {
-          showAlert('تم إنشاء الحساب بنجاح! يمكنك الآن تسجيل الدخول', 'success');
-          switchAuthTab('login');
+          // 📧 عرض شاشة إدخال الكود
+          document.getElementById('verifyEmailDisplay').innerText = email;
+          window.pendingEmail = email;
+          
+          showAlert('✅ ' + data.message, 'success');
+          switchAuthTab('verify');
         } else {
           let errorMsg = cleanMongooseError(data.message || data.error);
 
@@ -1775,13 +1786,112 @@
       }
     }
 
+    // ✅ تأكيد كود التسجيل
+    async function handleVerifySubmit(e) {
+      e.preventDefault();
+      const code = document.getElementById('verifyCode').value.trim();
+      const email = window.pendingEmail;
+
+      if (!code || code.length !== 6) {
+        showAlert('أدخل كوداً صحيحاً من 6 أرقام', 'warning');
+        return;
+      }
+
+      try {
+        const res = await fetch(`${API_BASE}/api/auth/verify`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email, code })
+        });
+        const data = await res.json();
+
+        if (res.ok && data.token) {
+          localStorage.setItem('token', data.token);
+          localStorage.setItem('username', data.user.username);
+          localStorage.setItem('role', data.user.role);
+          localStorage.setItem('userId', data.user.id);
+          
+          closeAuthModal();
+          checkAuthState();
+          checkFloatingTicketsCount();
+          loadBalance();
+          showAlert('🎉 تم تفعيل حسابك بنجاح!', 'success');
+        } else {
+          showAlert(data.message || 'كود غير صحيح', 'error');
+        }
+      } catch (err) {
+        showAlert('تعذر الاتصال بالسيرفر', 'error');
+      }
+    }
+
+    // 🔄 إعادة إرسال الكود
+    async function resendCode() {
+      const email = window.pendingEmail;
+      if (!email) return;
+
+      try {
+        const res = await fetch(`${API_BASE}/api/auth/resend-code`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email })
+        });
+        const data = await res.json();
+        
+        if (res.ok) {
+          showAlert('📧 ' + data.message, 'success');
+        } else {
+          showAlert(data.message || 'فشل الإرسال', 'error');
+        }
+      } catch (err) {
+        showAlert('تعذر الاتصال', 'error');
+      }
+    }
+
+    // 🔓 تأكيد كود الدخول
+    async function handleLoginCodeSubmit(e) {
+      e.preventDefault();
+      const code = document.getElementById('loginCode').value.trim();
+      const email = window.loginEmail;
+
+      if (!code || code.length !== 6) {
+        showAlert('أدخل كوداً صحيحاً من 6 أرقام', 'warning');
+        return;
+      }
+
+      try {
+        const res = await fetch(`${API_BASE}/api/auth/verify-login`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email, code })
+        });
+        const data = await res.json();
+
+        if (res.ok && data.token) {
+          localStorage.setItem('token', data.token);
+          localStorage.setItem('username', data.user.username);
+          localStorage.setItem('role', data.user.role);
+          localStorage.setItem('userId', data.user.id);
+          
+          closeAuthModal();
+          checkAuthState();
+          checkFloatingTicketsCount();
+          loadBalance();
+          showAlert('🎉 تم تسجيل الدخول بنجاح!', 'success');
+        } else {
+          showAlert(data.message || 'كود غير صحيح', 'error');
+        }
+      } catch (err) {
+        showAlert('تعذر الاتصال بالسيرفر', 'error');
+      }
+    }
+
     function handleLogout() {
       localStorage.removeItem('token');
       localStorage.removeItem('accessToken');
       localStorage.removeItem('jwt');
       localStorage.removeItem('username');
       localStorage.removeItem('role');
-      localStorage.removeItem('userId'); // 💰
+      localStorage.removeItem('userId');
       checkAuthState();
       checkFloatingTicketsCount();
       showAlert('تم تسجيل الخروج بنجاح', 'success');
