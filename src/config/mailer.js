@@ -1,26 +1,5 @@
-const nodemailer = require('nodemailer');
-
-const transporter = nodemailer.createTransport({
-  host: process.env.EMAIL_HOST || 'smtp-relay.brevo.com',
-  port: 465,
-  secure: true,
-  auth: {
-    user: process.env.EMAIL_USER,
-    pass: process.env.EMAIL_PASS
-  },
-  connectionTimeout: 60000,
-  greetingTimeout: 60000,
-  socketTimeout: 60000,
-  tls: { rejectUnauthorized: false }
-});
-
-transporter.verify((error) => {
-  if (error) {
-    console.error('❌ خطأ SMTP:', error.message);
-  } else {
-    console.log('✅ البريد جاهز');
-  }
-});
+const { Resend } = require('resend');
+const resend = new Resend(process.env.RESEND_API_KEY);
 
 async function sendVerificationCode(email, code, username, type = 'verify') {
   const subjects = {
@@ -40,15 +19,21 @@ async function sendVerificationCode(email, code, username, type = 'verify') {
     '<p style="color:#94a3b8;font-size:13px;">الكود صالح لمدة 10 دقائق</p>' +
     '</div>';
 
-  await transporter.sendMail({
-    from: process.env.EMAIL_FROM || ('ضماني <' + process.env.EMAIL_USER + '>'),
-    to: email,
-    subject: subjects[type],
-    html: html
-  });
-  
-  console.log('📧 تم إرسال كود ' + type + ' إلى: ' + email);
-  return true;
+  try {
+    const result = await resend.emails.send({
+      from: 'ضماني <onboarding@resend.dev>',
+      to: email,
+      subject: subjects[type],
+      html: html
+    });
+
+    console.log('📧 كود ' + type + ' أُرسل إلى: ' + email);
+    console.log('Resend ID:', result.id || result);
+    return true;
+  } catch (err) {
+    console.error('❌ فشل إرسال البريد إلى ' + email + ':', err.message);
+    throw err;
+  }
 }
 
-module.exports = { sendVerificationCode, transporter };
+module.exports = { sendVerificationCode };
