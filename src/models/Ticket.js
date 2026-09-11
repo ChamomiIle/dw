@@ -30,13 +30,15 @@ const ticketSchema = new mongoose.Schema({
   },
   // مصفوفة لتخزين رسائل الشات الخاصة بالتذكرة
   messages: [
-    {
-      sender: { type: String },
-      message: { type: String },
-      socketId: { type: String },
-      timestamp: { type: Date, default: Date.now }
-    }
-  ]
+  {
+    sender: { type: String },
+    message: { type: String },
+    image: { type: String, default: null },     // 📸 الصورة Base64
+    hasImage: { type: Boolean, default: false }, // 📸 هل فيها صورة؟
+    socketId: { type: String },
+    timestamp: { type: Date, default: Date.now }
+  }
+]
 }, { 
   timestamps: true // يقوم بإضافة createdAt و updatedAt تلقائياً
 });
