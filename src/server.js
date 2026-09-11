@@ -6,20 +6,24 @@ const path = require('path');
 const { Server } = require('socket.io');
 require('dotenv').config();
 
-// استيراد مسارات الـ Routes بالأسماء الصحيحة المطابقة لمجلد routes لديك
+// استيراد مسارات الـ Routes
 const authRoutes = require('./routes/authRoutes');
 const ticketRoutes = require('./routes/ticketRoutes');
 
 const app = express();
 const server = http.createServer(app);
 
-// إعدادات الـ CORS والسيرفر الحقيقي (مضاف إليها PATCH)
+// إعدادات الـ CORS + Socket.io
 const io = new Server(server, {
   cors: {
     origin: "*",
     methods: ["GET", "POST", "PUT", "PATCH", "DELETE"]
-  }
+  },
+  maxHttpBufferSize: 1e7 // 📸 10 ميجا للصور
 });
+
+// ✅ مشاركة io مع الراوترات (مهم لحذف التذاكر)
+app.set('io', io);
 
 app.use(cors({
   origin: "*",
@@ -27,44 +31,70 @@ app.use(cors({
   credentials: true
 }));
 
-app.use(express.json());
+// 📸 زيادة حد JSON للصور
+app.use(express.json({ limit: '10mb' }));
+app.use(express.urlencoded({ extended: true, limit: '10mb' }));
 
-// تقديم الملفات الثابتة (HTML, CSS, JS) من مجلد src/public
+// تقديم الملفات الثابتة (HTML, CSS, JS) من مجلد public
 app.use(express.static(path.join(__dirname, 'public')));
 
-// ربط المسارات (Routes) بالبادئات الأساسية
+// ربط المسارات (Routes)
 app.use('/api/auth', authRoutes);
 app.use('/api/tickets', ticketRoutes);
 
-// ربط نظام الشات الحقيقي باستخدام Socket.io
+// ============================================
+// 🔌 ربط نظام الشات الحقيقي - Socket.io
+// ============================================
 io.on('connection', (socket) => {
   console.log(`🔌 تم اتصال عميل جديد بالـ Socket: ${socket.id}`);
 
+  // الانضمام لغرفة تذكرة
   socket.on('join_ticket', (ticketId) => {
     socket.join(ticketId);
     console.log(`👤 انضم المستخدم الغرفة/التذكرة: ${ticketId}`);
   });
 
+  // 📸 إرسال رسالة (نص + صورة)
   socket.on('send_message', async (data) => {
-    const { ticketId, sender, message } = data;
+    const { ticketId, sender, message, image, hasImage } = data;
     
+    console.log(`📨 رسالة جديدة في ${ticketId} من ${sender}${hasImage ? ' [مع صورة]' : ''}`);
+
     // حفظ الرسالة في قاعدة البيانات
     try {
       const Ticket = require('./models/Ticket');
       await Ticket.findByIdAndUpdate(ticketId, {
-        $push: { messages: { sender, message, socketId: socket.id, timestamp: new Date() } }
+        $push: {
+          messages: {
+            sender,
+            message: message || '',
+            image: image || null,        // 📸 الصورة Base64
+            hasImage: hasImage || false,
+            socketId: socket.id,
+            timestamp: new Date()
+          }
+        }
       });
     } catch (err) {
-      console.error('خطأ في حفظ الرسالة:', err.message);
+      console.error('❌ خطأ في حفظ الرسالة:', err.message);
     }
 
     // بث الرسالة لكل المتواجدين في نفس الغرفة
     io.to(ticketId).emit('receive_message', {
       sender,
-      message,
+      message: message || '',
+      image: image || null,
+      hasImage: hasImage || false,
       socketId: socket.id,
       timestamp: new Date()
     });
+  });
+
+  // 🔄 تحديث حالة التذكرة
+  socket.on('status_updated', (data) => {
+    const { ticketId, status } = data;
+    console.log(`🔄 تحديث حالة التذكرة ${ticketId} إلى: ${status}`);
+    io.to(ticketId).emit('status_updated', data);
   });
 
   socket.on('disconnect', () => {
@@ -80,7 +110,7 @@ mongoose.connect(MONGO_URI)
   .then(() => {
     console.log('✅ تم الاتصال بقاعدة بيانات MongoDB بنجاح!');
     server.listen(PORT, () => {
-      console.log(`🚀 السيرفر شغال يمعلم على البورت ${PORT}`);
+      console.log(`🚀 السيرفر شغال على البورت ${PORT}`);
     });
   })
   .catch((err) => {
