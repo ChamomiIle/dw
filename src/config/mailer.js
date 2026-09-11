@@ -1,18 +1,23 @@
 const nodemailer = require('nodemailer');
 
+// ✅ استخدام البورت 465 مع secure: true
 const transporter = nodemailer.createTransport({
   host: process.env.EMAIL_HOST || 'smtp-relay.brevo.com',
-  port: parseInt(process.env.EMAIL_PORT) || 587,
-  secure: false,
+  port: 465,             // ← غيرنا من 587 إلى 465
+  secure: true,          // ← true للبورت 465
   auth: {
     user: process.env.EMAIL_USER,
     pass: process.env.EMAIL_PASS
   },
+  connectionTimeout: 30000, // ⏱️ 30 ثانية
+  greetingTimeout: 30000,
+  socketTimeout: 30000,
   tls: {
     rejectUnauthorized: false
   }
 });
 
+// ✅ التحقق من الاتصال
 transporter.verify((error) => {
   if (error) {
     console.error('❌ خطأ في إعداد البريد:', error.message);
@@ -21,6 +26,7 @@ transporter.verify((error) => {
   }
 });
 
+// 📤 دالة إرسال كود التحقق
 async function sendVerificationCode(email, code, username, type = 'verify') {
   const subjects = {
     verify: '🔐 تأكيد حسابك في ضماني',
