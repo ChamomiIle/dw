@@ -2,16 +2,17 @@
 <html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8">
-  <<meta name="google-site-verification" content="z5SHC05zgVK7z9JpggUNNNbm6pJ31qH2tso3YcN1GWQ" />
+  <meta name="google-site-verification" content="z5SHC05zgVK7z9JpggUNNNbm6pJ31qH2tso3YcN1GWQ" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ضماني | منصة الوساطة الرقمية المضمونة</title>
-      <meta name="description" content="منصة ضماني للوساطة الرقمية المضمونة - نضمن حق البائع والمشتري في شراء وبيع الحسابات والمنتجات الرقمية بأمان 100%">
+    <meta name="description" content="منصة ضماني للوساطة الرقمية المضمونة - نضمن حق البائع والمشتري في شراء وبيع الحسابات والمنتجات الرقمية بأمان 100%">
   <meta name="keywords" content="ضماني, وساطة, وساطة رقمية, منصة وساطة, وساطة آمنة, وساطة حسابات">
   <meta name="robots" content="index, follow">
   <meta property="og:title" content="ضماني | منصة الوساطة الرقمية المضمونة">
   <meta property="og:description" content="نضمن حق البائع والمشتري في شراء الحسابات والمنتجات الرقمية">
   <meta property="og:url" content="https://damane.site">
   <meta property="og:type" content="website">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0%25' y1='0%25' x2='0%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%2338bdf8'/%3E%3Cstop offset='100%25' style='stop-color:%230284c7'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpath d='M50 8 L85 22 L85 50 Q85 78 50 92 Q15 78 15 50 L15 22 Z' fill='url(%23g)' stroke='%23ffffff' stroke-width='3'/%3E%3Ctext x='50' y='65' font-size='42' text-anchor='middle' fill='white' font-family='Arial' font-weight='bold'%3Eض%3C/text%3E%3C/svg%3E">
   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
   <script src="https://cdn.socket.io/4.7.5/socket.io.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
@@ -230,6 +231,133 @@
       transition: 0.25s;
     }
     .hero-action-btn:hover { transform: translateY(-3px); box-shadow: 0 8px 25px rgba(37, 99, 235, 0.6); }
+
+    /* ✅ قسم "من نحن" الجديد */
+    .about-section {
+      max-width: 1150px;
+      margin: 20px auto 50px;
+      padding: 0 20px;
+    }
+    
+    .about-card {
+      background: linear-gradient(135deg, rgba(2, 132, 199, 0.1) 0%, rgba(15, 23, 42, 0.7) 50%, rgba(56, 189, 248, 0.05) 100%);
+      border: 1px solid var(--card-border);
+      border-radius: 28px;
+      padding: 45px 40px;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.4);
+    }
+    
+    .about-card::before {
+      content: "";
+      position: absolute;
+      top: -50%;
+      right: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(56, 189, 248, 0.08) 0%, transparent 60%);
+      pointer-events: none;
+    }
+    
+    .about-header {
+      text-align: center;
+      margin-bottom: 35px;
+      position: relative;
+      z-index: 1;
+    }
+    
+    .about-icon-big {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 70px;
+      height: 70px;
+      background: linear-gradient(135deg, #0284c7, #2563eb);
+      border-radius: 20px;
+      font-size: 2rem;
+      margin-bottom: 15px;
+      box-shadow: 0 10px 30px var(--primary-glow);
+    }
+    
+    .about-title {
+      font-size: 1.8rem;
+      font-weight: 900;
+      color: #fff;
+      margin-bottom: 10px;
+    }
+    
+    .about-title span {
+      background: linear-gradient(135deg, #38bdf8, #818cf8);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    
+    .about-subtitle {
+      color: var(--text-sub);
+      font-size: 1rem;
+      font-weight: 600;
+    }
+    
+    .about-text {
+      text-align: center;
+      font-size: 1rem;
+      color: var(--text-sub);
+      line-height: 1.9;
+      max-width: 850px;
+      margin: 0 auto 35px;
+      font-weight: 600;
+      position: relative;
+      z-index: 1;
+    }
+    
+    .about-text strong {
+      color: var(--accent);
+      font-weight: 800;
+    }
+    
+    .about-features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 20px;
+      position: relative;
+      z-index: 1;
+    }
+    
+    .about-feature {
+      background: rgba(15, 23, 42, 0.7);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 18px;
+      padding: 25px 20px;
+      text-align: center;
+      transition: 0.3s;
+    }
+    
+    .about-feature:hover {
+      border-color: var(--accent);
+      transform: translateY(-5px);
+      box-shadow: 0 15px 35px rgba(2, 132, 199, 0.2);
+    }
+    
+    .about-feature-icon {
+      font-size: 2rem;
+      margin-bottom: 12px;
+      display: inline-block;
+    }
+    
+    .about-feature h4 {
+      color: #fff;
+      font-size: 1.05rem;
+      font-weight: 800;
+      margin-bottom: 10px;
+    }
+    
+    .about-feature p {
+      color: var(--text-sub);
+      font-size: 0.85rem;
+      line-height: 1.7;
+      font-weight: 600;
+    }
 
     .section-container { max-width: 1150px; margin: 0 auto 50px; padding: 0 20px; }
     .card { background: var(--card-bg); border: 1px solid var(--card-border); backdrop-filter: blur(12px); border-radius: 24px; padding: 32px; box-shadow: 0 20px 40px rgba(0,0,0,0.4); }
@@ -506,6 +634,20 @@
       .stat-card { min-width: 140px; padding: 14px 18px; flex: 1 1 calc(50% - 12px); }
       .stat-card .value { font-size: 1.4rem; }
       .stat-card .label { font-size: 0.72rem; }
+      
+      /* ✅ قسم "من نحن" على الجوال */
+      .about-section { padding: 0 12px; margin-bottom: 30px; }
+      .about-card { padding: 28px 20px; border-radius: 20px; }
+      .about-icon-big { width: 55px; height: 55px; font-size: 1.6rem; border-radius: 15px; }
+      .about-title { font-size: 1.4rem; }
+      .about-subtitle { font-size: 0.88rem; }
+      .about-text { font-size: 0.9rem; line-height: 1.75; margin-bottom: 25px; }
+      .about-features { grid-template-columns: 1fr; gap: 14px; }
+      .about-feature { padding: 20px 16px; }
+      .about-feature-icon { font-size: 1.7rem; }
+      .about-feature h4 { font-size: 0.98rem; }
+      .about-feature p { font-size: 0.82rem; }
+      
       .section-container { padding: 0 12px; margin-bottom: 30px; }
       .card { padding: 20px 16px; border-radius: 18px; }
       .section-title { font-size: 1.1rem; flex-wrap: wrap; line-height: 1.5; }
@@ -595,7 +737,8 @@
   <header>
     <a href="/" class="brand"><span>ضماني</span> 🛡️</a>
     <nav class="nav-links">
-      <a href="#guarantee" class="nav-btn"><span class="icon">🛡️</span> الضمان والحماية</a>
+      <a href="#about" class="nav-btn"><span class="icon">🛡️</span> من نحن</a>
+      <a href="#guarantee" class="nav-btn"><span class="icon">💰</span> الضمان</a>
       <a href="#rules" class="nav-btn"><span class="icon">📜</span> القوانين</a>
       <a href="#reviews" class="nav-btn"><span class="icon">⭐</span> آراء العملاء</a>
       <a href="#faq" class="nav-btn"><span class="icon">❓</span> الأسئلة الشائعة</a>
@@ -669,6 +812,44 @@
     <h1>منصة ضماني للوساطة الرقمية <span>المضمونة 100%</span></h1>
     <p>نضمن حق البائع والمشتري في شراء الحسابات، الخدمات، والمنتجات الرقمية بعقود ومشرفين معتمدين.</p>
     <button class="hero-action-btn" onclick="openCreateTicketModal()"><span>🚀 ابدأ غرفة وساطة جديدة الآن</span></button>
+  </section>
+
+  <!-- ✅ قسم "من نحن" الجديد -->
+  <section class="about-section" id="about">
+    <div class="about-card">
+      <div class="about-header">
+        <div class="about-icon-big">🛡️</div>
+        <h2 class="about-title">من <span>نحن</span>؟</h2>
+        <p class="about-subtitle">تعرّف على منصة ضماني للوساطة الرقمية</p>
+      </div>
+      
+      <p class="about-text">
+        <strong>ضماني</strong> هي منصة وساطة رقمية مضمونة، تأسست بهدف حماية حقوق <strong>البائع والمشتري</strong> في المعاملات الرقمية في الوطن العربي. 
+        نوفر بيئة آمنة ومحايدة لإتمام الصفقات على الحسابات والخدمات والمنتجات الرقمية، 
+        من خلال نظام وساطة متكامل يضمن وصول المبلغ للبائع بعد تأكيد استلام المشتري للبيانات كاملة. 
+        نعتمد على <strong>مشرفين معتمدين</strong> و<strong>عقود PDF موثقة</strong> لضمان حقوق جميع الأطراف.
+      </p>
+      
+      <div class="about-features">
+        <div class="about-feature">
+          <div class="about-feature-icon">🎯</div>
+          <h4>رسالتنا</h4>
+          <p>توفير بيئة وساطة رقمية آمنة وموثوقة تحمي حقوق جميع الأطراف في المعاملات الرقمية بالوطن العربي.</p>
+        </div>
+        
+        <div class="about-feature">
+          <div class="about-feature-icon">👁️</div>
+          <h4>رؤيتنا</h4>
+          <p>أن نكون المنصة الرقمية الأولى والأكثر ثقة في الوساطة المضمونة على مستوى المنطقة العربية.</p>
+        </div>
+        
+        <div class="about-feature">
+          <div class="about-feature-icon">💎</div>
+          <h4>قيمنا</h4>
+          <p>الأمانة، الشفافية، الحياد، والاحترافية في التعامل مع كل صفقة، مع الحفاظ على خصوصية عملائنا.</p>
+        </div>
+      </div>
+    </div>
   </section>
 
   <div class="stats-container">
