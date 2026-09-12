@@ -21,7 +21,7 @@ async function sendVerificationCode(email, code, username, type = 'verify') {
 
   try {
     const result = await resend.emails.send({
-      from: 'ضماني <brag73s29@gmail.com>',
+      from: 'ضماني <noreply@damane.site>',
       to: email,
       subject: subjects[type],
       html: html
