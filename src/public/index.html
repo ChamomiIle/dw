@@ -186,7 +186,16 @@
       font-weight: 700;
       color: var(--accent);
     }
-    .ticker-content { display: inline-block; animation: marquee 25s linear infinite; }
+    .ticker-content { 
+  display: inline-block; 
+  animation: marquee 90s linear infinite;
+  white-space: nowrap;
+  will-change: transform;
+}
+
+.live-ticker:hover .ticker-content {
+  animation-play-state: paused;
+}
     @keyframes marquee { 0% { transform: translateX(100%); } 100% { transform: translateX(-100%); } }
 
     .hero { text-align: center; padding: 60px 20px 30px; max-width: 900px; margin: 0 auto; }
